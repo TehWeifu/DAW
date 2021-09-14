@@ -6,8 +6,7 @@ class suma {
 		int suma=0; 
 		suma=n1+n2; 
 		
-		// la clase es nomana "System" amb s majuscula
-		// Exises cometes no son les correctes " 
-		System.out.println("LA SUMA ES: " + suma); 
+		// la classe es nomena "System" amb s majúscula
+		System.out.println("LA SUMA ES: " + suma);
 	} 
 }
