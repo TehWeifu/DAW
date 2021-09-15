@@ -33,10 +33,10 @@ Exercici 1: Troba les errades en el següent codi:
 	// Esta bé
  
 12. boolean causa = 7; 
-	// una variable tipus "char" tan sols es pot inicialitzar amb "true" o "false", mai amb un número
+	// una variable tipus "boolean" tan sols pot contenir "true" o "false", mai amb un número
 	
 13. boolean igualdad = "true"; 
-	// una variable tipus char tan sols es pot inicialitzar amb "true" o "false", mai amb un String
+	// una variable tipus "boolean" tan sols pot contenir "true" o "false", mai amb un String
 	
 14. double precio = S/.20.50; 
 	// no es pot ficar un punt abans de un numero
