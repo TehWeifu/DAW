@@ -1,0 +1,8 @@
+Ejercicio “Empresa“
+
+Realizar el diseño conceptual de una BD para gestionar la información sobre los empleados de los departamentos de una empresa, a partir de las siguientes condiciones:
+a)Para cada empleado dispondremos de su DNI, nombre, fecha de nacimiento, salario.
+b)De cada departamento sabremos su nombre y el número de despachos que tiene.
+c)Un departamento puede tener muchos empleados pero un empleado debe trabajar en un departamento y solo en uno.
+
+Realiza el diagrama E/R.

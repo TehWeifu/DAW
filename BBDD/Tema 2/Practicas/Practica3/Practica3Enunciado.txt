@@ -1,0 +1,4 @@
+Ejercicio: interpretación diagramas E/R
+
+Teniendo en cuenta que las siguientes asociaciones son las únicas que pueden darse entre ALUMNOS y ORDENADORES,
+piensa qué diagrama E/R las representa fielmente. NOTA: fíjate en la cantidad de líneas de cada conjunto para averiguar las cardinalidades mínimas y máximas.

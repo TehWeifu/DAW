@@ -1,0 +1,9 @@
+Ejercicio “Torneo de fútbol”
+
+Se desea almacenar información sobre un torneo de fútbol con las siguientes características.
+
+En el torneo pueden participar varios equipos (nombre, nº jugadores, alias) que están compuestos por varios jugadores (dni, nombre, nº dorsal).
+Un jugador sólo puede pertenecer a un equipo.
+a)Realiza el diagrama E/R correspondiente.
+b)¿Cómo representarías que un jugador tiene que estar adscrito obligatoriamente a un equipo?
+c)¿Cómo representarías que el alias del equipo es obligatorio?
