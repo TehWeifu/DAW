@@ -1,0 +1,4 @@
+Exercici13:
+	1. Fals: un programa pot constar de varios fitxers, un per cada fitxer .java que es compila
+	2. Fals: el métode main ha de ser static per a que es poda cridar sense crear un objecte de la classe.
+	3. Fals: eixa inicialització de la variable dona error de compilació.

@@ -1,0 +1,3 @@
+Exercici17
+	a) Aquesta expressió donarà true si la variable b és inicialitzada amb true o donarà false si la variable b és inicialitzada amb false. Donarà error de compilació si no és inicialitzada amb cap valor.
+	b) Aquesta expressió sempre dona true.

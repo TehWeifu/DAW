@@ -1,0 +1,10 @@
+Exercici5
+
+boolean X = true, Y = false, Z = true
+
+a) (X && Y) || (X && Z) 	→ true
+b) (X || !Y) && (!X || Z) 	→ true
+c) X || Y && Z			→ true
+d) !(X || Y) && Z		→ false
+e) X || Y || X && !Z && !Y 	→ true
+f) !X || !Y || Z && X && !Y 	→ true
