@@ -1,18 +1,22 @@
 import java.util.Scanner;
 
-public class Exercici5 {
+public class TestJava {
 	public static void main(String[] args) {
+		//variable declaration
 		Scanner input = new Scanner(System.in);
-		
-		System.out.print("Introduzca un numero entero: ");
-		double inputNum = input.nextInt();
-		
-		if (inputNum > 0) {
-			System.out.println("El numero es positivo");
-		} else if (inputNum < 0) {
-			System.out.println("El numero es negativo");
+		double inputNum;
+
+		// ask user for a number
+		System.out.print("Introduïsca un número real: ");
+		inputNum = input.nextDouble();
+
+		// checks whether the number is positive or negative by comparing it to 0
+		if (inputNum > 0.0) {
+			System.out.println("El número és positiu");
+		} else if (inputNum < 0.0) {
+			System.out.println("El número és negatiu");
 		} else {
-			System.out.println("El numero es cero");
+			System.out.println("El número és zero");
 		}
 	}
 }
