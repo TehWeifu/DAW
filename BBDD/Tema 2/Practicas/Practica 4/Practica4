@@ -1,0 +1,8 @@
+4. Enunciado Entidades Débiles.
+
+Ejercicio “Tienda multiprecio”: Una tienda multiprecio pretende generar una BD que contenga información sobre sus pedidos de venta.
+
+    Para cada pedido desea almacenar el nº de pedido, la fecha de expedición, las líneas que componen el pedido y el importe total del pedido.
+    Para cada línea del pedido necesita guardar el nº de línea, el nombre del artículo, el pvp actual y el importe de la línea.
+
+Representa en un diagrama E/R esta situación.
