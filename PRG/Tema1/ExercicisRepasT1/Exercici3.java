@@ -1,3 +1,5 @@
+// 3. Intenta dir que resultat donaria el següent codi:
+
 public class Exercici3 {
     public static void main(String[] args) {
         int valor = 0;

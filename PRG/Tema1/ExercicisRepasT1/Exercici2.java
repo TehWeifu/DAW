@@ -1,3 +1,5 @@
+// 2. Resol i explica el result d’aquestos operadors unaris (trabajan con binarios).
+
 public class Exercici2 {
     public static void main(String[] args) {
 
@@ -9,14 +11,14 @@ public class Exercici2 {
         // 10010000
         // 10000000 (en decimal 128)
         int m = k & l;
-        System.out.println("El resultat es: " + m);
+        System.out.println("El resultat és: " + m);
 
         // Operació OR binària
         // 10000100
         // 10010000
         // 10010100 (en decimal 148)
         int n = k | l;
-        System.out.println("El resultat es: " + n);
+        System.out.println("El resultat és: " + n);
     }
 }
 

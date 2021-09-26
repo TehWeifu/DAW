@@ -1,36 +1,48 @@
+//12. Demana el día, mes i any d’una data correcta i mostra la data del dia següent.
+//    Suposem que tots els mesos tenen 30 dies.
+
 import java.util.Scanner;
 
-public class Exercici12 {
+public class TestJava {
 	public static void main(String[] args) {
 		// variable declaration
 		Scanner input = new Scanner(System.in);
-		int inputNum;
-		int tmpNum;
+		byte inputDay;
+		byte inputMonth;
+		long inputYear;
 
-		// Ask for input and assigns it to the temporal variable
-		System.out.print("Introduïsca un número entre 0 y 9.999: ");
-		inputNum = input.nextInt();
-		tmpNum = inputNum;
+		byte nextDay;
+		byte nextMonth;
+		long nextYear;
 
-		// outputs the digits one by one doing the mod and diving each time the number by 10
-		if (inputNum > 9_999 || inputNum < 0) {
-			System.out.println("El número introduït no és valid");
-		} else {
-			System.out.print("El número " + inputNum + " al revés és ");
+		// ask user for day, month, year
+		System.out.print("Introduïsca un dia (1-30): ");
+		inputDay = input.nextByte();
+		System.out.print("Introduïsca un mes (1-12): ");
+		inputMonth = input.nextByte();
+		System.out.print("Introduïsca un any: ");
+		inputYear = input.nextLong();
 
-			System.out.print(tmpNum % 10);
-			tmpNum /= 10;
-			if (tmpNum > 0) {
-				System.out.print(tmpNum % 10);
-				tmpNum /= 10;
-			}
-			if (tmpNum > 0) {
-				System.out.print(tmpNum % 10);
-				tmpNum /= 10;
-			}
-			if (tmpNum > 0) {
-				System.out.print(tmpNum % 10);
-			}
+		// adds a day and assigns the input values to the next day values
+		nextDay = (byte) (inputDay + 1);
+		nextMonth = inputMonth;
+		nextYear = inputYear;
+
+		// checks if day is over the month day's count, if so it resets the days and adds one to the month
+		if (nextDay > 30) {
+			nextDay = 1;
+			nextMonth++;
 		}
+
+		// checks if month is over the year month's count, if so it resets the days and adds one to the month
+		if (nextMonth > 12) {
+			nextDay = 1;
+			nextMonth = 1;
+			nextYear++;
+		}
+
+		// Mostra la data original i l'endemà.
+		System.out.println("El dia següent a " + inputDay + "\\" + inputMonth + "\\" + inputYear + " es "
+				+ nextDay + "\\" + nextMonth + "\\" + nextYear);
 	}
 }

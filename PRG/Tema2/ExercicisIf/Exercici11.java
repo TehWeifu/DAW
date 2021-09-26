@@ -1,31 +1,37 @@
+// 11. Demana el día, mes i any d’una data e indicar si la data és correcta.
+//     Amb mesos de 28, 30 i 31 dies. Sense anys de trapás (bisiestos)
+
 import java.util.Scanner;
 
 public class Exercici11 {
 	public static void main(String[] args) {
+		// variable declaration
 		Scanner input = new Scanner(System.in);
-		int inputNum;
+		byte inputDay;
+		byte inputMonth;
+		long inputYear;
 
-		System.out.print("Introduzca un numero entre 0 y 9.999: ");
-		inputNum = input.nextInt();
+		// ask user for day, month and year
+		System.out.print("Introduïsca un dia (1-30): ");
+		inputDay = input.nextByte();
+		System.out.print("Introduïsca un mes (1-12): ");
+		inputMonth = input.nextByte();
+		System.out.print("Introduïsca un any: ");
+		inputYear = input.nextLong();
 
-		if (inputNum > 9_999 || inputNum < 0) {
-			System.out.println("El numero introducido no es valido");
+		// First checks days are between 1 and 31 and months are between 1 and 12
+		// Then checks the day is not over 30 for April, June, September and November
+		if (inputDay < 1 || inputDay > 31 || inputMonth < 1 || inputMonth > 12) {
+			System.out.println("La data " + inputDay + "\\" + inputMonth + "\\" + inputYear + " no és correcta");
 		} else {
-			System.out.print("El numero introducido tiene ");
-			if (inputNum / 10 == 0) System.out.println("1 digito");
-			else if (inputNum / 100 == 0) System.out.println("2 digitos");
-			else if (inputNum / 1000 == 0) System.out.println("3 digitos");
-			else System.out.println("4 digitos");
-		}
+			if ((inputMonth == 4 || inputMonth == 6 || inputMonth == 9 ||inputMonth == 11) && inputDay > 30) {
+				System.out.println("La data " + inputDay + "\\" + inputMonth + "\\" + inputYear + " no és correcta");
+			} else if (inputMonth == 2 && inputDay > 28) {
+				System.out.println("La data " + inputDay + "\\" + inputMonth + "\\" + inputYear + " no és correcta");
 
-//        if (inputNum > 9999 || inputNum < 0) {
-//            System.out.println("El numero introducido no es valido");
-//        } else {
-//            if (inputNum == 0) {
-//                System.out.print("El numero " + inputNum + " tiene 1 digito.");
-//            } else {
-//                System.out.print("El numero " + inputNum + " tiene " + (int) (Math.log10(inputNum) + 1) + " digito(s).");
-//            }
-//        }
+			} else {
+				System.out.println("La data " + inputDay + "\\" + inputMonth + "\\" + inputYear + " és correcta");
+			}
+		}
 	}
 }

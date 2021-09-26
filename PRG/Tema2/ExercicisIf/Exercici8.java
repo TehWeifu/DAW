@@ -1,32 +1,38 @@
+// 8. Demana un número entre 0 i 9.999 i mostrar’l amb les xifres a l’inrevés
+
 import java.util.Scanner;
 
-public class Exercici8 {
+public class TestJava {
 	public static void main(String[] args) {
 		// variable declaration
 		Scanner input = new Scanner(System.in);
-		double inputNum1;
-		double inputNum2;
+		int inputNum;
+		int tmpNum;
 
-		// asks user for both input numbers
-		System.out.print("Introduïsca un nombre real: ");
-		inputNum1 = input.nextDouble();
-		System.out.print("Introduïsca altre nombre real: ");
-		inputNum2 = input.nextDouble();
+		// ask for input and assigns it to the temporal variable
+		System.out.print("Introduïsca un número sencer entre 0 y 9.999: ");
+		inputNum = input.nextInt();
+		tmpNum = inputNum;
 
-		// checks for the biggest number by comparing them,
-		// if none is bigger than the other that means they're equals
-//        if (inputNum1 > inputNum2) {
-//            System.out.println("El nombre " + inputNum1 + " és major que " + inputNum2);
-//        } else {
-//            if (inputNum1 < inputNum2) {
-//                System.out.println("El numero " + inputNum2 + " és major que " + inputNum1);
-//            } else {
-//                System.out.println("Els dos nombres son iguals");
-//            }
-//        }
+		// outputs the digits one by one doing the mod and diving each time the number by 10
+		if (inputNum > 9_999 || inputNum < 0) {
+			System.out.println("El número introduït no és valid");
+		} else {
+			System.out.print("El número " + inputNum + " al revés és ");
 
-		// Checks if they are equals and if not prints them in order using Math methods.
-		if (inputNum1 == inputNum2) System.out.println("Els dos nombres son iguals");
-		else System.out.println("El nombre " + Math.max(inputNum1, inputNum2) + " és major que " + Math.min(inputNum1, inputNum2));
+			System.out.print(tmpNum % 10);
+			tmpNum /= 10;
+			if (tmpNum > 0) {
+				System.out.print(tmpNum % 10);
+				tmpNum /= 10;
+			}
+			if (tmpNum > 0) {
+				System.out.print(tmpNum % 10);
+				tmpNum /= 10;
+			}
+			if (tmpNum > 0) {
+				System.out.print(tmpNum % 10);
+			}
+		}
 	}
 }

@@ -1,31 +1,52 @@
+// 6. Demana tres números i mostrar'ls ordenats de major a menor.
+
 import java.util.Scanner;
 
 public class Exercici6 {
-    public static void main(String[] args) {
-        // variables declaration
-        Scanner input = new Scanner(System.in);
-        int inputNum1;
-        int inputNum2;
+	public static void main(String[] args) {
+		// declares variables
+		Scanner input = new Scanner(System.in);
+		double inputNum1;
+		double inputNum2;
+		double inputNum3;
 
-        // asking user for two numbers
-        System.out.print("Introduïsca un número sencer: ");
-        inputNum1 = input.nextInt();
-        System.out.print("Introduïsca altre numero sencer: ");
-        inputNum2 = input.nextInt();
+		// ask for inputs to the user
+		System.out.print("Introduïsca el primer número real: ");
+		inputNum1 = input.nextDouble();
+		System.out.print("Introduïsca el segon número real: ");
+		inputNum2 = input.nextDouble();
+		System.out.print("Introduïsca el tercer número real: ");
+		inputNum3 = input.nextDouble();
 
-        // checks whether the numbers are multiples. If checks one, else checks the other
-        if (inputNum1 % inputNum2 == 0) {
-            if (inputNum2 % inputNum1 == 0) { // if both are multiples of each other it means they are the same number
-                System.out.println("Son el mateix número");
-            } else {
-                System.out.println("El número " + inputNum1 + " és múltiple de " + inputNum2);
-            }
-        } else {
-            if (inputNum2 % inputNum1 == 0) {
-                System.out.println("El número " + inputNum2 + " és múltiple de " + inputNum1);
-            } else {
-                System.out.println("Els números no son múltiples entre si");
-            }
-        }
-    }
+		// initializes three temp variables with the input values
+		var tmpA = inputNum1;
+		var tmpB = inputNum2;
+		var tmpC = inputNum3;
+
+		// Sorts the numbers by comparing them two at the time
+		// and swapping their values if one later one is bigger than the first one
+		if (tmpB > tmpA) {
+			// swap A and B
+			var tmpSwap = tmpA;
+			tmpA = tmpB;
+			tmpB = tmpSwap;
+		}
+
+		if (tmpC > tmpA) {
+			// swap A and C
+			var tmpSwap = tmpA;
+			tmpA = tmpC;
+			tmpC = tmpSwap;
+		}
+
+		if (tmpC > tmpB) {
+			// swap B and C
+			var tmpSwap = tmpB;
+			tmpB = tmpC;
+			tmpC = tmpSwap;
+		}
+
+		// Outputs the descending order
+		System.out.println("Los números en ordre descendent son: " + tmpA + "  " + tmpB + "  " + tmpC);
+	}
 }

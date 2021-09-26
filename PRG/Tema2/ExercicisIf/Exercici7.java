@@ -1,26 +1,37 @@
+// 7. Demana un número entre 0 i 9.999 i digues quantes xifres té.
+
 import java.util.Scanner;
 
 public class Exercici7 {
 	public static void main(String[] args) {
 		// variable declaration
 		Scanner input = new Scanner(System.in);
-		double inputNum1;
-		double inputNum2;
+		int inputNum;
 
-		// ask the user for two integers
-		System.out.print("Introduïsca un nombre real: ");
-		inputNum1 = input.nextDouble();
-		System.out.print("Introduïsca altre nombre real: ");
-		inputNum2 = input.nextDouble();
+		// Ask user for an integer
+		System.out.print(" un número sencer entre 0 y 9.999: ");
+		inputNum = input.nextInt();
 
-		// obtains the bigger one by comparing them and outputs the corresponding statement
-		if (inputNum1 > inputNum2) {
-			System.out.println("El nombre " + inputNum1 + " és major que " + inputNum2);
+		// checks how many digits a number has by dividing it by powers of 10
+		if (inputNum > 9_999 || inputNum < 0) {
+			System.out.println("El número introduït no es valido");
 		} else {
-			System.out.println("El nombre " + inputNum2 + " és major que " + inputNum1);
+			System.out.print("El número introduït té ");
+			if (inputNum / 10 == 0) System.out.println("1 xifra");
+			else if (inputNum / 100 == 0) System.out.println("2 xifres");
+			else if (inputNum / 1000 == 0) System.out.println("3 xifra");
+			else System.out.println("4 xifres");
 		}
 
-		// obtains the bigger and smaller number by using the Math functions
-//        System.out.println("El nombre " + Math.max(inputNum1, inputNum2) + " és major que " + Math.min(inputNum1, inputNum2));
+//        // checks how many a digits has by using Math log10 method
+//        if (inputNum > 9999 || inputNum < 0) {
+//            System.out.println("El número introduït no es valid");
+//        } else {
+//            if (inputNum == 0) {
+//                System.out.print("El número " + inputNum + " té 1 xifra.");
+//            } else {
+//                System.out.print("El número " + inputNum + " té " + (int) (Math.log10(inputNum) + 1) + " xifre(s).");
+//            }
+//        }
 	}
 }

@@ -1,4 +1,4 @@
-Exercici4
+﻿Exercici4
 
 int A = 5, B = 3, C = -12
  
@@ -12,7 +12,7 @@ g) A * B == 15  		→ true
 h) A * B == -30 		→ false
 i) C / B < A			→ true
 j) C / B == -10 		→ false
-k) C / B == -4 		→ true
+k) C / B == -4 			→ true
 l) A + B + C == 5		→ false
 m) (A+B == 8 ) && (A-B == 2)	→ true
 n) (A+B == 8 ) || (A-B == 6) 	→ true

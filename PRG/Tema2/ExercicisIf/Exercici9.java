@@ -1,27 +1,29 @@
+// 9. Demana una nota de 0 a 10 i mostrar-la de la forma: Insuficient, Suficient, Bé, ...
+
 import java.util.Scanner;
 
-public class Exercici9 {
+public class TestJava {
 	public static void main(String[] args) {
 		// variable declaration
 		Scanner input = new Scanner(System.in);
-		double inputNum1;
-		double inputNum2;
+		double inputGrade;
 
-		// ask user for two numbers as inputs
-		System.out.print("Introduïsca un nombre real: ");
-		inputNum1 = input.nextDouble();
-		System.out.print("Introduïsca un altre nombre real: ");
-		inputNum2 = input.nextDouble();
+		// Ask for input to the user
+		System.out.print("Introduïsca una nota entre 1 y 10: ");
+		inputGrade = input.nextDouble();
 
-		// outputs both numbers in order by comparing them first
-		System.out.print("Els nombres en ordre descendent son: ");
-		if (inputNum1 > inputNum2) {
-			System.out.println(inputNum1 + " " + inputNum2);
+		// First checks if grade is in range and then chooses between if states for the right statement
+		if (inputGrade < 0.0 || inputGrade > 10.0) {
+			System.out.println("Aquesta nota no és vàlida.");
 		} else {
-			System.out.println(inputNum2 + " " + inputNum1);
-		}
+			System.out.print("La nota " + inputGrade + " equival a ");
 
-		// outputs both numbers in order by using the Math max/min methods
-//        System.out.println("Els nombres en ordre descendent son: " + Math.max(inputNum1, inputNum2) + " " + Math.min(inputNum1, inputNum2));
+			if (inputGrade == 10.0) System.out.println("\"M.H.\"");
+			else if (inputGrade >= 9.0) System.out.println("\"Excel·lent\"");
+			else if (inputGrade >= 7.0) System.out.println("\"Notable\"");
+			else if (inputGrade >= 6.0) System.out.println("\"Bé\"");
+			else if (inputGrade >= 5.0) System.out.println("\"Suficient\"");
+			else System.out.println("\"Insuficient\"");
+		}
 	}
 }
