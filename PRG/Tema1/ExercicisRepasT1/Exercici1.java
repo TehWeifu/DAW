@@ -1,5 +1,5 @@
 // 1.Indica que mostra el següent codi i explica línia a línia el codi.
-public class TestJava {
+public class Exercici1 {
     public static void main(String[] args) {
 
         // 33 en binari és 100001, j << 2 dona 10000100 que en decimal és 132

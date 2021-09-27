@@ -1,0 +1,21 @@
+2. Galería de pintura
+
+Una galería de pintura
+
+Una galería de pintura desea diseñar una base de datos para almacenar la información sobre las exposiciones que organiza y los cuadros que vende. La información más relevante que desea almacenar es la que se describe a continuación.
+
+    Con la galería trabajan distintos artistas de los que se quiere saber: DNI, nombre, dirección y teléfonos. 
+
+    Estos artistas proporcionan pinturas a la galería para que ésta organice exposiciones con el propósito de venderlas.
+    Cada pintura se identifica por un código, tiene un título y un precio orientativo fijado por el artista.
+
+
+    Las exposiciones se identifican por un código y tienen una fecha de inicio y otra de finalización.
+
+    Una pintura puede exhibirse en varias exposiciones hasta que se consiga vender a algún cliente; 
+
+    De estos clientes se desea conocer el DNI, el nombre, la dirección, los teléfonos.
+
+
+    Cuando se venda un cuadro, hay que almacenar la fecha de la venta, que no tiene por qué coincidir con una exposición, y el precio final que se ha pagado. 
+

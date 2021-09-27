@@ -1,0 +1,5 @@
+6. Enunciado Especialización/Generalización
+
+Una inmobiliaria desea almacenar información de sus inmuebles. De todos los inmuebles se desea almacenar el código, precio y dirección. Además, se desea almacenar información extra de algunos inmuebles: De las viviendas hay que almacenar el tipo, de los locales los m2, y de los terrenos, si son urbanos o rústicos.
+
+También, se almacenará el DNI y nombre de los comerciales de los inmuebles. Se sabe que un comercial puede tener asignados varios inmuebles y estos inmuebles tienen asignado al menos un comercial y solo uno.

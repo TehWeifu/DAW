@@ -1,0 +1,11 @@
+5. Enunciado Agregación
+
+Ejercicio ”Alumnos con beca para trabajar”
+
+    Sabemos que todo alumno puede estar haciendo prácticas en una empresa y solo en una.
+    De los alumnos necesitamos almacenar su dni y nombre. Y de las empresas su cif. 
+    Además, queremos almacenar el número de horas semanales que el alumno debe estar en la empresa.
+    Dado un alumno y una empresa de prácticas la Conselleria puede otorgarle una beca por una cantidad determinada y solo una.
+    De cada beca, que puede otorgarse a varios alumnos-empresa interesa conocer su código identificador y el mínimo y máximo de dinero que permite conceder.
+
+Obtén un diagrama Entidad/Relación que permita representar esta situación.

@@ -1,0 +1,15 @@
+1. Compañía Aseguradora
+
+Compañía Aseguradora
+
+Una compañía aseguradora tiene dos tipos de empleados bien diferenciados: vendedores de seguros y administrativos. Para todos ellos necesita conocer su DNI, nombre y salario. Además, necesita disponer de la siguiente información:
+
+    La zona geográfica en la que opera un vendedor y el porcentaje de comisión que se lleva por venta realizada.
+
+    La categoría de los administrativos.
+
+    Todo seguro es vendido por un vendedor y necesitamos disponer del número de póliza, que identifica al seguro, la fecha de firma, el importe al que asciende y el nombre de su beneficiario.
+
+    Además, para cada venta queremos almacenar la comisión que se llevará el vendedor y que se calcula con la siguiente fórmula:
+
+COMISION_VENTA = (IMPORTE_VENTA * %COMISION_VENDEDOR)/100

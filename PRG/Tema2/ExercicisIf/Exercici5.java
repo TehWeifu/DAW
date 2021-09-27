@@ -1,3 +1,4 @@
+// 5. Demana dos números i mostrar’ls ordenats de major a menor.
 import java.util.Scanner;
 
 public class Exercici5 {
