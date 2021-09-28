@@ -1,0 +1,7 @@
+Exercici 3. Indica les fallades que trobes en el següent bucle:
+
+// Les variables c i a mai van ser declarades
+
+c = 5;
+for (a=1; a<5; a++)
+      c = c – 1;

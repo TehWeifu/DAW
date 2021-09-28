@@ -21,17 +21,25 @@ public class Ciudadano {
     public static void main(String[] args) {
         if (nacionalidad == 'E') {
             System.out.println("És resident en Espanya");
-        } else if (estudiando) {
-            System.out.println("És resident en Espanya");
-        } else if (edad < 18 && (padreResidente || madreResidente)) {
-            System.out.println("És resident en Espanya");
-            // En aquest exercici, la següent condició és la que ens dona el resultat
-        } else if (ciudadanoEU && (trabajando || conyuge)) {
-            System.out.println("És resident en Espanya");
-        } else if (!ciudadanoEU && conyuge) {
-            System.out.println("És resident en Espanya");
         } else {
-            System.out.println("No pot ser resident a Espanya");
+            if (estudiando) {
+                System.out.println("És resident en Espanya");
+            } else {
+                if (edad < 18 && (padreResidente || madreResidente)) {
+                    System.out.println("És resident en Espanya");
+                } else {
+                    // En aquest exercici, la següent condició és la que ens dona el resultat
+                    if (ciudadanoEU && (trabajando || conyuge)) {
+                        System.out.println("És resident en Espanya");
+                    } else {
+                        if (!ciudadanoEU && conyuge) {
+                            System.out.println("És resident en Espanya");
+                        } else {
+                            System.out.println("No pot ser resident a Espanya");
+                        }
+                    }
+                }
+            }
         }
     }
 }
