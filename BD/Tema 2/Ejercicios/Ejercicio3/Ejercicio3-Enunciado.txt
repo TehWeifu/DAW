@@ -1,0 +1,10 @@
+3. Vinos de La Rioja
+
+Vinos de La Rioja
+
+    Los vinos son producidos por bodegas, de las que conocemos su CIF y nombre. Y sabemos que no existen dos bodegas en La Rioja con el mismo nombre.
+    Las bodegas pueden ser de dos tipos: empresas o cooperativas bodegueras. Para las empresas almacenaremos el nombre de su propietario, y para las cooperativas el número de socios cooperativistas.
+    Las bodegas pueden producir varios vinos pero existen vinos registrados que no son producidos por bodegas sino por personas particulares, de las que no nos interesa almacenar información.
+    De los vinos guardaremos su marca, tipo (tinto, blanco o rosado), año de cosecha y graduación; además, conocemos los distintos tipos de uva que se han utilizado para su elaboración.
+    Algunos prestigiosos catadores han calificado varios de nuestros vinos y nos interesa almacenar su DNI, nombre y medio de comunicación en el que trabajan. No nos interesa almacenar en nuestra base de datos catadores de los que no dispongamos toda su información o que no hayan valorado ninguno de nuestros vinos. Además, la normativa de catas prohíbe que un catador valore más de 20 vinos de cualquier empresa de La Rioja.
+

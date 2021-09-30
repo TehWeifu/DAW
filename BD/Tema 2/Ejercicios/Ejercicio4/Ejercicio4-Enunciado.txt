@@ -1,0 +1,12 @@
+4. Horarios
+
+Horarios
+
+Antes de comenzar el curso, los encargados de realizar los horarios de un ciclo formativo han decidido automatizar el proceso para repartir las horas y aulas.
+
+    Para ello, se cuenta con una relación de las asignaturas a impartir (nombre, ciclo formativo y curso) y del profesor (nombre y departamento al que pertenecen) que imparte cada una de ellas.
+    Cada asignatura se imparte en una sola aula y de cada aula se conoce su número identificador y la capacidad de la misma.
+    Las aulas pueden ser informáticas o no (sin ordenadores, de teoría). Para las primeras se desea conocer el número de ordenadores que poseen y de las segundas los metros cuadrados.
+    Además, cualquier aula (informática o no) puede tener una pizarra. Si la tiene, sólo tiene una, y una pizarra solo puede pertenecer a un aula.
+    De las pizarras interesa conocer su tamaño (ancho y alto).
+
