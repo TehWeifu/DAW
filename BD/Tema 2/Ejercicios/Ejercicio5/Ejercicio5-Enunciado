@@ -1,0 +1,14 @@
+5. Vehículos
+
+Vehículos
+
+Se desea tener informatizada información acerca de los vehículos que circula habitualmente por una ciudad, teniendo en cuenta que:
+
+    Los datos que se quieren conocer sobre sus conductores son: nombre, primer apellido, DNI, la fecha en la que se sacó el carné de conducir y los vehículos de los que son conductores. 
+
+    No se quiere almacenar en la base de datos ningún vehículo que no tenga conductor asignado.
+
+    Se quiere almacenar información de algunos vehículos: coches, patinetes y camiones. De todos ellos se desea conocer marca y modelo. 
+
+    Además, para los coches necesitamos el número de puertas, para los patinetes la velocidad máxima y para los camiones la tara.
+
