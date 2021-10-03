@@ -3,8 +3,8 @@
 public class Exercici2 {
     public static void main(String[] args) {
 
-        // una línia composta per asteriscs (*) de 10 de larg. Cada impressió sols portarà un caràcter.
-        // ********** 
+        // Una línia composta per asteriscs (*) de 10 de llarg. Cada impressió sols portarà un caràcter.
+        // **********
         byte i1 = 0;
         final byte SIZE1 = 10;
 
@@ -16,8 +16,8 @@ public class Exercici2 {
         System.out.println();
 
 
-        // una línia composta por uns (1) i ceros (0) intercalats de 20 de larg. Cada impressió sols portarà un caràcter.
-        // 10101010101010101010		
+        // Una línia composta per uns (1) i zeros (0) intercalats de 20 de llarg. Cada impressió sols portarà un caràcter.
+        // 10101010101010101010
         byte i2 = 1;
         final byte SIZE2 = 20;
 
@@ -29,7 +29,7 @@ public class Exercici2 {
         System.out.println();
 
 
-        // una línia composta per seqüencies de quatre uns (1) i un cero (0) succesius de 25 de larg. 
+        // Una línia composta per seqüències de quatre uns (1) i un zero (0) successius de 25 de llarg.
         // 1111011110111101111011110
         byte i3 = 1;
         final byte SIZE3 = 25;
@@ -42,12 +42,12 @@ public class Exercici2 {
         System.out.println();
 
 
-        // un quadre compost per signes més (+) de 5 files i 10 columnes 
-        // ++++++++++ 
+        // un quadre compost per signes més (+) de 5 files i 10 columnes
         // ++++++++++
         // ++++++++++
         // ++++++++++
-        // ++++++++++          	
+        // ++++++++++
+        // ++++++++++
         byte i4 = 0;
         byte j4 = 0;
         final byte ROWS4 = 5;
@@ -67,13 +67,13 @@ public class Exercici2 {
         System.out.println();
 
 
-        // un quadre compost per signes igual (=) alternats amb signes menys (-) de 6 files i 10 columnes 
+        // un quadre compost per signes igual (=) alternats amb signes menys (-) de 6 files i 10 columnes
         // =-=-=-=-=-
         // =-=-=-=-=-
         // =-=-=-=-=-
         // =-=-=-=-=-
         // =-=-=-=-=-
-        // =-=-=-=-=-  
+        // =-=-=-=-=-
         byte i5 = 0;
         byte j5 = 0;
         final byte ROWS5 = 6;
@@ -83,10 +83,7 @@ public class Exercici2 {
             j5 = 0;
 
             while (j5 < COLUMNS5) {
-                if (j5 % 2 == 0)
-                    System.out.print('=');
-                else
-                    System.out.print('-');
+                System.out.print(j5 % 2 == 0 ? '=' : '-');
                 j5++;
             }
 
@@ -96,7 +93,7 @@ public class Exercici2 {
         System.out.println();
 
 
-        // un triangle isósceles de 10 de altura, compost per lletres 'o' 
+        // un triangle isòsceles de 10 de altura, compost per lletres 'o'
         // o
         // oo
         // ooo
@@ -125,7 +122,7 @@ public class Exercici2 {
         System.out.println();
 
 
-        // el mateix triangle, però invertit i composto por lletres 'o' 
+        // el mateix triangle, però invertit i composto por lletres 'o'
         // oooooooooo
         // ooooooooo
         // oooooooo
@@ -154,32 +151,27 @@ public class Exercici2 {
         System.out.println();
 
 
-        // un rectangle buit compost per coixinets '#' de costats 10x5 
+        // un rectangle buit compost per coixinets '#' de costats 10x5
         // ##########
         // #        #
         // #        #
         // #        #
         // ##########
-        byte i8 = 0;
-        byte j8 = 0;
+        byte i8 = 1;
+        byte j8 = 1;
         final byte ROWS8 = 5;
         final byte COLUMNS8 = 10;
 
-        while (i8 < ROWS8) {
-            j8 = 0;
+        while (i8 <= ROWS8) {
+            j8 = 1;
 
-            while (j8 < COLUMNS8) {
-                if (i8 == 0 || (i8 == ROWS8 - 1) || j8 == 0 || (j8 == COLUMNS8 - 1))
-                    System.out.print('#');
-                else
-                    System.out.print(' ');
+            while (j8 <= COLUMNS8) {
+                System.out.print(i8 == 1 || i8 == ROWS8  || j8 == 1 || j8 == COLUMNS8  ? '#' : ' ');
                 j8++;
             }
+
             System.out.println();
             i8++;
         }
-        System.out.println();
     }
 }
-
-
