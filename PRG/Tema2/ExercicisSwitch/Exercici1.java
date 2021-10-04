@@ -13,10 +13,10 @@
 
 public class Exercici1 {
 	public static void main(String[] args) {
-		char opcion;
-		int x;
-		
-		switch (opcion) {
+		char option = '0';
+		int x = 0;
+
+		switch (option) {
 			case 'd':
 				x = x + 2;
 				break;
@@ -29,4 +29,3 @@ public class Exercici1 {
 		}
 	}
 }
-
