@@ -1,0 +1,13 @@
+7. La prensa
+
+ La prensa
+
+Deseamos informatizar los artículos publicados por los periódicos regionales.
+
+    De estos últimos conocemos su nombre y su dirección completa (tipo de vía, nombre de la vía, número de portal y código postal).
+    De cada artículo almacenaremos su título, texto completo, resumen y el tipo de artículo: noticia, artículo de opinión, etc.
+    Un mismo artículo puede ser publicado en distintos periódicos y nos interesará registrar las fechas y secciones (local, nacional, sociedad, etc) de publicación.
+    Todos los artículos tienen uno o más autores, los cuales pueden ser periodistas profesionales o no. De todos ellos, interesa conocer su nombre y DNI.
+    De los autores que no son periodistas, deseamos conocer su profesión.
+    Además, sabemos para qué periódico trabajan los periodistas y qué cargo ocupan, aunque algunos de ellos trabajan por su cuenta (no trabajan para ningún periódico). 
+
