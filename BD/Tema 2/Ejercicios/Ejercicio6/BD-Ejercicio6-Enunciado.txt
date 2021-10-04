@@ -1,0 +1,9 @@
+6. Compañía telefónica
+
+Compañía telefónica
+
+Una pequeña empresa telefónica desea crear una base de datos para controlar las llamadas efectuadas entre sus abonados, exclusivamente.
+
+    Necesita información sobre las terminales de su red: el número de teléfono, el nombre del abonado que es obligatorio y el tipo de teléfono: fijo o móvil.
+    De cada llamada realizada entre terminales interesa conocer el número de teléfono del emisor, el número de teléfono del receptor, la hora de comienzo de la llamada y su duración.
+
