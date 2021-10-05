@@ -1,7 +1,7 @@
-// Exercici 3. El algoritme per a calcular la lletra del NIF es el següent:
+// Exercici 3. L'algoritme per a calcular la lletra del NIF és el següent:
 // 1. Calcula el resto de dividir el número de DNI per 23
-// 2. La letra del NIF corresponent amb la següent taula:
-// 	Si el resto es:	La letra es:
+// 2. La lletra del NIF corresponent amb la següent taula:
+// 	Si el resto és:	La lletra és:
 // 	0			T
 // 	1			R
 // 	2			W
@@ -25,47 +25,50 @@
 // 	20			C
 // 	21			K
 // 	22			E
-// Crea un programa que donat un NIF et torne la lletra segons el algoritme anterior.
-// Utilitza una sentencia switch.
+// Crea un programa que donat un NIF et torne la lletra segons l'algoritme anterior.
+// Utilitza una sentència switch.
 
 import java.util.Scanner;
 
-public class Exercici3 {
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		long dniNum = 0;
+public class ExerciseXXX {
+    public static void main(String[] args) {
+        // variable declaration
+        Scanner input = new Scanner(System.in);
+        long dniNum;
 
-		do {
-			System.out.print("Introduïsca el numero del DNI: ");
-			dniNum = input.nextLong();
-		} while (dniNum < 0 || dniNum > 99_999_999);
+        // prompts user asking for an ID number and checks if it is valid
+        do {
+            System.out.print("Introduïsca el numero del DNI: ");
+            dniNum = input.nextLong();
+        } while (dniNum < 0 || dniNum > 99_999_999);
 
-		System.out.printf("Al numero de DNI %08d li correspon la lletra ", dniNum);
-
-		switch ((byte) (dniNum % 23)) {
-			case 0 -> System.out.println('T');
-			case 1 -> System.out.println('R');
-			case 2 -> System.out.println('W');
-			case 3 -> System.out.println('A');
-			case 4 -> System.out.println('G');
-			case 5 -> System.out.println('M');
-			case 6 -> System.out.println('Y');
-			case 7 -> System.out.println('F');
-			case 8 -> System.out.println('P');
-			case 9 -> System.out.println('D');
-			case 10 -> System.out.println('X');
-			case 11 -> System.out.println('B');
-			case 12 -> System.out.println('N');
-			case 13 -> System.out.println('J');
-			case 14 -> System.out.println('Z');
-			case 15 -> System.out.println('S');
-			case 16 -> System.out.println('Q');
-			case 17 -> System.out.println('V');
-			case 18 -> System.out.println('H');
-			case 19 -> System.out.println('L');
-			case 20 -> System.out.println('C');
-			case 21 -> System.out.println('K');
-			case 22 -> System.out.println('E');
-		}
-	}
+        // Outputs the corresponding letter by doing the mod operation and 
+        // doing a switch en the result
+        System.out.printf("Al numero de DNI %08d li correspon la lletra ", dniNum);
+        switch ((byte) (dniNum % 23)) {
+            case 0 -> System.out.println('T');
+            case 1 -> System.out.println('R');
+            case 2 -> System.out.println('W');
+            case 3 -> System.out.println('A');
+            case 4 -> System.out.println('G');
+            case 5 -> System.out.println('M');
+            case 6 -> System.out.println('Y');
+            case 7 -> System.out.println('F');
+            case 8 -> System.out.println('P');
+            case 9 -> System.out.println('D');
+            case 10 -> System.out.println('X');
+            case 11 -> System.out.println('B');
+            case 12 -> System.out.println('N');
+            case 13 -> System.out.println('J');
+            case 14 -> System.out.println('Z');
+            case 15 -> System.out.println('S');
+            case 16 -> System.out.println('Q');
+            case 17 -> System.out.println('V');
+            case 18 -> System.out.println('H');
+            case 19 -> System.out.println('L');
+            case 20 -> System.out.println('C');
+            case 21 -> System.out.println('K');
+            case 22 -> System.out.println('E');
+        }
+    }
 }

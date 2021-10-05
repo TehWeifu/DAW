@@ -5,16 +5,18 @@ import java.util.Scanner;
 
 public class Exercici4 {
 	public static void main(String[] args) {
+		// variable declaration
 		Scanner input = new Scanner(System.in);
 		byte monthNum;
 
+		// prompts user asking for a month and checks if it is valid
 		do {
 			System.out.print("Introduïsca un numero de mes (1-12): ");
 			monthNum = input.nextByte();
 		} while (monthNum < 1 || monthNum > 12);
 
+		// outputs the month name by doing a switch on the input variable
 		System.out.print("El mes " + monthNum + " correspon al mes ");
-
 		switch (monthNum) {
 			case 1 -> System.out.println("Gener");
 			case 2 -> System.out.println("Febrer");

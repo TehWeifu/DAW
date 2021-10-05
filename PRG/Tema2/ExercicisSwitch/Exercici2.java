@@ -3,13 +3,13 @@
 //            public static void main(String [] args) {
 //                char a='g';
 //                switch (a) {
-//                    case 'g':
+//                    case 'g':  		// Aquest label s'executa, la variable "a" obté el valor 'h'
 //                        a++;
-//                    default:
-//                        if (a<'g')
+//                    default:		// Com no hi ha break, aquest label tambe s'executa
+//                        if (a<'g')		// la condició es false
 //                            a--;
 //                        else
-//                            a='m';
+//                            a='m';		// S'executa aquest statement,la variable "a" obté el valor 'm'
 //                }
 //                System.out.println(a);
 //            }//fin main
