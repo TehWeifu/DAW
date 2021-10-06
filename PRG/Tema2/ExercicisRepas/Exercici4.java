@@ -2,20 +2,20 @@
 
 import java.util.Scanner;
 
-public class TestJava {
+public class Exercici4 {
     public static void main(String[] args) {
         // variable declaration
         Scanner input = new Scanner(System.in);
-        byte inputNum;
-        byte tmpNum;
+        short inputNum;
+        short tmpNum;
         long resBinary = 0;
         byte position = 0;
 
-        // prompts the user for a number
+        // prompts the user asking for a number
         do {
             System.out.print("Introduïsca un numero sencer entre 0 i 257: ");
-            inputNum = input.nextByte();
-        } while (inputNum < 0);
+            inputNum = input.nextShort();
+        } while (inputNum < 0 || inputNum > 257);
 
         // transform the decimal number to binary number by doing the mod 2 operation and adding the result
         // in front of the number

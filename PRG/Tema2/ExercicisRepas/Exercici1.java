@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class Exercici1 {
     public static void main(String[] args) {
+        // variable declaration
         Scanner input = new Scanner(System.in);
         byte inputNum;
 
+        // prompts user asking for a number between 1 and 10 and does basic validation
         do {
             System.out.print("Introduïsca un numero entre 1 y 10: ");
             inputNum = input.nextByte();
         } while (inputNum < 1 || inputNum > 10);
 
+        // outputs the correct name for the number by comparing in a switch
         System.out.print("El numero " + inputNum + " en anglés és ");
         switch (inputNum) {
             case 1 -> System.out.println("one");
@@ -27,3 +30,4 @@ public class Exercici1 {
         }
     }
 }
+

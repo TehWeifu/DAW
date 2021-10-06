@@ -1,4 +1,4 @@
-//3. Escriu un programa que mostra el signe zodiacal d'una persona. Per a això l'usuari
+//	  3. Escriu un programa que mostra el signe zodiacal d'una persona. Per a això l'usuari
 //        ha d'introduir únicament el dia i el mes de naixement i el programa
 //        determinarà immediatament el signe zodiacal de la persona.
 

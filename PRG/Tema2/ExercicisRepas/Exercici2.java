@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class TestJava {
     public static void main(String[] args) {
-        //variable declaration
+        // variable declaration
         Scanner input = new Scanner(System.in);
 
         final long PASS = 123456;
@@ -24,7 +24,7 @@ public class TestJava {
             System.out.println();
         }
 
-        // outputs the result
+        // outputs the result checking if the pass is correct
         if (PASS == inputPass) {
             System.out.println("Enhorabona!");
         } else {
