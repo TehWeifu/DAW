@@ -1,5 +1,5 @@
-//        Exercici 7. Realitza un programa utilitzant bucles que mostre la següent figura per
-//        pantalla.
+// Exercici 7. Realitza un programa utilitzant bucles que mostre la següent figura per
+// pantalla.
 //             ┌───────┐
 //             │   *   │
 //             │  * *  │

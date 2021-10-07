@@ -8,3 +8,4 @@ public class Exercici3 {
         System.out.println();
     }
 }
+

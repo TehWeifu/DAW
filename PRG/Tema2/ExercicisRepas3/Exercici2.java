@@ -5,7 +5,7 @@
 //        int m=1;
 //        boolean x=true;
 //        do{
-//            if (!x){                  // la primera vegada no se cumple, la segunda vegada se cumple
+//            if (!x){                  // la primera vegada no se cumple, la segona vegada se cumple
 //                var=2;
 //            }
 //            do {

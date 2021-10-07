@@ -7,8 +7,8 @@ public class Exercici2 {
         final byte NUMS_TO_INPUT = 5;
         Scanner input = new Scanner(System.in);
 
-        double maxNum = Double.MIN_VALUE;
-        double minNum = Integer.MAX_VALUE;
+        double maxNum = Double.NEGATIVE_INFINITY;
+        double minNum = Double.POSITIVE_INFINITY;
 
         for (int i = 1; i <= NUMS_TO_INPUT; i++) {
 
@@ -23,3 +23,4 @@ public class Exercici2 {
         System.out.println("El numero menor es " + minNum);
     }
 }
+
