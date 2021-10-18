@@ -100,7 +100,8 @@ p {
     display: flex;
     font-size: 2rem;
     align-items: center;
-    border-bottom: 1px solid var(--lv-main-beige);
+    border-bottom: 2px solid var(--lv-main-beige);
+    background-color: var(--lv-main-brown);
     z-index: 1;
 }
 
@@ -140,4 +141,53 @@ p {
     background-color: var(--lv-main-brown);
     border: 1px solid var(--lv-main-beige);
     padding: 5px;
+}
+
+#cookies {
+    position: fixed;
+    bottom: 2rem;
+    width: 5%;
+    height: 3rem;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--lv-main-beige);
+    border: 2px solid var(--lv-main-brown);
+    border-radius: 15px;
+    z-index: 1;
+    transition: width 2s ease-in;
+}
+
+
+
+#cookies p {
+    font-size: 1.2rem;
+    color: var(--lv-main-brown);
+    font-weight: bolder;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+#cookies button {
+    color: var(--lv-main-brown);
+    background-color: #50c878;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--lv-main-brown);
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+#cookies button:active {
+    transform: scale(0.98);
+}
+
+@keyframes cookiesDisplay {
+
 }
