@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Exercici3 {
     
     // Method to print a day of the week based on a number
-    public static void diaDelaSemana(int num) {
+    public static void diaDelaSemana(final int num) {
         switch (num) {
             case 1:
                 System.out.println("Dilluns");
