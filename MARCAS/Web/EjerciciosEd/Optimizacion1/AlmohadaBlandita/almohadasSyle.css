@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("bck_clouds.png") repeat;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    max-width: 800px;
+    border-radius: 20px;
+    background-color: #e6bf98;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #C80060;
+}
+
+p {
+    letter-spacing: 1px;
+}
