@@ -15,14 +15,17 @@ public class Exercici5 {
         // Loops over the array, copying the new character when it finds the character to be replaced
         // or the original character if it doesn't find an occurrence
         String resStr = "";
+        int count = 0;
         for (int i = 0; i < inputStr.length(); i++) {
             if (inputStr.charAt(i) == inputOldChar) {
                 resStr += inputNewChar;
+                count++;
             } else {
                 resStr += inputStr.charAt(i);
             }
         }
 
+        System.out.println("El caràcter '" + inputOldChar + "' apareix " + count + " vegades.");
         System.out.println("La frase canviada es: " + resStr);
     }
 }

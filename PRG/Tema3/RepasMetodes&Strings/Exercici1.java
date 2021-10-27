@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TestJava {
+public class Exercici1 {
     // Method to calculate the difference in minuts between 2 moments (hours + minutes)
     // Returns a positive number if the first moment is later than the second moment
     // Returns a negative number if the second moment is later than the first moment
@@ -22,7 +22,7 @@ public class TestJava {
         inputMin1 = sc.nextInt();
         System.out.print("Introduïsca la segona hora: ");
         inputHour2 = sc.nextInt();
-        System.out.print("Introduïsca els segons hora: ");
+        System.out.print("Introduïsca els segons minuts: ");
         inputMin2 = sc.nextInt();
 
         System.out.println("La diferencia entre els dos moments es " + diferenciaMin(inputHour1, inputMin1, inputHour2, inputMin2) + " minuts.");
