@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Exercici3 {
     public static void main(String[] args) {
-        
+
         // Constant declaration for array length and console scanner
         final byte NUM_COUNT = 10;
         final Scanner sc = new Scanner(System.in);
@@ -18,14 +18,15 @@ public class Exercici3 {
         // swapping its value and position with it.
         for (int i = 0; i < NUM_COUNT; i++) {
             System.out.print("Introduïsca el " + (i + 1) + " numero real: ");
-            numArr[i]  = sc.nextDouble();
-
-            if (numArr[i] >= bigNum) {
-                bigNum = numArr[i];
+            double tmpNum = sc.nextDouble();            
+            numArr[i] = tmpNum;
+            
+            if ((tmpNum % 2 == 0) && (tmpNum >= bigNum)) {
+                bigNum = tmpNum;
                 bigPos = i;
             }
         }
-        
+
         // Prints the biggest number and its position in the array
         System.out.println("El major numero es " + bigNum + ". Esta en la posició  " + bigPos + " del array");
     }
