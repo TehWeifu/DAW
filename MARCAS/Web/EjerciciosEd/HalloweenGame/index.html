@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Insect catch game</title>
+</head>
+<body>
+
+<div class="game-start">
+    <h2>Spooky Catch!</h2>
+    <button class="startBtn">play game</button>
+</div>
+
+<div class="insect-selection hide">
+    <h2>What is your favourite insect?</h2>
+
+    <div class="insect-display">
+        <div class="insect-option">
+            <span>Zombie</span>
+            <img src="./imgs/zombie.png" alt="">
+        </div>
+        <div class="insect-option">
+            <span>Witch</span>
+            <img src="./imgs/witch.png" alt="">
+        </div>
+        <div class="insect-option">
+            <span>Ghost</span>
+            <img src="./imgs/ghost.png" alt="">
+        </div>
+        <div class="insect-option">
+            <span>Skeleton</span>
+            <img src="./imgs/skeleton.png" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="game-container hide">
+    <span class="time">Time: 00:00</span>
+    <span class="score">Score: 0</span>
+    <div class="message hide">
+        Are you spooked yet? <br>
+        You are the playing scariest game ever made!
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -116,6 +116,18 @@ p {
     cursor: default;
 }
 
+#mainMenu li li:hover {
+    background-color: var(--lv-main-beige);
+}
+
+#mainMenu li li:active {
+    transform: scale(1.02);
+}
+
+#mainMenu li li:hover a {
+    color: var(--lv-main-brown);
+}
+
 #mainMenu a {
     color: var(--lv-main-beige);
 }
