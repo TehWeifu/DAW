@@ -1,15 +1,18 @@
 import java.util.Scanner;
 
 public class Exercici4 {
+    // Declares constants for array length and a scanner
     private static final byte LENGTH = 15;
-
     public static final Scanner sc = new Scanner(System.in);
+
+    // Declares two arrays, for titles and their states. Titles are initialized with constant values
     public static final String[] titles = {
             "La perla", "Amuleto", "Azafrán", "Calix", "Celda 211", "City", "Crepúsculo", "Dos ranas", "Ébano",
             "El baile", "El lector", "Luna nueva", "Piedad", "Todo fluye", "Una vez"
     };
     public static final int[] state = new int[LENGTH];
 
+    // Method that prints the main Menu and prompts user to input an option, does validation and returns the option
     public static int mainMenu() {
         int res;
         System.out.println("MENU");
@@ -24,6 +27,7 @@ public class Exercici4 {
         return res;
     }
 
+    // Method that prints the borrow option menu and prompts user to input an option, does validation and returns the option
     public static int borrowMenu() {
         int res;
         System.out.println();
@@ -40,6 +44,7 @@ public class Exercici4 {
         return res;
     }
 
+    // Method that changes the state of a book by searching it for its name
     public static void borrow() {
         System.out.print("Introduïsca el títol de un llibre: ");
         sc.nextLine();
@@ -57,6 +62,7 @@ public class Exercici4 {
         }
     }
 
+    // Prints a single entry of a book and its state by searching for its name
     public static void printOne() {
         System.out.print("Introduïsca el títol de un llibre: ");
         sc.nextLine();
@@ -85,6 +91,7 @@ public class Exercici4 {
         }
     }
 
+    // Prints every book title and its state in a matrix format
     public static void printAll() {
         System.out.printf("%-15s%s%n", "Títol", "Tipus de préstec");
         for (int i = 0; i < titles.length; i++) {
@@ -92,13 +99,15 @@ public class Exercici4 {
         }
     }
 
-    public static int search(String str) {
+    // Searches for a book by its title and returns its index. Returns -1 if it can't be found
+    public static int search(final String str) {
         for (int i = 0; i < titles.length; i++) {
             if (titles[i].equals(str)) return i;
         }
         return -1;
     }
 
+    // Loops over the menu until the user wants to exit
     public static void main(String[] args) {
         int menuOption;
         do {
@@ -119,3 +128,4 @@ public class Exercici4 {
         } while (menuOption != 4);
     }
 }
+

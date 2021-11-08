@@ -1,0 +1,9 @@
+Transforma a primera forma norma (1FN) las siguientes tablas: 
+
+a) A (a0, a1, {a2})
+
+b) EMPRESA (cif, nombre, dirección, {socios}) CP{cif}
+
+c) CONCIERTO (código, artista, {fechas}) CP{código}
+
+d) VENDEDOR (dni, nombre, categoría, {zonas}) CP{dni}
