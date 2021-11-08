@@ -15,9 +15,25 @@ public class Exercici1 {
 
     // Arrays for employee data
     private static final int[] employeeNum = new int[RND_LENGTH];
-    private static final int[] employeeSex = new int[RND_LENGTH];
+    private static final int[] employeeGender = new int[RND_LENGTH];
     private static final int[] employeeStatus = new int[RND_LENGTH];
     private static final double[] employeeSalary = new double[RND_LENGTH];
+
+    // Prints the main menu, prompts user to input an option and returns it
+    public static int mainMenu() {
+        int option;
+        System.out.println("Menu: ");
+        System.out.println("1. Percentatge d'homes");
+        System.out.println("2. Percentatge de dones");
+        System.out.println("3. Percentatge d'homes que treballen i sou mitjà");
+        System.out.println("4. Percentatge de dones que treballen i sou mitjà");
+        System.out.println("5. Eixir");
+        do {
+            System.out.print("Introduïsca una opció: ");
+            option = sc.nextInt();
+        } while (option < 1 || option > 5);
+        return option;
+    }
 
     // Fills an array with an auto-incrementable value, the number will never be duplicated
     public static void fillInc(int[] arr) {
@@ -40,75 +56,64 @@ public class Exercici1 {
         }
     }
 
-    // Prints the main menu, prompts user to input an option and returns it
-    public static int mainMenu() {
-        int option;
-        System.out.println("Menu: ");
-        System.out.println("1. Percentatge d'homes");
-        System.out.println("2. Percentatge de dones");
-        System.out.println("3. Percentatge d'homes que treballen i sou mitjà");
-        System.out.println("4. Percentatge de dones que treballen i sou mitjà");
-        System.out.println("5. Eixir");
-        do {
-            System.out.print("Introduïsca una opció: ");
-            option = sc.nextInt();
-        } while (option < 1 || option > 5);
-        return option;
-    }
-
-    // Averages the occurrences of a sex. Returns a number between 0 and 1 
-    public static double averageSex(final int sex) {
+    // Averages the occurrences of a gender. Returns a number between 0 and 1
+    public static double averageGender(final int gender) {
         int count = 0;
-        for (int num : employeeSex) {
-            if (num == sex) count++;
+        for (int num : employeeGender) {
+            if (num == gender) count++;
         }
-        return (((double) count) / employeeSex.length);
+        return (((double) count) / employeeGender.length);
     }
 
-    // Prints the occurrences of a sex which status is working (1)
+    // Prints the occurrences of a gender which status is working (1)
     // Calculates the average of salaries of such occurrences
-    public static void averageAndSalary(final int sex) {
-        int count = 0;
+    public static void averageAndSalary(final int gender) {
+        int countGender = 0;
+        int countWorking = 0;
         double sumSalary = 0;
 
-        for (int i = 0; i < employeeSex.length; i++) {
-            if (employeeSex[i] == sex && employeeStatus[i] == 1) {
-                count++;
-                sumSalary += employeeSalary[i];
+        for (int i = 0; i < employeeGender.length; i++) {
+            if (employeeGender[i] == gender) {
+                countGender++;
+                if (employeeStatus[i] == 1) {
+                    countWorking++;
+                    sumSalary += employeeSalary[i];
+                }
             }
         }
 
-        System.out.printf("El percentatge %s que treballen es %.2f%%%n", (sex == 1 ? "d'homes" : "de dones"),
-                ((double) count / employeeSex.length) * 100);
-        System.out.printf("El sou mitja es %.2f$%n", sumSalary / count);
+        System.out.printf("El percentatge %s que treballen es %.2f%%%n", (gender == 1 ? "d'homes" : "de dones"),
+                ((double) countWorking / countGender) * 100);
+        System.out.printf("El sou mitja es %.2f$%n", sumSalary / countWorking);
     }
 
-
     public static void main(String[] args) {
-        
-        // Initilizes the employee Arrays
+
+        // Initializes the employee Arrays
         fillInc(employeeNum);
-        fillRnd(employeeSex, 1, 3);
+        fillRnd(employeeGender, 1, 3);
         fillRnd(employeeStatus, 1, 3);
         fillSalary(employeeSalary);
 
+        // Prints all the employees with their data
         System.out.println("Taula de treballadors");
         System.out.printf("%-5s%-10s%-15s%s%n", "Id", "Sexe", "Treballant", "Sou");
         for (int i = 0; i < employeeStatus.length; i++) {
-            System.out.printf("%-5d%-10s%-15s%.2f$%n", employeeNum[i], (employeeSex[i] == 1 ? "Home" : "Dona"),
+            System.out.printf("%-5d%-10s%-15s%.2f$%n", employeeNum[i], (employeeGender[i] == 1 ? "Home" : "Dona"),
                     (employeeStatus[i] == 1 ? "Si" : "No"), employeeSalary[i]);
         }
         System.out.println();
 
+        // Loops over the main menu until user chooses to exit
         int menuOption;
         do {
             menuOption = mainMenu();
             switch (menuOption) {
                 case 1:
-                    System.out.printf("El percentatge d'homes es %.2f%%%n", averageSex(1) * 100);
+                    System.out.printf("El percentatge d'homes es %.2f%%%n", averageGender(1) * 100);
                     break;
                 case 2:
-                    System.out.printf("El percentatge de dones es %.2f%%%n", averageSex(2) * 100);
+                    System.out.printf("El percentatge de dones es %.2f%%%n", averageGender(2) * 100);
                     break;
                 case 3:
                     averageAndSalary(1);
@@ -121,4 +126,3 @@ public class Exercici1 {
         } while (menuOption != 5);
     }
 }
-
