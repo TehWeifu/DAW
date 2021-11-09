@@ -17,7 +17,7 @@ public class Exercici1 {
     private static final int[] employeeNum = new int[RND_LENGTH];
     private static final int[] employeeGender = new int[RND_LENGTH];
     private static final int[] employeeStatus = new int[RND_LENGTH];
-    private static final double[] employeeSalary = new double[RND_LENGTH];
+    private static final int[] employeeSalary = new int[RND_LENGTH];
 
     // Prints the main menu, prompts user to input an option and returns it
     public static int mainMenu() {
@@ -50,9 +50,9 @@ public class Exercici1 {
     }
 
     // Fills an array with a random number between 500 and 3000
-    public static void fillSalary(double[] arr) {
+    public static void fillSalary(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = 500 + (numGen.nextInt(250000) / 100.0);
+            arr[i] = 50000 + (numGen.nextInt(250000));
         }
     }
 
@@ -70,7 +70,7 @@ public class Exercici1 {
     public static void averageAndSalary(final int gender) {
         int countGender = 0;
         int countWorking = 0;
-        double sumSalary = 0;
+        int sumSalary = 0;
 
         for (int i = 0; i < employeeGender.length; i++) {
             if (employeeGender[i] == gender) {
@@ -84,7 +84,7 @@ public class Exercici1 {
 
         System.out.printf("El percentatge %s que treballen es %.2f%%%n", (gender == 1 ? "d'homes" : "de dones"),
                 ((double) countWorking / countGender) * 100);
-        System.out.printf("El sou mitja es %.2f$%n", sumSalary / countWorking);
+        System.out.printf("El sou mitja es %.2f$%n", (sumSalary / countWorking / 100.0));
     }
 
     public static void main(String[] args) {
@@ -100,7 +100,7 @@ public class Exercici1 {
         System.out.printf("%-5s%-10s%-15s%s%n", "Id", "Sexe", "Treballant", "Sou");
         for (int i = 0; i < employeeStatus.length; i++) {
             System.out.printf("%-5d%-10s%-15s%.2f$%n", employeeNum[i], (employeeGender[i] == 1 ? "Home" : "Dona"),
-                    (employeeStatus[i] == 1 ? "Si" : "No"), employeeSalary[i]);
+                    (employeeStatus[i] == 1 ? "Si" : "No"), (employeeSalary[i] / 100.0));
         }
         System.out.println();
 
@@ -126,3 +126,4 @@ public class Exercici1 {
         } while (menuOption != 5);
     }
 }
+
