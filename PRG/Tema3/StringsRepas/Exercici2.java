@@ -4,12 +4,12 @@ public class Exercici2 {
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
 
-	// variable to keep accumulate the whole prase and the input word
+        // variable to keep accumulate the whole phrase and the input word
         String totalPhrase = "";
         String inputStr = "";
 
-	// Loops until the user inputs "fi" (regardless of case). Concatenates the word to the phrase
-        while (!inputStr.toLowerCase().equals("fi")) {
+        // Loops until the user inputs "fi" (regardless of case). Concatenates the word to the phrase
+        while (!inputStr.equalsIgnoreCase("fi")) {
             totalPhrase += inputStr.toLowerCase().trim() + " ";
 
             System.out.print("Introduïsca una paraula: ");
@@ -17,7 +17,7 @@ public class Exercici2 {
         }
         totalPhrase = totalPhrase.trim();
 
-	// Prints the resulting string
+        // Prints the resulting string
         System.out.println("La frase final es");
         System.out.println(totalPhrase);
     }
