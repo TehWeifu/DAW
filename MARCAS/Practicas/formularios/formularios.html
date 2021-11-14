@@ -27,6 +27,37 @@
                 Si <input type="radio" name="mayor_edad" value="1">
                 No <input type="radio" name="mayor_edad " value="0">
             </p>
+            <p>Sexo:
+                Hombre <input type="radio" name="sexo" value="0">
+                Mujer <input type="radio" name="sexo" value="1">
+                No determinado <input type="radio" name="sexo" value="2">
+            </p>
+
+            <!-- Cuando se utilizan los checkbox se manda un Array al php con los valores seleccionados-->
+            <p>Marcas que conoces:
+                <input type="checkbox" name="marca" value="apple">Apple
+                <input type="checkbox" name="marca" value="xiaomi">Xiaomi
+                <input type="checkbox" name="marca" value="huawei">Huawei
+                <input type="checkbox" name="marca" value="samsung">Samsung
+            </p>
+
+            <p>
+                Selecciona la provincia:
+                <select name="provincia" id="">
+                    <option value="castellon">Castellón</option>
+                    <option value="valencia" selected>Valencia</option>
+                    <option value="alicante">Alicante</option>
+                </select>
+            </p>
+
+            <p>
+                Mensaje:
+                <textarea name="mensaje" cols="50" rows="8" placeholder="mucho texto..."></textarea>
+            </p>
+
+            <!-- los inputs de tipo submit y los de tipo image ambos invocan el action del formulario-->
+            <p><input type="submit" value="Enviar..." name="enviar"></p>
+            <p><input type="image" src="https://source.unsplash.com/300x300" name="enviar2" value="enviar2"></p>
         </form>
     </body>
 </html>
