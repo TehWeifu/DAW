@@ -1,0 +1,36 @@
+Transforma a tercera forma norma (3FN) las siguientes tablas: 
+
+Ejercicio 1
+A (a0, a1)
+CP: {a}
+
+A’ (a0, a2)
+CP: {a0, a2}
+CAj: {a0} → A.a0
+
+
+Ejercicio2
+EMPRESA (cif, nombre, direccion)
+CP: {cif}
+
+SOCIO_EMPRESA (cif_empresa, socio)
+CP: {cif_empresa, socio}
+CAj: {cif_empresa} → EMPRESA.cif
+
+
+Ejercicio 3
+CONCIERTO (codigo, artista)
+CP: {codigo}
+
+FECHA_CONCIERTO (cod_concierto, fecha)
+CP: {cod_concierto, fecha}
+CAj: {cod_concierto} → CONCIERTO.codigo
+
+
+Ejercicio4
+VENDEDOR (dni, nombre, categoria)
+CP: {dni}
+
+VENDEDOR_ZONA(dni_vendedor, zona)
+CP: {dni_vendedor, zona}
+CAj: {dni_vendedor} → VENDEDOR.dni

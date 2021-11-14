@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulario 1</title>
+    </head>
+    <body>
+        <h2 align="center">Formulario 1</h2>
+        <hr>
+
+        <form action="" method="post">
+            <p>Introduce tu Nombre: <input name="userName" type="text"></p>
+            <p>Apellido1: <input name="userSur1" type="text"></p>
+            <p>Apellido2: <input name="userSur2" type="text"></p>
+            <p>Clave: <input name="userPass" type="password"></p>
+            <p>Mayor de edad <input checked name="adult" type="checkbox" value="1"></p>
+            <p>Soltero: SI: <input name="single" type="radio" value="1"> NO:
+                <input name="single" type="radio" value="0"></p>
+            <p>País Favorito: Spain: <input name="country" type="radio" value="sp">
+                France: <input name="country" type="radio" value="fr"></p>
+            <p><input name="sndBtn" type="submit" value="Enviar Datos"></p>
+            <p><input name="rstBtn" type="reset" value="Borrar todos los Datos"></p>
+            <p>Provincia: <select id="region" name="region">
+                <option value="valencia">Valencia</option>
+                <option value="alicante">Alicante</option>
+                <option value="castellon">Castellón</option>
+            </select></p>
+            <p>Pais: <select id="country" multiple name="country">
+                <option value="fr">Francia</option>
+                <option value="it">Italia</option>
+                <option value="uk">Inglaterra</option>
+            </select></p>
+
+            <p>Observaciones: <textarea cols="30" id="extra" name="extra" rows="3"></textarea></p>
+        </form>
+
+
+    </body>
+</html>

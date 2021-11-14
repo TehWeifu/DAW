@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulario 2</title>
+    </head>
+    <body>
+        <h2 align="center">Formulario 2</h2>
+        <hr>
+
+        <form action="" method="post">
+            <p>Nombre: <input name="name" type="text"></p>
+            <p>Apellidos: <input name="surnames" type="text"></p>
+            <p>Correo electrónico: <input name="mail" placeholder="@" type="email"></p>
+            <p>Población: <input name="city" type="text"></p>
+            <p>Provincia: <input name="region" type="text"></p>
+
+            <table>
+                <tr>
+                    <td>Edad:</td>
+                    <td>¿Cómo nos conociste?</td>
+                </tr>
+                <tr>
+                    <td width="450px"><input name="age" type="radio" value="0x20"> 0-20</td>
+                    <td><input name="how" type="checkbox" value="friends"> A través de un amigo.</td>
+                </tr>
+                <tr>
+                    <td><input checked name="age" type="radio" value="20x40"> 20-40</td>
+                    <td><input name="how" type="checkbox" value="engine"> A través de un buscador.</td>
+                </tr>
+                <tr>
+                    <td><input name="age" type="radio" value="40x60"> 40-60</td>
+                    <td><input name="how" type="checkbox" value="web"> Navegando por la red</td>
+                </tr>
+                <tr>
+                    <td><input name="age" type="radio" value="60x100"> 60-100</td>
+                    <td><input name="how" type="checkbox" value="other"> Otros</td>
+                </tr>
+            </table>
+
+            <p>Opinión sobre nuestra página web <br>
+                <textarea cols="30" id="opinion" name="opinion" placeholder="Escriba aquí su opinión"
+                          rows="5"></textarea>
+            </p>
+
+            <p>Tiene alguna sugerencia... <br>
+                <textarea cols="30" id="suggestions" name="suggestions" placeholder="Escriba aquí sus sugerencias"
+                          rows="5"></textarea>
+            </p>
+
+            <p>¿Cuánto navegas por internet? (Señala la opción que más se acerque) <br>
+                <select id="internetHours" name="internetHours" size="4">
+                    <option value="2day">2 horas al día.</option>
+                    <option value="4day">4 horas al día.</option>
+                    <option value="10week">10 horas a la semana.</option>
+                    <option value="20month">20 horas al mes.</option>
+                </select>
+            </p>
+
+            <table>
+                <tr>
+                    <td width="450px"></td>
+                    <td><input type="submit" value="Enviar formulario"></td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+</html>
