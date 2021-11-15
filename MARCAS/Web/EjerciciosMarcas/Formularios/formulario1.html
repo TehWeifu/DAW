@@ -9,31 +9,81 @@
         <hr>
 
         <form action="" method="post">
-            <p>Introduce tu Nombre: <input name="userName" type="text"></p>
-            <p>Apellido1: <input name="userSur1" type="text"></p>
-            <p>Apellido2: <input name="userSur2" type="text"></p>
-            <p>Clave: <input name="userPass" type="password"></p>
-            <p>Mayor de edad <input checked name="adult" type="checkbox" value="1"></p>
-            <p>Soltero: SI: <input name="single" type="radio" value="1"> NO:
-                <input name="single" type="radio" value="0"></p>
-            <p>País Favorito: Spain: <input name="country" type="radio" value="sp">
-                France: <input name="country" type="radio" value="fr"></p>
-            <p><input name="sndBtn" type="submit" value="Enviar Datos"></p>
-            <p><input name="rstBtn" type="reset" value="Borrar todos los Datos"></p>
-            <p>Provincia: <select id="region" name="region">
-                <option value="valencia">Valencia</option>
-                <option value="alicante">Alicante</option>
-                <option value="castellon">Castellón</option>
-            </select></p>
-            <p>Pais: <select id="country" multiple name="country">
-                <option value="fr">Francia</option>
-                <option value="it">Italia</option>
-                <option value="uk">Inglaterra</option>
-            </select></p>
+            <table>
+                <tbody>
+                <tr>
+                    <td align="right">Introduce tu Nombre:</td>
+                    <td><input name="userName" type="text"></td>
+                </tr>
 
-            <p>Observaciones: <textarea cols="30" id="extra" name="extra" rows="3"></textarea></p>
+                <tr>
+                    <td align="right">Apellido1:</td>
+                    <td><input name="userSur1" type="text"></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Apellido2:</td>
+                    <td><input name="userSur2" type="text"></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Clave:</td>
+                    <td><input name="userPass" type="password"></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Mayor de edad:</td>
+                    <td><input checked name="adult" type="checkbox" value="1"></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Soltero:</td>
+                    <td>SI: <input name="single" type="radio" value="1" checked>
+                        NO: <input name="single" type="radio" value="0"></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Pais Favorito:</td>
+                    <td>Spain: <input name="country" type="radio" value="sp">
+                        France: <input name="country" type="radio" value="fr"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input name="sndBtn" type="submit" value="Enviar Datos"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input name="rstBtn" type="reset" value="Borrar todos los Datos"></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Provincia:</td>
+                    <td><select id="region" name="region">
+                        <option value="valencia">Valencia</option>
+                        <option value="alicante">Alicante</option>
+                        <option value="castellon">Castellón</option>
+                    </select></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Pais:</td>
+                    <td><select id="country" size="7" name="country">
+                        <option value="fr">Francia</option>
+                        <option value="it">Italia</option>
+                        <option value="uk">Inglaterra</option>
+                    </select></td>
+                </tr>
+
+                <tr>
+                    <td align="right">Observaciones:</td>
+                    <td><textarea cols="30" id="extra" name="extra" rows="3"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
         </form>
 
-
+        <p>Volver a <a href="./index_formularios.html">Index (Formularios)</a></p>
     </body>
 </html>
