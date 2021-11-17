@@ -5,28 +5,31 @@
 //si se ha pulsado el botón de enviar formulario
 if (isset($_POST["sndBtn"])){
 
-        $name = $_POST["userName"];
+        $userName = $_POST["userName"];
         $userSur1 = $_POST["userSur1"];
         $userSur2 = $_POST["userSur2"];
         $userPass = $_POST["userPass"];
+        $userAdult = ($_POST["userAdult"] === "1" ? "Mayor de edad" : "Menor de edad");
+        $userSingle = ($_POST["userSingle"] === "1" ? "Soltero" : "Con pareja");
+        $userFavCountry = $_POST["userFavCountry"];
+        $userRegion = $_POST["userRegion"];
+        $userCountry = $_POST["userCountry"];
+        $userExtra = $_POST["userExtra"];
 
-
-
-		//se crea la variable "de" y se le asigna lo que el usuario ha escrito en el campo "de" del formulario
-		$de=$_POST["de"];
-		
-		//se crea la variable "asunto" y se le asigna lo que el usuario ha escrito en el campo "asunto" del formulario
-		$asunto=$_POST["asunto"];
-				
-		
-		//se crea la variable "mensaje" y se le asigna lo que el usuario ha escrito en el campo "mensaje" del formulario
-		$mensaje=$_POST["mensaje"] . "\n" . $_POST["telefono"] . "\n" . $_POST["direccion"] . "\n";
+        $mailMessage = $userName . " " . $userSur1 . " " . $userSur2 . "\n" .
+                        "Contraseña: " . $userPass . "\n" .
+                        $userAdult . "\n" .
+                        $userSingle . "\n" .
+                        "Pais favorito: " . $userFavCountry . "\n" .
+                        "Provincia: " . $userRegion . "\n" .
+                        "Pais: " . $userCountry . "\n" .
+                        "Comentarios: " . $userExtra . "\n";
 
 		 
 		//sintaxis mail(destino, asunto,mensaje,cabeceras);
-		mail("bvkvgxvt@gmail.com",$asunto,$mensaje,"From:$de\n");
+		mail("bvkvgxvt@gmail.com", "Formulario 1", $mailMessage, "From:uwu\n");
 		
 		//mensaje de confirmación de envío
-		echo "El formulario ha sido enviado con exito.";
+		echo "El formulario ha sido enviado con éxito.";
 }
 ?>
