@@ -1,0 +1,39 @@
+CREATE TABLE profesores (
+    codigo int(2) UNSIGNED ZEROFILL,
+    nombre varchar(15),
+    apellido varchar(15),
+    PRIMARY KEY (codigo)
+) ENGINE=INNODB;
+
+CREATE TABLE alumnos (
+    codigo int(3) UNSIGNED ZEROFILL,
+    nombre varchar(15),
+    apellido varchar(15),
+    PRIMARY KEY (codigo)
+) ENGINE=INNODB;
+
+CREATE TABLE modulos (
+    codigo INT(10) UNSIGNED,
+    modulo VARCHAR(15),
+    nombre VARCHAR(30),
+	cod_curso VARCHAR(5),
+    cod_profesor INT(2) UNSIGNED ZEROFILL,
+    PRIMARY KEY (codigo),
+    INDEX (cod_curso),
+    FOREIGN KEY (cod_curso) REFERENCES cursos(codigo) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (cod_profesor),
+    FOREIGN KEY (cod_profesor) REFERENCES profesores(codigo) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=INNODB;
+
+CREATE TABLE matriculas (
+    codigo INT(10) UNSIGNED,
+    cod_alumno INT(3) UNSIGNED ZEROFILL,
+    cod_modulo INT(10) UNSIGNED,
+    PRIMARY KEY (codigo),
+    INDEX (cod_alumno),
+    FOREIGN KEY (cod_alumno) REFERENCES alumnos(codigo) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (cod_modulo),
+    FOREIGN KEY (cod_modulo) REFERENCES modulos(codigo) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=INNODB
+
+

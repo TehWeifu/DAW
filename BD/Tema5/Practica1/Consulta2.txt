@@ -1,0 +1,17 @@
+CREATE TABLE ciclos (
+    codigo varchar(3),
+    ciclo varchar(50),
+    grado varchar(15),
+    PRIMARY KEY (codigo)
+) ENGINE=INNODB;
+
+CREATE TABLE cursos(
+    codigo varchar(5),
+    curso varchar(50),
+    cod_ciclo varchar(3),
+    turno varchar(20),
+    PRIMARY KEY (codigo),
+    INDEX (cod_ciclo),
+    FOREIGN KEY (cod_ciclo) REFERENCES ciclos(codigo) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=INNODB;
+

@@ -1,0 +1,9 @@
+CREATE TABLE usuarios (
+	id_usuario varchar(3),
+	usuario varchar(20),
+	nombre varchar(20),
+	apellido varchar(20),
+	password varchar(50),
+	PRIMARY KEY (id_usuario)
+) ENGINE=INNODB;
+
