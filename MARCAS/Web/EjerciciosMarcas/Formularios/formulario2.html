@@ -8,12 +8,12 @@
         <h2 align="center">Formulario 2</h2>
         <hr>
 
-        <form action="" method="post">
-            <p>Nombre: <input name="name" type="text"></p>
-            <p>Apellidos: <input name="surnames" type="text"></p>
-            <p>Correo electrónico: <input name="mail" placeholder="@" type="email"></p>
-            <p>Población: <input name="city" type="text"></p>
-            <p>Provincia: <input name="region" type="text"></p>
+        <form action="./php/phpForm2.php" method="post">
+            <p>Nombre: <input name="userName" type="text"></p>
+            <p>Apellidos: <input name="userSur" type="text"></p>
+            <p>Correo electrónico: <input name="userMail" placeholder="@" type="email"></p>
+            <p>Población: <input name="userCity" type="text"></p>
+            <p>Provincia: <input name="userRegion" type="text"></p>
 
             <table>
                 <tr>
@@ -21,35 +21,35 @@
                     <td>¿Cómo nos conociste?</td>
                 </tr>
                 <tr>
-                    <td width="450px"><input name="age" type="radio" value="0x20"> 0-20</td>
-                    <td><input name="how" type="checkbox" value="friends"> A través de un amigo.</td>
+                    <td width="450px"><input name="userAge" type="radio" value="0x20"> 0-20</td>
+                    <td><input name="userHow" type="checkbox" value="friends"> A través de un amigo.</td>
                 </tr>
                 <tr>
-                    <td><input checked name="age" type="radio" value="20x40"> 20-40</td>
-                    <td><input name="how" type="checkbox" value="engine"> A través de un buscador.</td>
+                    <td><input checked name="userAge" type="radio" value="20x40"> 20-40</td>
+                    <td><input name="userHow" type="checkbox" value="engine"> A través de un buscador.</td>
                 </tr>
                 <tr>
-                    <td><input name="age" type="radio" value="40x60"> 40-60</td>
-                    <td><input name="how" type="checkbox" value="web"> Navegando por la red</td>
+                    <td><input name="userAge" type="radio" value="40x60"> 40-60</td>
+                    <td><input name="userHow" type="checkbox" value="web"> Navegando por la red</td>
                 </tr>
                 <tr>
-                    <td><input name="age" type="radio" value="60x100"> 60-100</td>
-                    <td><input name="how" type="checkbox" value="other"> Otros</td>
+                    <td><input name="userAge" type="radio" value="60x100"> 60-100</td>
+                    <td><input name="userHow" type="checkbox" value="other"> Otros</td>
                 </tr>
             </table>
 
             <p>Opinión sobre nuestra página web <br>
-                <textarea cols="30" id="opinion" name="opinion" placeholder="Escriba aquí su opinión"
+                <textarea cols="30" id="userOpinion" name="userOpinion" placeholder="Escriba aquí su opinión"
                           rows="5"></textarea>
             </p>
 
             <p>Tiene alguna sugerencia... <br>
-                <textarea cols="30" id="suggestions" name="suggestions" placeholder="Escriba aquí sus sugerencias"
+                <textarea cols="30" id="userSug" name="userSug" placeholder="Escriba aquí sus sugerencias"
                           rows="5"></textarea>
             </p>
 
             <p>¿Cuánto navegas por internet? (Señala la opción que más se acerque) <br>
-                <select id="internetHours" name="internetHours" size="4">
+                <select id="userInternetHours" name="userInternetHours" size="4">
                     <option value="2day">2 horas al día.</option>
                     <option value="4day">4 horas al día.</option>
                     <option value="10week">10 horas a la semana.</option>
@@ -60,7 +60,7 @@
             <table>
                 <tr>
                     <td width="450px"></td>
-                    <td><input type="submit" value="Enviar formulario"></td>
+                    <td><input name="sndBtn" type="submit" value="Enviar formulario"></td>
                 </tr>
             </table>
         </form>
