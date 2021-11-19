@@ -11,7 +11,7 @@ if (isset($_POST["sndBtn"])) {
     $userCity = $_POST["userCity"];
     $userRegion = $_POST["userRegion"];
     $userAge = $_POST["userAge"];
-    $userHow = $_POST["userHow"];
+//    $userHow = $_POST["userHow"];
     $userOpinion = $_POST["userOpinion"];
     $userSug = $_POST["userSug"];
     $userInternetHours = $_POST["userInternetHours"];
@@ -21,16 +21,22 @@ if (isset($_POST["sndBtn"])) {
         "Provincia: " . $userRegion . "\n" .
         "Ciudad: " . $userCity . "\n" .
         "Edad: " . $userAge . "\n" .
-        "Como nos conociste: " . $userHow . "\n";
-        "Opinion pagina: " . $userOpinion . "\n";
-        "Sugerencias: " . $userSug . "\n";
-        "Tiempo en Internet: " . $userInternetHours . "\n";
+        "Como nos conociste: ";
 
+
+    foreach ($_POST["userHow"] as $selected) {
+        $mailMessage .= ($selected . " ");
+    }
+
+    $mailMessage .= "\n" .
+        "Opinion pagina: " . $userOpinion . "\n" .
+        "Sugerencias: " . $userSug . "\n" .
+        "Tiempo en Internet: " . $userInternetHours . "\n";
 
     //sintaxis mail(destino, asunto,mensaje,cabeceras);
     mail("bvkvgxvt@gmail.com", "Formulario 2", $mailMessage, "From:$userMail\n");
 
     //mensaje de confirmación de envío
-    echo "El formulario ha sido enviado con éxito.";
+    echo $mailMessage;
 }
 ?>

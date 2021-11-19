@@ -30,6 +30,6 @@ if (isset($_POST["sndBtn"])) {
     mail("bvkvgxvt@gmail.com", "Formulario 1", $mailMessage, "From:uwu\n");
 
     //mensaje de confirmación de envío
-    echo "El formulario ha sido enviado con éxito.";
+    echo $mailMessage;
 }
 ?>

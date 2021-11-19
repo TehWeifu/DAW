@@ -21,10 +21,11 @@ if (isset($_POST["sndBtn"])) {
         "Description: " . $userDescription . "\n" .
         "Translation frequency: " . $userFrequency . "\n";
 
+
     //sintaxis mail(destino, asunto,mensaje,cabeceras);
     mail("bvkvgxvt@gmail.com", "Formulario 3", $mailMessage, "From:owo\n");
 
     //mensaje de confirmación de envío
-    echo "El formulario ha sido enviado con éxito.";
+    echo $mailMessage;
 }
 ?>
