@@ -21,9 +21,9 @@ if (isset($_POST["sndBtn"])) {
         "Provincia: " . $userRegion . "\n" .
         "Ciudad: " . $userCity . "\n" .
         "Edad: " . $userAge . "\n" .
-        "Como nos conociste: " . $userHow . "\n";
-        "Opinion pagina: " . $userOpinion . "\n";
-        "Sugerencias: " . $userSug . "\n";
+        "Como nos conociste: " . $userHow . "\n" .
+        "Opinion pagina: " . $userOpinion . "\n" .
+        "Sugerencias: " . $userSug . "\n" .
         "Tiempo en Internet: " . $userInternetHours . "\n";
 
 
@@ -34,3 +34,4 @@ if (isset($_POST["sndBtn"])) {
     echo "El formulario ha sido enviado con éxito.";
 }
 ?>
+
