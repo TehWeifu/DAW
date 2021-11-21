@@ -1,4 +1,6 @@
 public class Exercici1 {
+
+    // Method that receives a "Bomber" object and the variable name to output all its content
     private static void printBomber(final Bomber bomber, final String name) {
         System.out.println(name);
         System.out.println("Nom: " + bomber.getNom());
@@ -10,6 +12,9 @@ public class Exercici1 {
     }
 
     public static void main(String[] args) {
+        // Creates a "Bomber" object specifying its properties in the constructor and prints the current state of the object
+        // The changes the properties values and prints its states again
+
         Bomber myBomber = new Bomber("Julian", "Sanchez", 89, false, true);
         printBomber(myBomber, "myBomber");
 
@@ -17,4 +22,3 @@ public class Exercici1 {
         printBomber(myBomber, "myBomber");
     }
 }
-
