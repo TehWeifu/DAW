@@ -1,3 +1,0 @@
-ALTER TABLE bodega
-	MODIFY id_bodega INT UNSIGNED AUTO_INCREMENT;
-    

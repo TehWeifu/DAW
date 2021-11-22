@@ -1,6 +1,0 @@
-ALTER TABLE catador
-	ADD	telefono INT(9) UNSIGNED,
-    ADD direccion VARCHAR(50),
-    ADD poblacion VARCHAR(50),
-    ADD email VARCHAR(50);
-
