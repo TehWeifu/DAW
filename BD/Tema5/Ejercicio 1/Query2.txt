@@ -1,0 +1,3 @@
+ALTER TABLE catador
+	ADD codigo_postal INT(5) UNSIGNED AFTER poblacion
+	

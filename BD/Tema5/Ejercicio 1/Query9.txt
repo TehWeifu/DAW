@@ -1,0 +1,6 @@
+CREATE TABLE ventas (
+    id_venta INT UNSIGNED AUTO_INCREMENT,
+    descripcion TEXT,
+    PRIMARY KEY (id_venta)
+) ENGINE = INNODB;
+    

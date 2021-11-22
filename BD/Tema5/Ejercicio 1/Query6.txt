@@ -1,0 +1,5 @@
+CREATE TABLE bodega (
+    id_bodega INT UNSIGNED,
+    nombre_bodega VARCHAR(50)
+) ENGINE = INNODB;
+

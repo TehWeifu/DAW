@@ -1,0 +1,3 @@
+ALTER TABLE catador
+	DROP email;
+    

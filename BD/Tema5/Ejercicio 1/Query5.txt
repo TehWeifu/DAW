@@ -1,0 +1,3 @@
+ALTER TABLE califica
+	CHANGE puntuacion punto DECIMAL(5,2) UNSIGNED;
+    
