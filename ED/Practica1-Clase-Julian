@@ -1,0 +1,13 @@
+clase CajaFuerte
+	Material
+	Combinacion
+	MecanismoAbertura
+	Abierto
+	objetosAlmacenados
+	
+	abrir()
+	cerrar()
+	guardar()
+	retirar()
+	cambiarCombinacion()
+	
