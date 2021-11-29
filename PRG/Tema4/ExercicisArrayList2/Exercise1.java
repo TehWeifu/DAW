@@ -70,6 +70,7 @@ public class Exercise1 {
             if (carPos != -1) {
                 cars.remove(carPos);
                 System.out.println("Se ha eliminado el coche.");
+                Car.decreaseCarCount();
             } else {
                 System.out.println("Error. La matrícula no existe.");
             }
@@ -80,7 +81,7 @@ public class Exercise1 {
 
     // Method that prints the number of car elements existing in the collection
     private static void countCars() {
-        System.out.printf("Hay un total de %d coches registrados.%n", cars.size());
+        System.out.printf("Hay un total de %d coches registrados.%n", Car.getCarCount());
     }
 
     // Overloaded method that delegates on the main method to print every car

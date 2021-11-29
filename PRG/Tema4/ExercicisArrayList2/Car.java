@@ -4,6 +4,8 @@ public class Car {
     private String model;
     private double kms;
 
+    private static int carCount = 0;
+
     // Three-parameter constructor that delegates on main constructo
     public Car(final String plateNum, final String brand, final String model) {
         this(plateNum, brand, model, 0.0);
@@ -17,6 +19,8 @@ public class Car {
         this.brand = brand;
         this.model = model;
         this.kms = Math.max(kms, 0.0);
+
+        increaseCarCount();
     }
 
     // Getters & Setters for each property
@@ -58,6 +62,18 @@ public class Car {
     public Car setKms(final double kms) {
         this.kms = Math.max(kms, 0);
         return this;
+    }
+
+    public static int getCarCount() {
+        return carCount;
+    }
+
+    public static void increaseCarCount() {
+        carCount++;
+    }
+
+    public static void decreaseCarCount() {
+        carCount--;
     }
 
     public static boolean isPlateNumValid(final String plateNum) {
