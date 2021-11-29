@@ -16,8 +16,8 @@ public class Car {
     // Validates kms to be a positive number
     public Car(final String plateNum, final String brand, final String model, final double kms) {
         this.plateNum = (isPlateNumValid(plateNum) ? plateNum.replaceAll(" ", "").toUpperCase() : "0000AAA");
-        this.brand = brand;
-        this.model = model;
+        this.brand = brand.toLowerCase();
+        this.model = model.toLowerCase();
         this.kms = Math.max(kms, 0.0);
 
         increaseCarCount();
@@ -41,7 +41,7 @@ public class Car {
     }
 
     public Car setBrand(final String brand) {
-        this.brand = brand;
+        this.brand = brand.toLowerCase();
         return this;
     }
 
@@ -50,7 +50,7 @@ public class Car {
     }
 
     public Car setModel(final String model) {
-        this.model = model;
+        this.model = model.toLowerCase();
         return this;
     }
 
