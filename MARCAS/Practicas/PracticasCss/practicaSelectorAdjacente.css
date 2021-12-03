@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*Este selector solo funciona cuando el h2 sigue a h1*/
+h2 + h1 {
+    color: blue;
+}
+

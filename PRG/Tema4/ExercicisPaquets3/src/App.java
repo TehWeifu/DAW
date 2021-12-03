@@ -16,6 +16,8 @@ public class App {
     public static final List<Cylinder> cylinders = new ArrayList<>();
     public static final List<Sphere> spheres = new ArrayList<>();
 
+    // Method that prints the main menu and prompts user to input an option
+    // Validates the input option and then returns it
     private static int mainMenu() {
         int inputOption;
 
@@ -36,6 +38,8 @@ public class App {
         return inputOption;
     }
 
+    // Method to create and store a new Cube object
+    // Prompts user to input a side and creates a new object with that side and stores it in the container
     private static void addCube() {
         System.out.print("Introduzca el lado del cubo: ");
         double inputSide = Double.parseDouble(scanner.nextLine());
@@ -43,6 +47,8 @@ public class App {
         cubes.add(new Cube(inputSide));
     }
 
+    // Method to create and store a new Sphere object
+    // Prompts user to input a radius and creates a new object with that radius and stores it in the container
     private static void addSphere() {
         System.out.print("Introduzca el radio de la esfera: ");
         double inputRadius = Double.parseDouble(scanner.nextLine());
@@ -50,6 +56,8 @@ public class App {
         spheres.add(new Sphere(inputRadius));
     }
 
+    // Method to create and store a new Cylinder object
+    // Prompts user to input a height and a radius. Then creates a new object with those values and stores it in the container
     private static void addCylinder() {
         System.out.print("Introduzca el radio del cilindro: ");
         double inputRadius = Double.parseDouble(scanner.nextLine());
@@ -59,6 +67,7 @@ public class App {
         cylinders.add(new Cylinder(inputRadius, inputSide));
     }
 
+    // Method that represents the area menu, calling the corresponding method based on the user input
     private static void printShapeArea() {
         int menuOption;
 
@@ -80,6 +89,8 @@ public class App {
         } while (menuOption != 4);
     }
 
+    // Prints the area menu, prompting the user to input an option
+    // Validates the option and returns it
     private static int shapeMenu() {
         int inputOption;
 
@@ -98,6 +109,7 @@ public class App {
         return inputOption;
     }
 
+    // Prints the area of each cube object stored in the container
     private static void printAreaCubes() {
         if (cubes.isEmpty()) {
             System.out.println("No se han creado cubos :(");
@@ -108,6 +120,7 @@ public class App {
         }
     }
 
+    // Prints the area of each Sphere object stored in the container
     private static void printAreaSpheres() {
         if (cubes.isEmpty()) {
             System.out.println("No se han creado esferas :(");
@@ -118,6 +131,7 @@ public class App {
         }
     }
 
+    // Prints the area of each cylinder object stored in the container
     private static void printAreaCylinders() {
         if (cubes.isEmpty()) {
             System.out.println("No se han creado cilindros :(");
@@ -128,6 +142,7 @@ public class App {
         }
     }
 
+    // Prints every value of every object created
     private static void printAll() {
         if (cubes.isEmpty() && spheres.isEmpty() && cylinders.isEmpty()) {
             System.out.println("No se ha creado ninguna figura :(");
@@ -162,6 +177,7 @@ public class App {
         System.out.println();
     }
 
+    // Generates a random amount of figures with random properties
     private static void generateRndFigures() {
         final Random random = new Random();
 
@@ -178,6 +194,8 @@ public class App {
         }
     }
 
+    // Main method that loops until the user chooses the exit option
+    // Switches on every menu option, calling the corresponding method
     public static void main(String[] args) {
         int menuOption;
         do {
