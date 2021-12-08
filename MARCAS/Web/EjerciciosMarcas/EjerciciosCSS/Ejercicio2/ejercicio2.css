@@ -1,0 +1,49 @@
+/* No borrar la siguiente regla CSS porque es necesaria para ver los bordes de la tabla */
+table, tr, th, td {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+#titulo {
+    color: teal;
+}
+
+strong,
+a,
+tfoot,
+tbody th {
+    color: red;
+}
+
+.destacado,
+.especial,
+tbody strong {
+    color: orange;
+}
+
+span.especial {
+    color: purple;
+}
+
+#subtitulo,
+a em,
+caption {
+    color: blue;
+}
+
+tbody {
+    color: green;
+}
+
+#adicional {
+    color: olive;
+}
+
+#especial {
+    color: fuchsia;
+}
+
+#adicional a {
+    color: green;
+}
