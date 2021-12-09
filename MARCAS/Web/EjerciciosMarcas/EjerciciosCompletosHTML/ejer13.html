@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ejercicio 13</title>
+    </head>
+    <body>
+        <h1 align="center">CATÁLOGO DE ARTE</h1>
+        <p><strong>Introduce los términos de búsqueda:</strong></p>
+        <form action="#">
+            <table align="center" width="80%">
+                <tr>
+                    <td><strong>OBRA</strong></td>
+                    <td><strong>TIPO</strong></td>
+                    <td><strong>DISPONIBILIDAD</strong></td>
+                    <td><strong>ESTILO</strong></td>
+                </tr>
+                <tr>
+                    <td>Titulo <input type="text"></td>
+                    <td><input name="tipo" type="checkbox" value="esc"> Escultura</td>
+                    <td><input name="disp" type="radio" value="publ">Muse / Acceso público</td>
+                    <td>
+                        <select name="estilo">
+                            <option value="clas">Clásico</option>
+                            <option value="abs">Abstracto</option>
+                            <option value="surr">Surrealista</option>
+                            <option value="otro">Otros</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Autor <input type="text"></td>
+                    <td><input name="tipo" type="checkbox" value="arq"> Aruitectura</td>
+                    <td><input name="disp" type="radio" value="priv">Colección privada</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input name="tipo" type="checkbox" value="pint"> Pintura</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <p><strong>Háganos saber sus sugerencias:</strong> <textarea cols="40" id="" name=""
+                                                                         placeholder="Me gustaría indicar que..."
+                                                                         rows="4"></textarea>
+            </p>
+            <p align="center"><input type="submit" value="buscar"></p>
+        </form>
+        <p>Volver a <a href="./index.html">Index (Ejercicios Completos HTML)</a></p>
+    </body>
+</html>

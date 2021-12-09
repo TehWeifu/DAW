@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ejercicio 16</title>
+    </head>
+    <body>
+        <h2>Información sobre el producto</h2>
+        <form action="#">
+            <fieldset>
+                <legend>Datos básicos</legend>
+                <p>Nombre <br>
+                    <input type="text">
+                </p>
+                <p>Descripcion <br>
+                    <textarea></textarea></p>
+                <p>Foto <input type="file"></p>
+                <p><input name="views" type="checkbox" value="1">Añadir contador de visitas</p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Datos económicos</legend>
+                <p>Precio <input type="number">$ Impuestos <select name="impuestos">
+                    <option value="4">4%</option>
+                    <option value="4">7%</option>
+                    <option value="4">16%</option>
+                    <option value="4">25%</option>
+                </select></p>
+                <p>Promoción</p>
+                <p><input checked name="promo" type="radio" value="0"> Ninguno</p>
+                <p><input name="promo" type="radio" value="100">Transporte gratuito</p>
+                <p><input name="promo" type="radio" value="5"> Descuento 5%</p>
+            </fieldset>
+        </form>
+
+        <p>Volver a <a href="./index.html">Index (Ejercicios Completos HTML)</a></p>
+    </body>
+</html>
