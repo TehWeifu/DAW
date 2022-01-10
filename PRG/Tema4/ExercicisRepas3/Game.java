@@ -297,7 +297,7 @@ public class Game {
                     break;
             }
             System.out.println();
-        } while (gameMenuOption != 6 && players.size() > 1);
+        } while (gameMenuOption != 7 && players.size() > 1);
         System.out.println("Juego finalizado.");
         printWinningPlayer();
     }
