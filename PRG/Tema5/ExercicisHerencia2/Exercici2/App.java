@@ -1,0 +1,57 @@
+public class App {
+    public static void main(String[] args) {
+        Vehiculo miVehiculo = new Vehiculo();
+        miVehiculo.setnombreVehiculo("El Gran Vehiculo");
+        System.out.println("usando miVehiculo, nombreVehiculo : " + miVehiculo.getnombreVehiculo());
+        System.out.println("usando miVehiculo llama a: " + miVehiculo.transportar());
+        System.out.println();
+        Acuatico miAcuatico = new Acuatico();
+        miAcuatico.setnombreVehiculo("El Acuático");
+        System.out.println("usando miAcuatico, nombreVehiculo : " + miAcuatico.getnombreVehiculo());
+        System.out.println("usando miAcuatico llama a : " + miAcuatico.transportar());
+        System.out.println("usando miAcuatico llama a : " + miAcuatico.navegar());
+        System.out.println();
+        Barco miBarco = new Barco();
+        miBarco.setnombreVehiculo("Titanic");
+        System.out.println("usando miBarco, nombreVehiculo : " + miBarco.getnombreVehiculo());
+        System.out.println("usando miBarco llama a : " + miBarco.transportar());
+        System.out.println("usando miBarco llama a : " + miBarco.navegar());
+        System.out.println("usando miBarco llama a : " + miBarco.prenderMotor());
+        System.out.println();
+        Velero miVelero = new Velero();
+        miVelero.setnombreVehiculo("Veleron");
+        System.out.println("usando miVelero, nombreVehiculo : " + miVelero.getnombreVehiculo());
+        System.out.println("usando miVelero llama a : " + miVelero.transportar());
+        System.out.println("usando miVelero llama a : " + miVelero.navegar());
+        System.out.println("usando miVelero llama a : " + miVelero.izarVelas());
+        System.out.println();
+        Aereo miAereo = new Aereo();
+        miAereo.setnombreVehiculo("El Aereo");
+        System.out.println("usando miAereo, nombreVehiculo : " + miAereo.getnombreVehiculo());
+        System.out.println("usando miAereo llama a : " + miAereo.transportar());
+        System.out.println("usando miAereo llama a : " + miAereo.volar());
+        System.out.println();
+        Avion miAvion = new Avion();
+        miAvion.setnombreVehiculo("El Condor");
+        System.out.println("usando miAvion, nombreVehiculo : " + miAvion.getnombreVehiculo());
+        System.out.println("usando miAvion llama a : " + miAvion.transportar());
+        System.out.println("usando miAvion llama a : " + miAvion.volar());
+        System.out.println("usando miAvion llama a : " + miAvion.bajarTrenDeAterrizaje());
+        System.out.println();
+        Helicoptero miHelicoptero = new Helicoptero();
+        miHelicoptero.setnombreVehiculo("El lobo del Aire");
+        System.out.println("usando miHelicoptero, nombreVehiculo :" + miHelicoptero.getnombreVehiculo());
+        System.out.println("usando miHelicoptero llama a : " + miHelicoptero.transportar());
+        System.out.println("usando miHelicoptero llama a : " + miHelicoptero.volar());
+        System.out.println("usando miHelicoptero llama a : " + miHelicoptero.encenderHelices());
+        System.out.println();
+        System.out.println("nombre Vehiculo :" + miVehiculo.getnombreVehiculo());
+        System.out.println("nombre Acuatico :" + miAcuatico.getnombreVehiculo());
+        System.out.println("nombre Aereo :" + miAereo.getnombreVehiculo());
+        System.out.println("nombre Barco :" + miBarco.getnombreVehiculo());
+        System.out.println("nombre Velero :" + miVelero.getnombreVehiculo());
+        System.out.println("nombre Avion :" + miAvion.getnombreVehiculo());
+        System.out.println("nombre Helicoptero :" + miHelicoptero.getnombreVehiculo());
+        System.out.println();
+    }
+}
