@@ -1,5 +1,5 @@
 public class Velero extends Acuatico {
     public String izarVelas() {
-        return "Metodo izarVelas de la clase Velero";
+        return "Método izarVelas de la clase Velero";
     }
 }

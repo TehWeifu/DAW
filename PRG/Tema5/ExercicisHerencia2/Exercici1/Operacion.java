@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
-public class Operation {
+public class Operacion {
     public static final Scanner scanner = new Scanner(System.in);
 
     private double op1;
     private double op2;
     private double result;
 
-    public Operation() {
+    public Operacion() {
         this(0.0, 0.0, 0.0);
     }
 
-    private Operation(final double op1, final double op2, final double result) {
+    private Operacion(final double op1, final double op2, final double result) {
         this.op1 = op1;
         this.op2 = op2;
         this.result = result;
@@ -39,8 +39,7 @@ public class Operation {
         return op2;
     }
 
-    protected Operation setResult(final double result) {
+    protected void setResult(final double result) {
         this.result = result;
-        return this;
     }
 }

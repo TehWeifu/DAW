@@ -1,5 +1,5 @@
-public class Avion extends Aereo{
+public class Avion extends Aereo {
     public String bajarTrenDeAterrizaje() {
-        return "Metodo bajarTrenDeAterrizaje de la clase Avion";
+        return "Método bajarTrenDeAterrizaje de la clase Avion";
     }
 }

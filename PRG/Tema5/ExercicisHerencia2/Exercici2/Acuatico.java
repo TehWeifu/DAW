@@ -1,6 +1,5 @@
-public class Acuatico extends Vehiculo{
+public class Acuatico extends Vehiculo {
     public String navegar() {
-        return "Metodo navegar de la clase Acuatico";
+        return "Método navegar de la clase Acuatico";
     }
-
 }

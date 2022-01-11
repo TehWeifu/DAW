@@ -18,6 +18,6 @@ public class Vehiculo {
     }
 
     public String transportar() {
-        return "Metodo transportar de la clase Vehiculo";
+        return "Método transportar de la clase Vehiculo";
     }
 }
