@@ -1,13 +1,19 @@
 import java.util.Arrays;
 
+// Definition of class ConjuntoDeFiguras
+// Stores an arrays of Figuras objects and manipulates it
 public class ConjuntoDeFiguras {
-    Figura[] arrFiguras;
+    private Figura[] arrFiguras;
 
-    ConjuntoDeFiguras() {
+    // Constructor that receives no parameters and initializes the array with a fixed size of 10
+    public ConjuntoDeFiguras() {
         arrFiguras = new Figura[10];
     }
 
-    void anade(Figura fig) {
+    // Method to add a new Firgura object to the array
+    // Loops through the array checking if there is an empty reference to assign
+    // If no reference is available, creates a new array with the values of the current array and bigger size
+    public void anade(Figura fig) {
         for (int i = 0; i < arrFiguras.length; i++) {
             if (arrFiguras[i] == null) {
                 arrFiguras[i] = fig;
@@ -20,7 +26,10 @@ public class ConjuntoDeFiguras {
         arrFiguras[tmpIndex] = fig;
     }
 
-    double areaTotal() {
+    // Method to sum all the areas of the figures
+    // Loops through every element and checks to which class references the object
+    // Then downcast that reference to its appropriate class and calculates the area by calling its method
+    public double areaTotal() {
         double sumOfAreas = 0;
 
         for (Figura figura : arrFiguras) {
@@ -38,11 +47,13 @@ public class ConjuntoDeFiguras {
         return sumOfAreas;
     }
 
-    void imprimeTodo() {
+
+    // Method to print every Figura object stored
+    // Loops through every element calling to its toString method by using polymorphism
+    public void imprimeTodo() {
         for (Figura figura : arrFiguras) {
             if (figura != null) {
                 System.out.println(figura);
-
             }
         }
     }
