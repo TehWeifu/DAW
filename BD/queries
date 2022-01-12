@@ -1,0 +1,93 @@
+1.
+CREATE TABLE tipos (
+    codigo VARCHAR(10),
+    tipo VARCHAR(50),
+    PRIMARY KEY (codigo)
+    ) ENGINE = INNODB;
+    
+    CREATE TABLE modelos (
+    codigo VARCHAR(10),
+    modelo VARCHAR(100),
+    ca_tipos VARCHAR(10),
+    PRIMARY KEY (codigo),
+    INDEX (ca_tipos),
+    FOREIGN KEY (ca_tipos) REFERENCES tipos (codigo) ON UPDATE CASCADE ON DELETE RESTRICT
+    ) ENGINE = INNODB;
+    
+    CREATE TABLE productos (
+    referencia VARCHAR(10),
+    descripcion VARCHAR(255),
+    coste DECIMAL(4,2),
+    mayor DECIMAL (4,2),
+    ca_modelos VARCHAR(10),
+    imagen VARCHAR(50),
+    PRIMARY KEY (referencia),
+    INDEX (ca_modelos),
+    FOREIGN KEY (ca_modelos) REFERENCES modelos (codigo) ON UPDATE CASCADE ON DELETE RESTRICT
+    ) ENGINE = INNODB;
+    
+    
+2.
+a)
+CREATE TABLE clientes (
+    codigo INT AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    apellidos VARCHAR(50),
+    PRIMARY KEY (codigo)
+    ) ENGINE = INNODB;
+    
+b)
+ALTER TABLE productos
+	ADD ca_cliente INT,
+    ADD INDEX (ca_cliente),
+    ADD FOREIGN KEY (ca_cliente) REFERENCES clientes (codigo) ON UPDATE CASCADE ON DELETE RESTRICT;
+    
+c)
+ALTER TABLE productos
+	MODIFY coste DECIMAL(5,2);
+	
+d)
+ALTER TABLE productos
+	DROP mayor;
+	
+3.
+CREATE TABLE alumno (
+    num_expediente INT,
+    nombre VARCHAR(50),
+    PRIMARY KEY (num_expediente)
+    ) ENGINE = INNODB;
+    
+CREATE TABLE empresa (
+    codigo INT AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    PRIMARY KEY (codigo)
+    ) ENGINE = INNODB;
+    
+CREATE TABLE fct (
+    id INT AUTO_INCREMENT,
+    num_expediente INT,
+    cod_empresa INT,
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    PRIMARY KEY (id),
+    UNIQUE (num_expediente, cod_empresa),
+    INDEX (num_expediente),
+    FOREIGN KEY (num_expediente) REFERENCES alumno (num_expediente) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (cod_empresa),
+    FOREIGN KEY (cod_empresa) REFERENCES empresa (codigo) ON UPDATE CASCADE ON DELETE RESTRICT
+    ) ENGINE = INNODB;
+    
+    
+4.
+CREATE TABLE capitulo (
+    codigo INT AUTO_INCREMENT,
+    num_pags INT NOT NULL,
+    titulo VARCHAR(50),
+    cap_padre INT,
+    tipo_letra VARCHAR(25),
+    PRIMARY KEY (codigo),
+    UNIQUE (titulo),
+    INDEX (cap_padre),
+    FOREIGN KEY (cap_padre) REFERENCES capitulo (codigo)ON UPDATE CASCADE ON DELETE RESTRICT
+    ) ENGINE = INNODB;
+    
