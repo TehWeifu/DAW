@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Posicionamiento</title>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            div {
+                width: 100px;
+                height: 100px;
+                border: 1px solid blue;
+            }
+
+            div.uno {
+                background: red;
+            }
+
+            div.dos {
+                background: blueviolet;
+                position: absolute;
+            }
+
+            div.tres {
+                background: pink;
+            }
+
+            /*El posicionamiento por defecto es static*/
+            /*El posicionamiento relativo desplaza una caja pero se mantiene su espacio original*/
+            /*El posicionamiento absoluto desplaza una caja dejando libre su espacio original*/
+
+            /*Las cajas se pueden desplazar con las propiedad top, bottom, right, left*/
+            /*Los números negativos se utilizan para hacer el contrario*/
+
+            /*Por defecto los elementos declarados antes en el HTML aparecen encima (mas cercano a la pantalla)*/
+            /*Se puede cambiar la cercanía con el espectador utilizando "z-index"*/
+        </style>
+    </head>
+    <body>
+        <div class="uno">
+            Esto es un DIV1
+        </div>
+        <div class="dos">
+            Esto es un DIV2
+        </div>
+        <div class="tres">
+            Esto es un DIV3
+        </div>
+        <p>Donde estoy</p>
+    </body>
+</html>
