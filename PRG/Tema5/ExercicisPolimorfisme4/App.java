@@ -10,22 +10,32 @@ public class App {
     private static final List<User> users = new ArrayList<>();
 
     private static int mainMenu() {
-        System.out.println("╔════════════ MENU ════════════╗");
-        System.out.println("║ 1. Crear nuevo usuario          ║");
-        System.out.println("║ 1. Imprimir usuarios          ║");
-        System.out.println("║ 1. Generar usuarios (aleatoriamente)          ║");
-        System.out.println("║ 7. Salir                     ║");
-        System.out.println("╚══════════════════════════════╝");
+        System.out.println("╔════════════════ MENU ════════════════╗");
+        System.out.println("║ 1. Crear nuevo usuario               ║");
+        System.out.println("║ 2. Banear usuario                    ║");
+        System.out.println("║ 3. Cambiar E-mal                     ║");
+        System.out.println("║ 4. Crear mensaje                     ║");
+        System.out.println("║ 5. Eliminar mensaje                  ║");
+        System.out.println("║ 6. Imprimir usuarios                 ║");
+        System.out.println("║ 7. Generar usuarios (aleatoriamente) ║");
+        System.out.println("║ 8. Salir                             ║");
+        System.out.println("╚══════════════════════════════════════╝");
 
         int inputOption;
         do {
             System.out.print("Introduzca una opción: ");
             inputOption = Integer.parseInt(scanner.nextLine());
-        } while (inputOption < 1 || inputOption > 0); // TODO: change this
+        } while (inputOption < 1 || inputOption > 8);
         return inputOption;
     }
 
     private static void printAll() {
+        if (users.size() == 0) {
+            System.out.println("No hay usuario registrados :(");
+            return;
+        }
+
+        System.out.printf("Hay %d usuarios registrados%n", users.size());
         for (User user : users) {
             if (user instanceof Mod) System.out.println("Moderador");
             else if (user instanceof Admin) System.out.println("Administrador");
@@ -39,10 +49,15 @@ public class App {
     private static void addNewUser() {
         int userType = newUserMenu();
 
-        System.out.println("Introduzca el nick del usuario: ");
+        System.out.print("Introduzca el nick del usuario: ");
         String inputNick = scanner.nextLine();
-        System.out.println("Introduzca el email de usuario: ");
+        System.out.print("Introduzca el email de usuario: ");
         String inputMail = scanner.nextLine();
+
+        if (findUserByMail(inputMail) != -1) {
+            System.out.printf("Error. Ya existe un usuario con este mail -> %s%n", inputMail);
+            return;
+        }
 
         switch (userType) {
             case 1:
@@ -57,15 +72,18 @@ public class App {
     }
 
     private static int newUserMenu() {
-        System.out.println("1. Usuario normal");
-        System.out.println("2. Usuario moderador");
-        System.out.println("3. Usuario administrador");
+        System.out.println("╔═══════════ MENU USUARIOS ════════════╗");
+        System.out.println("║ 1. Usuario normal                    ║");
+        System.out.println("║ 2. Usuario moderador                 ║");
+        System.out.println("║ 3. Usuario administrador             ║");
+        System.out.println("║ 4. Salir                             ║");
+        System.out.println("╚══════════════════════════════════════╝");
 
         int inputOption;
         do {
             System.out.print("Introduzca el tipo de usuario: ");
             inputOption = Integer.parseInt(scanner.nextLine());
-        } while (inputOption < 1 || inputOption > 3);
+        } while (inputOption < 1 || inputOption > 4);
 
         return inputOption;
     }
@@ -80,26 +98,31 @@ public class App {
             return;
         }
 
-        System.out.println("Introduce el mail del administrador que ha eliminado al usuario");
+        System.out.print("Introduce el mail del administrador que ha eliminado al usuario: ");
         String inputMailAdmin = scanner.nextLine();
 
         int adminIdx = findUserByMail(inputMailAdmin);
-        if (adminIdx== -1) {
+        if (adminIdx == -1) {
             System.out.println("Error. No existe ningún administrador con dicho mail");
             return;
         }
-        // Comprobar que el usuario administrador es realmente administrador
-        // Downcastear el admin para aumentar la cuenta de baneos
-        // Borrar al usuario del array
 
-        users.
+        if (users.get(adminIdx) instanceof Admin) {
+            ((Admin) users.get(adminIdx)).addBan();
 
-        (Admin) users.get(adminIdx)
+            System.out.printf("El usuario %s ha sido eliminado con éxito.%n", users.get(deleteUserIdx).getNick());
+            users.remove(deleteUserIdx);
+        } else {
+            System.out.println("Error. El usuario %s no es Administrador");
+        }
     }
 
-    private static void generateRndUsers(final int number) {
+    private static void generateRndUsers() {
+        System.out.print("Introduce el numero de usuario a generar: ");
+        int inputNumber = Integer.parseInt(scanner.nextLine());
+
         int randomType;
-        for (int i = 0; i < number; i++) {
+        for (int i = 0; i < inputNumber; i++) {
             randomType = random.nextInt(10);
             if (randomType < 7) {
                 users.add(new User(random.nextInt(100), generateRndMail(), generateRndNick()));
@@ -135,13 +158,11 @@ public class App {
                 tmpStr.append((char) ('A' + random.nextInt(26)));
             }
         }
-
         if (random.nextBoolean()) {
             tmpStr.append("@gmail.com");
         } else {
             tmpStr.append("@hotmail.com");
         }
-
         return tmpStr.toString();
     }
 
@@ -161,21 +182,41 @@ public class App {
     }
 
     private static void deleteMessage() {
-        System.out.print("Indica el E-mail del usuario que ha borrado el mensaje: ");
-        String inputMail = scanner.nextLine();
+        System.out.print("Indica el E-mail del usuario que ha escrito el mensaje: ");
+        String inputMailUser = scanner.nextLine();
 
-        int userIdx = findUserByMail(inputMail);
+        int userIdx = findUserByMail(inputMailUser);
         if (userIdx == -1) {
-            System.out.printf("Error. No existe ningún usuario con el mail -> %s%n", inputMail);
+            System.out.printf("Error. No existe ningún usuario con el mail -> %s%n", inputMailUser);
+            return;
+        }
+
+        User tmpUser = users.get(userIdx);
+        if (tmpUser.getMessages() == 0) {
+            System.out.printf("Error. El usuario %s no tiene mensajes%n", tmpUser.getNick());
+            return;
+        }
+
+        System.out.print("Indica el E-mail del moderador o Administrador que ha borrado el mensaje: ");
+        String inputMailAdmin = scanner.nextLine();
+
+        int adminIdx = findUserByMail(inputMailAdmin);
+        if (adminIdx == -1) {
+            System.out.printf("No existe ningún usuario con el mail -> %s%n", inputMailAdmin);
+            return;
+        }
+
+        User tmpAdvUser = users.get(adminIdx);
+        if (tmpAdvUser instanceof Mod) {
+            ((Mod) tmpAdvUser).addDeletedPost();
+            System.out.printf("El Mod %s ha eliminado el mensaje de %s %n",
+                    tmpAdvUser.getNick(), tmpUser.decreaseMessage().getNick());
+        } else if (tmpAdvUser instanceof Admin) {
+            ((Admin) tmpAdvUser).addDeletedPost();
+            System.out.printf("El Admin %s ha eliminado el mensaje de %s %n",
+                    tmpAdvUser.getNick(), tmpUser.decreaseMessage().getNick());
         } else {
-            User tmpUser = users.get(userIdx);
-            if (tmpUser.getMessages() > 0) {
-                tmpUser.decreaseMessage();
-                System.out.printf("Se ha borrado un mensaje del usuario %s (%s mensajes)%n",
-                        tmpUser.getNick(), tmpUser.getMessages());
-            } else {
-                System.out.printf("Error. El usuario %s no tiene mensajes.%n", tmpUser.getNick());
-            }
+            System.out.println("Error. El usuario %s no es ni Mod ni Admin");
         }
     }
 
@@ -189,9 +230,12 @@ public class App {
         } else {
             User tmpUser = users.get(userIdx);
 
-            System.out.println("Introduzca");
-            tmpUser.setMail(scanner.nextLine());
-
+            System.out.printf("Introduzca el nuevo email del usuario %s: ", tmpUser.getNick());
+            final String inputNewMail = scanner.nextLine();
+            if (findUserByMail(inputNewMail) != -1) {
+                System.out.printf("Error. Ya existe un usuario con el mail -> %s%n", inputNewMail);
+            }
+            tmpUser.setMail(inputNewMail);
             System.out.printf("Se ha modificado el E-mail de usuario %s -> %s%n", tmpUser.getNick(), tmpUser.getMail());
         }
     }
@@ -204,7 +248,34 @@ public class App {
     }
 
     public static void main(String[] args) {
-        generateRndUsers(20);
-        printAll();
+        int menuOption;
+        do {
+            menuOption = mainMenu();
+
+            switch (menuOption) {
+                case 1:
+                    addNewUser();
+                    break;
+                case 2:
+                    deleteUser();
+                    break;
+                case 3:
+                    changeMail();
+                    break;
+                case 4:
+                    newMessage();
+                    break;
+                case 5:
+                    deleteMessage();
+                    break;
+                case 6:
+                    printAll();
+                    break;
+                case 7:
+                    generateRndUsers();
+                    break;
+            }
+            System.out.println();
+        } while (menuOption != 8);
     }
 }
