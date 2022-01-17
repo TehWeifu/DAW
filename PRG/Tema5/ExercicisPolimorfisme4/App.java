@@ -29,23 +29,6 @@ public class App {
         return inputOption;
     }
 
-    private static void printAll() {
-        if (users.size() == 0) {
-            System.out.println("No hay usuario registrados :(");
-            return;
-        }
-
-        System.out.printf("Hay %d usuarios registrados%n", users.size());
-        for (User user : users) {
-            if (user instanceof Mod) System.out.println("Moderador");
-            else if (user instanceof Admin) System.out.println("Administrador");
-            else System.out.println("Usuario");
-
-            System.out.println(user);
-            System.out.println();
-        }
-    }
-
     private static void addNewUser() {
         int userType = newUserMenu();
 
@@ -117,53 +100,24 @@ public class App {
         }
     }
 
-    private static void generateRndUsers() {
-        System.out.print("Introduce el numero de usuario a generar: ");
-        int inputNumber = Integer.parseInt(scanner.nextLine());
+    private static void changeMail() {
+        System.out.print("Indica el E-mail del usuario que desees modificar: ");
+        String inputMail = scanner.nextLine();
 
-        int randomType;
-        for (int i = 0; i < inputNumber; i++) {
-            randomType = random.nextInt(10);
-            if (randomType < 7) {
-                users.add(new User(random.nextInt(100), generateRndMail(), generateRndNick()));
-            } else if (randomType < 9) {
-                users.add(new Mod(random.nextInt(500), generateRndMail(), generateRndNick(), random.nextInt(100)));
-            } else {
-                users.add(new Admin(random.nextInt(2_000), generateRndMail(), generateRndNick(), random.nextInt(200), random.nextInt(50)));
-            }
-        }
-    }
-
-    private static String generateRndNick() {
-        StringBuilder tmpStr = new StringBuilder();
-
-        for (int i = 0; i < 5 + random.nextInt(16); i++) {
-            if (random.nextBoolean()) {
-                tmpStr.append((char) ('a' + random.nextInt(26)));
-            } else {
-                tmpStr.append((char) ('A' + random.nextInt(26)));
-            }
-        }
-
-        return tmpStr.toString();
-    }
-
-    private static String generateRndMail() {
-        StringBuilder tmpStr = new StringBuilder();
-
-        for (int i = 0; i < 10 + random.nextInt(21); i++) {
-            if (random.nextBoolean()) {
-                tmpStr.append((char) ('a' + random.nextInt(26)));
-            } else {
-                tmpStr.append((char) ('A' + random.nextInt(26)));
-            }
-        }
-        if (random.nextBoolean()) {
-            tmpStr.append("@gmail.com");
+        int userIdx = findUserByMail(inputMail);
+        if (userIdx == -1) {
+            System.out.printf("Error. No existe ningún usuario con el mail -> %s%n", inputMail);
         } else {
-            tmpStr.append("@hotmail.com");
+            User tmpUser = users.get(userIdx);
+
+            System.out.printf("Introduzca el nuevo email del usuario %s: ", tmpUser.getNick());
+            final String inputNewMail = scanner.nextLine();
+            if (findUserByMail(inputNewMail) != -1) {
+                System.out.printf("Error. Ya existe un usuario con el mail -> %s%n", inputNewMail);
+            }
+            tmpUser.setMail(inputNewMail);
+            System.out.printf("Se ha modificado el E-mail de usuario %s -> %s%n", tmpUser.getNick(), tmpUser.getMail());
         }
-        return tmpStr.toString();
     }
 
     private static void newMessage() {
@@ -216,28 +170,74 @@ public class App {
             System.out.printf("El Admin %s ha eliminado el mensaje de %s %n",
                     tmpAdvUser.getNick(), tmpUser.decreaseMessage().getNick());
         } else {
-            System.out.println("Error. El usuario %s no es ni Mod ni Admin");
+            System.out.printf("Error. El usuario %s no es ni Mod ni Admin", tmpAdvUser.getNick());
         }
     }
 
-    private static void changeMail() {
-        System.out.print("Indica el E-mail del usuario que desees modificar: ");
-        String inputMail = scanner.nextLine();
-
-        int userIdx = findUserByMail(inputMail);
-        if (userIdx == -1) {
-            System.out.printf("Error. No existe ningún usuario con el mail -> %s%n", inputMail);
-        } else {
-            User tmpUser = users.get(userIdx);
-
-            System.out.printf("Introduzca el nuevo email del usuario %s: ", tmpUser.getNick());
-            final String inputNewMail = scanner.nextLine();
-            if (findUserByMail(inputNewMail) != -1) {
-                System.out.printf("Error. Ya existe un usuario con el mail -> %s%n", inputNewMail);
-            }
-            tmpUser.setMail(inputNewMail);
-            System.out.printf("Se ha modificado el E-mail de usuario %s -> %s%n", tmpUser.getNick(), tmpUser.getMail());
+    private static void printAll() {
+        if (users.size() == 0) {
+            System.out.println("No hay usuario registrados :(");
+            return;
         }
+
+        System.out.printf("Hay %d usuarios registrados%n", users.size());
+        for (User user : users) {
+            if (user instanceof Mod) System.out.println("Moderador");
+            else if (user instanceof Admin) System.out.println("Administrador");
+            else System.out.println("Usuario");
+
+            System.out.println(user);
+            System.out.println();
+        }
+    }
+
+    private static void generateRndUsers() {
+        System.out.print("Introduce el numero de usuario a generar: ");
+        int inputNumber = Integer.parseInt(scanner.nextLine());
+
+        int randomType;
+        for (int i = 0; i < inputNumber; i++) {
+            randomType = random.nextInt(10);
+            if (randomType < 7) {
+                users.add(new User(random.nextInt(100), generateRndMail(), generateRndNick()));
+            } else if (randomType < 9) {
+                users.add(new Mod(random.nextInt(500), generateRndMail(), generateRndNick(), random.nextInt(100)));
+            } else {
+                users.add(new Admin(random.nextInt(2_000), generateRndMail(), generateRndNick(), random.nextInt(200), random.nextInt(50)));
+            }
+        }
+    }
+
+    private static String generateRndNick() {
+        StringBuilder tmpStr = new StringBuilder();
+
+        for (int i = 0; i < 5 + random.nextInt(16); i++) {
+            if (random.nextBoolean()) {
+                tmpStr.append((char) ('a' + random.nextInt(26)));
+            } else {
+                tmpStr.append((char) ('A' + random.nextInt(26)));
+            }
+        }
+
+        return tmpStr.toString();
+    }
+
+    private static String generateRndMail() {
+        StringBuilder tmpStr = new StringBuilder();
+
+        for (int i = 0; i < 10 + random.nextInt(21); i++) {
+            if (random.nextBoolean()) {
+                tmpStr.append((char) ('a' + random.nextInt(26)));
+            } else {
+                tmpStr.append((char) ('A' + random.nextInt(26)));
+            }
+        }
+        if (random.nextBoolean()) {
+            tmpStr.append("@gmail.com");
+        } else {
+            tmpStr.append("@hotmail.com");
+        }
+        return tmpStr.toString();
     }
 
     private static int findUserByMail(final String userMail) {
