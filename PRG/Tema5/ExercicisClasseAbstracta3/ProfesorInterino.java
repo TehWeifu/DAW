@@ -14,7 +14,7 @@ public class ProfesorInterino extends Profesor {
 
     @Override
     public String toString() {
-        return String.format("%s%s: %s",
+        return String.format("%s%s: %s%n",
                 super.toString(),
                 "Fecha comienzo interinidad", fechaComienzoInterinidad.getTime());
     }
