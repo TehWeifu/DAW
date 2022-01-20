@@ -17,7 +17,9 @@ public class Library {
         System.out.println("║ 4. Modificar estado préstamo ║");
         System.out.println("║ 5. Mostrar una publicación   ║");
         System.out.println("║ 6. Mostrar todo              ║");
+        System.out.println("╠══════════════════════════════╣");
         System.out.println("║ 7. Generar aleatoriamente    ║");
+        System.out.println("╠══════════════════════════════╣");
         System.out.println("║ 8. Salir                     ║");
         System.out.println("╚══════════════════════════════╝");
 
@@ -208,9 +210,9 @@ public class Library {
 
         for (int i = 0; i < inputNum; i++) {
             if (random.nextBoolean()) {
-                publications.add(new Book(random.nextInt(), generateString(), random.nextInt(2_022)));
+                publications.add(new Book(random.nextInt(1_000_000), generateString(), random.nextInt(2_022)));
             } else {
-                publications.add(new Magazine(random.nextInt(), generateString(), random.nextInt(2_022), random.nextInt(2)));
+                publications.add(new Magazine(random.nextInt(1_000_000), generateString(), random.nextInt(2_022), random.nextInt(2)));
             }
         }
     }
