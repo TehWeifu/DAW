@@ -16,16 +16,31 @@
                 border: 1px solid blue;
             }
 
+            div#padre {
+                position: relative;
+                margin: 0 auto;
+                width: 800px;
+                height: 600px;
+                border: 10px solid black;
+            }
+
             div.uno {
                 background: red;
+                position: fixed;
+                top: 0;
+                right: 0;
             }
 
             div.dos {
                 background: blueviolet;
-                position: absolute;
+                width: 75px;
+                height: 75px;
             }
 
             div.tres {
+                position: absolute;
+                bottom: 0;
+                right: 0;
                 background: pink;
             }
 
@@ -38,18 +53,23 @@
 
             /*Por defecto los elementos declarados antes en el HTML aparecen encima (mas cercano a la pantalla)*/
             /*Se puede cambiar la cercanía con el espectador utilizando "z-index"*/
+
+            /*Por defect solo hay un elemento posicionado, el body*/
         </style>
     </head>
     <body>
-        <div class="uno">
-            Esto es un DIV1
+        <div id="padre">
+            <div class="uno">
+                Esto es un DIV1
+            </div>
+            <div class="dos">
+                Esto es un DIV2
+            </div>
+            <div class="tres">
+                Esto es un DIV3
+            </div>
+
         </div>
-        <div class="dos">
-            Esto es un DIV2
-        </div>
-        <div class="tres">
-            Esto es un DIV3
-        </div>
-        <p>Donde estoy</p>
+        <p>Donde estoy?</p>
     </body>
 </html>
