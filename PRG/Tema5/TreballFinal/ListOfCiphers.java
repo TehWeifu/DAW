@@ -3,6 +3,8 @@ import Ciphers.Cipher;
 import java.util.ArrayList;
 import java.util.List;
 
+// ListOfCiphers class
+// Class designed to store an array of Ciphers and encapsulate its operations
 public class ListOfCiphers {
     private final List<Cipher> cipherList;
 

@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Llibres extends Publicacio implements Prestable {
+public class Llibres extends Publicacio {
     private boolean prestat;
 
     public Llibres(final int codi, final String titol, final Date anyPublicacio) {

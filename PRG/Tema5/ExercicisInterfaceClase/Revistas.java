@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Revistas extends Publicacio implements Prestable {
+public class Revistas extends Publicacio {
     private int num;
 
 

@@ -1,5 +1,7 @@
 package Ciphers;
 
+// Class Cipher
+// Defines the basics operations for every cipher to have
 public abstract class Cipher implements Encryptable, Decipherable {
     private String message;
 

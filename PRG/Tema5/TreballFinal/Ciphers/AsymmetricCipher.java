@@ -1,5 +1,7 @@
 package Ciphers;
 
+// AsymmetricCipher class
+// Define both keys that every subclass must use
 public abstract class AsymmetricCipher extends Cipher {
     private final String publicKey;
     private final String privateKey;
@@ -25,6 +27,7 @@ public abstract class AsymmetricCipher extends Cipher {
                 "Private Key", getPrivateKey());
     }
 
+    // Overrides and creates a toString from zero since the original toString is designed for one key
     @Override
     public String toString() {
         return String.format("%s: %s%n%s",

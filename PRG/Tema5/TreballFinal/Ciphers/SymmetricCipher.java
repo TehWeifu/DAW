@@ -1,5 +1,7 @@
 package Ciphers;
 
+// SymmetricCipher class
+// Define the key that every subclass must use
 public abstract class SymmetricCipher extends Cipher {
     private final String key;
 

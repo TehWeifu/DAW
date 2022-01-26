@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Publicacio {
+public abstract class Publicacio implements Prestable {
     private int codi;
     private String titol;
     private Date anyPublicacio;
