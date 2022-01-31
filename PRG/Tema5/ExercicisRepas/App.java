@@ -81,7 +81,7 @@ public class App {
         do {
             System.out.print("Introduzca una opción: ");
             inputOption = Integer.parseInt(scanner.nextLine());
-        } while (inputOption < 1 || inputOption > 4); // TODO: CHANGE THIS
+        } while (inputOption < 1 || inputOption > 4);
         return inputOption;
     }
 
@@ -110,7 +110,7 @@ public class App {
     }
 
     private static void printLights() {
-
+        System.out.println(street.getStreetLights());
     }
 
     private static void generateRandomBuildings() {

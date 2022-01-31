@@ -37,7 +37,7 @@ public class Restaurant extends Building {
 
     @Override
     public int getLights() {
-        return 4;
+        return 2;
     }
 
     @Override

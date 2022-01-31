@@ -37,7 +37,7 @@ public class Apartment extends Building {
 
     @Override
     public int getLights() {
-        return 4;
+        return 10;
     }
 
     @Override

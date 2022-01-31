@@ -50,6 +50,43 @@ public class Street {
         return -1;
     }
 
+    public String getStreetLights() {
+        StringBuilder tmpBuilder = new StringBuilder();
+
+        int numOfLights = 10;
+        while (numOfLights > 0) {
+            for (int i = 0; i < arrOfBuildings.length / 2; i++) {
+                if (arrOfBuildings[i] != null && arrOfBuildings[i].getLights() >= numOfLights) {
+                    tmpBuilder.append("■■");
+                } else {
+                    tmpBuilder.append("  ");
+                }
+                tmpBuilder.append("  ");
+            }
+            numOfLights -= 2;
+            tmpBuilder.append('\n');
+        }
+
+        tmpBuilder.append(String.format("%s%n", "=".repeat(arrOfBuildings.length * 2)));
+        tmpBuilder.append(String.format("%s%n", "=".repeat(arrOfBuildings.length * 2)));
+
+        numOfLights = 0;
+        while (numOfLights <= 10) {
+            for (int i = arrOfBuildings.length / 2; i < arrOfBuildings.length; i++) {
+                if (arrOfBuildings[i] != null && arrOfBuildings[i].getLights() > numOfLights) {
+                    tmpBuilder.append("■■");
+                } else {
+                    tmpBuilder.append("  ");
+                }
+                tmpBuilder.append("  ");
+            }
+            numOfLights += 2;
+            tmpBuilder.append('\n');
+        }
+
+        return tmpBuilder.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder tmpBuilder = new StringBuilder();
