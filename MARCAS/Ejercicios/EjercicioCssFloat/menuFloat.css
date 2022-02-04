@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    /*box-sizing: border-box;*/
+}
+
+div.caja1,
+div.caja2,
+div.caja3,
+div.caja4 {
+    width: 100px;
+    height: 100px;
+    float: right;
+    padding: 0.5em;
+    margin-right: 5px;
+}
+
+div.caja1 {
+    background-color: aqua;
+    width: 150px;
+}
+
+div.caja2 {
+    width: 250px;
+    background-color: blueviolet;
+}
+
+div.caja3 {
+    background-color: gold;
+    width: 70px;
+}
+
+div.caja4 {
+    background-color: hotpink;
+    width: 200px;
+}
+
+div.pedro {
+    background-color: red;
+    width: 120px;
+    height: 100px;
+    float: left;
+    padding: 0.5em;
+}
+
+div.jesus {
+    background-color: orange;
+    width: 200px;
+    height: 100px;
+    float: left;
+}
+
+p.limpiar {
+    clear: both;
+    border: none;
+}
+
+p {
+    border: 1px solid red;
+}
+
+div#contenedor {
+    width: 1024px;
+    border: 2px solid green;
+    margin: 0 auto;
+}
+
+ul#menu {
+    list-style-type: none;
+    background-color: grey;
+    position: relative;
+}
+
+ul#menu > li {
+    float: left;
+}
+
+ul#menu > li > a {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 35px;
+    text-align: center;
+    color: black;
+    padding-top: 15px;
+    text-decoration: none;
+}
+
+ul#menu > li > a:hover {
+    background-color: yellow;
+}
+
+ul#menu li ul.submenu {
+    border: 5px solid black;
+    display: none;
+    list-style-type: none;
+    width: 100%;
+}
+
+ul#menu li:hover ul.submenu {
+    display: block;
+    position: absolute;
+    background-color: black;
+    left: 0;
+}
+
+ul.submenu > li {
+    float: left;
+}
+
+ul#menu li:hover ul.submenu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+ul#menu li:hover ul.submenu li a:hover {
+    color: red;
+}
+
+.menuLiga {
+    list-style-type: none;
+    border: 1px solid rebeccapurple;
+    color: red;
+}
