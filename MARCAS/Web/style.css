@@ -126,7 +126,7 @@ p {
     background-color: var(--lv-main-beige);
 }
 
-#mainMenu li li:active {
+li:active {
     transform: scale(1.02);
 }
 
@@ -138,6 +138,8 @@ p {
 #mainMenu a {
     color: var(--lv-main-beige);
     display: block;
+    font-size: 1.5rem;
+    letter-spacing: .1em;
 }
 
 #menuExercises:hover > ul {
@@ -151,7 +153,7 @@ p {
     padding: 0;
     display: none;
     flex-direction: column;
-    width: 450px;
+    width: 350px;
     z-index: 10;
 }
 
@@ -185,13 +187,14 @@ p {
     display: flex;
 }
 
-#htmlExercices li {
-    width: 500px;
-}
 
 #htmlExercices {
     position: absolute;
     left: 100px;
+}
+
+#menuExercises a {
+    text-decoration: none;
 }
 
 #cookies {
