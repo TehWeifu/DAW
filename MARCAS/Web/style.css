@@ -131,7 +131,8 @@ li:active {
 }
 
 
-#htmlExercices li:hover a {
+#htmlExercises li:hover a,
+#cssExercises li:hover a {
     color: var(--lv-main-brown);
 }
 
@@ -183,12 +184,14 @@ li:active {
     width: 200px;
 }
 
-#htmlMenu:hover #htmlExercices {
+#htmlMenu:hover #htmlExercises,
+#cssMenu:hover #cssExercises {
     display: flex;
 }
 
 
-#htmlExercices {
+#htmlExercises,
+#cssExercises {
     position: absolute;
     left: 100px;
 }

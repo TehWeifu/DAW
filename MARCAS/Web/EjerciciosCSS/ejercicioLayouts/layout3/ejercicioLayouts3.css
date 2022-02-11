@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#container {
+    width: 1024px;
+    height: 100%;
+
+    margin: 0 auto;
+    position: relative;
+}
+
+div.header {
+    background-color: lightgoldenrodyellow;
+    height: 100px;
+    padding: .5em;
+}
+
+div.header span.sectionTitle {
+    float: left;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+div.text {
+    padding: 1em;
+}
+
+div.text p {
+    margin: .5em 0;
+}
+
+div.content > div {
+    padding: .5em;
+    float: left;
+    width: 50%;
+    background-color: lightgrey;
+}
+
+div.content > div.extraDiv {
+    width: 50%;
+    background-color: lightsteelblue;
+}
+
+div.clrDiv {
+    clear: both;
+}
+
+div.footer {
+    height: 50px;
+    background-color: lightsalmon;
+}
