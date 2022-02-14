@@ -3,10 +3,32 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class App {
-    private static final String FILE_URL = "./contacts.txt";
+    private static final String FILE_URL = "./contacts.csv";
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<List<String>> contactArr = new ArrayList<>();
+
+    public static void main(String[] args) {
+        loadContacts();
+
+        int menuOption;
+        do {
+            menuOption = mainMenu();
+            switch (menuOption) {
+                case 1:
+                    addContact();
+                    break;
+                case 2:
+                    searchContact();
+                    break;
+                case 3:
+                    printContacts();
+                    break;
+            }
+            System.out.println();
+        } while (menuOption != 4);
+        saveContacts();
+    }
 
     private static void loadContacts() {
         Scanner myFile;
@@ -17,7 +39,7 @@ public class App {
         }
 
         while (myFile.hasNextLine()) {
-            String[] tmpArr = myFile.nextLine().split("\\s+");
+            String[] tmpArr = myFile.nextLine().split(",");
             contactArr.add(Arrays.asList(tmpArr[0], tmpArr[1]));
         }
 
@@ -35,7 +57,7 @@ public class App {
         }
 
         for (List<String> contact : contactArr) {
-            myFile.format("%s %s%n", contact.get(0), contact.get(1));
+            myFile.format("%s,%s%n", contact.get(0), contact.get(1));
         }
 
         myFile.close();
@@ -71,7 +93,6 @@ public class App {
         return inputOption;
     }
 
-
     private static void addContact() {
         if (contactArr.size() >= 20) {
             System.out.println("La lista de contactos está llena, no se pueden añadir más");
@@ -105,7 +126,6 @@ public class App {
         } else {
             System.out.printf("No existe el contacto \"%s\" en tu lista de contactos.%n", inputName);
         }
-
     }
 
     private static void printContacts() {
@@ -125,27 +145,5 @@ public class App {
             if (contactArr.get(i).get(0).equals(name)) return i;
         }
         return -1;
-    }
-
-    public static void main(String[] args) {
-        loadContacts();
-
-        int menuOption;
-        do {
-            menuOption = mainMenu();
-            switch (menuOption) {
-                case 1:
-                    addContact();
-                    break;
-                case 2:
-                    searchContact();
-                    break;
-                case 3:
-                    printContacts();
-                    break;
-            }
-            System.out.println();
-        } while (menuOption != 4);
-        saveContacts();
     }
 }

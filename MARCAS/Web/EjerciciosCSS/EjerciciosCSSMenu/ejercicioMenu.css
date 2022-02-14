@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clr-div {
+    clear: both;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1024px;
+}
+
+ul.menu {
+    background: linear-gradient(#555 50%, #333 50%);
+    list-style: none;
+    position: relative;
+}
+
+ul.menu > li {
+    float: left;
+}
+
+ul.menu > li > a {
+    color: white;
+    display: block;
+    padding: 1em;
+    margin: 0 .5em;
+    text-decoration: none;
+}
+
+ul.menu > li:hover > a {
+    background-color: #444;
+}
+
+ul.menu > li:hover ul.submenu {
+    display: block;
+}
+
+ul.menu ul.submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    list-style-type: none;
+    background-color: #C5C5C5;
+}
+
+ul.menu ul.submenu > li {
+    float: left;
+}
+
+ul.menu ul.submenu > li:hover > a {
+    background-color: #aaa;
+}
+
+ul.menu ul.submenu > li > a {
+    color: black;
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+}
+
+ul.menu ul.submenu ul.menuLenses {
+    border: 1px solid #000;
+    background-color: #fff;
+    list-style-type: none;
+    padding: .5em;
+    display: none;
+    position: absolute;
+}
+
+ul.menu ul.submenu > li:hover > ul {
+    display: block;
+}
+
+.menuLenses > li > a {
+    display: block;
+    text-decoration: none;
+}
+
+.menuLenses > li > a:hover {
+    color: black;
+}
+
+hr {
+    margin-top: 25%;
+}
