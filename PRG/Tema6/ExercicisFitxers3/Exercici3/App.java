@@ -7,7 +7,7 @@ public class App {
 
     private static final Random random = new Random();
     private static final Scanner scanner = new Scanner(System.in);
-    private static final List<Person> pplArr = new ArrayList<>();
+    private static final List<Person> pplArr = new LinkedList<>();
 
     public static void main(String[] args) {
         loadPeople();
@@ -16,14 +16,27 @@ public class App {
         do {
             menuOption = mainMenu();
             switch (menuOption) {
-                case 1 -> addPerson();
-                case 2 -> searchContact();
-                case 3 -> modifyPerson();
-                case 4 -> printContacts();
-                case 5 -> generateRandomRecords();
+                case 1:
+                    addPerson();
+                    break;
+                case 2:
+                    searchContact();
+                    break;
+                case 3:
+                    modifyPerson();
+                    break;
+                case 4:
+                    deletePerson();
+                    break;
+                case 5:
+                    printContacts();
+                    break;
+                case 6:
+                    generateRandomRecords();
+                    break;
             }
             System.out.println();
-        } while (menuOption != 6);
+        } while (menuOption != 7);
         savePeople();
     }
 
@@ -54,7 +67,7 @@ public class App {
         }
 
         for (Person person : pplArr) {
-            myFile.format("%s,%d,%f,%f%n", person.getName(), person.getAge(), person.getWeight(), person.getHeight());
+            myFile.format(Locale.ENGLISH, "%s,%d,%f,%f%n", person.getName(), person.getAge(), person.getWeight(), person.getHeight());
         }
         myFile.close();
     }
@@ -62,17 +75,18 @@ public class App {
     private static int mainMenu() {
         System.out.println();
         System.out.println("╔════════════ MENU ════════════╗");
-        System.out.println("║ 1. Nuevo deportista          ║");
+        System.out.println("║ 1. Crear deportista          ║");
         System.out.println("║ 2. Buscar deportista         ║");
         System.out.println("║ 3. Modificar deportista      ║");
-        System.out.println("║ 4. Mostrar deportistas       ║");
+        System.out.println("║ 4. Eliminar deportista       ║");
+        System.out.println("║ 5. Mostrar deportistas       ║");
         System.out.println("╠══════════════════════════════╣");
-        System.out.println("║ 5. Generar aleatoriamente    ║");
+        System.out.println("║ 6. Generar aleatoriamente    ║");
         System.out.println("╠══════════════════════════════╣");
-        System.out.println("║ 6. Salir                     ║");
+        System.out.println("║ 7. Salir                     ║");
         System.out.println("╚══════════════════════════════╝");
 
-        return promptMenuOption(6);
+        return promptMenuOption(7);
     }
 
     private static int promptMenuOption(final int options) {
@@ -176,10 +190,18 @@ public class App {
             do {
                 submenuOption = modifyMenu();
                 switch (submenuOption) {
-                    case 1 -> promptName(pplArr.get(contactIdx));
-                    case 2 -> promptAge(pplArr.get(contactIdx));
-                    case 3 -> promptWeight(pplArr.get(contactIdx));
-                    case 4 -> promptHeight(pplArr.get(contactIdx));
+                    case 1:
+                        promptName(pplArr.get(contactIdx));
+                        break;
+                    case 2:
+                        promptAge(pplArr.get(contactIdx));
+                        break;
+                    case 3:
+                        promptWeight(pplArr.get(contactIdx));
+                        break;
+                    case 4:
+                        promptHeight(pplArr.get(contactIdx));
+                        break;
                 }
             } while (submenuOption != 5);
 
@@ -271,6 +293,20 @@ public class App {
         System.out.println("╚══════════════════════════════════╝");
 
         return promptMenuOption(5);
+    }
+
+    private static void deletePerson() {
+        System.out.println("Introduzca el nombre: ");
+        String inputName = scanner.nextLine();
+
+        int personIndex = findPersonByName(inputName);
+
+        if (personIndex == -1) {
+            System.out.printf("Error. No existe un deportista con el nombre %s.", inputName);
+        } else {
+            pplArr.remove(personIndex);
+            System.out.printf("Se ha eliminado el deportista %s satisfactoriamente.%n", inputName);
+        }
     }
 
     private static void printContacts() {
