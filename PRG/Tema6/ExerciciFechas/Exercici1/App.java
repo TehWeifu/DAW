@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -7,12 +8,20 @@ public class App {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int inputYear = promptInt("Introduzca el año: ");
-        int inputMonth = promptInt("Introduzca el mes: ", 1, 12);
-        int inputDay = promptInt("Introduzca el dia: ", 1, 31);
+        LocalDate myDate;
+        do {
+            int inputYear = promptInt("Introduzca el año: ");
+            int inputMonth = promptInt("Introduzca el mes: ", 1, 12);
+            int inputDay = promptInt("Introduzca el dia: ", 1, 31);
 
-        LocalDate myDate = LocalDate.of(inputYear, inputMonth, inputDay);
-        String strFullDate = myDate.plusDays(10).format(DateTimeFormatter.ofPattern("EEEE, d 'de' MMMM 'de' yyyy", new Locale("ca")));
+            try {
+                myDate = LocalDate.of(inputYear, inputMonth, inputDay);
+                break;
+            } catch (DateTimeException e) {
+                System.out.println("Error. Se ha introducido una fecha no valida. Intentalo otra vez");
+            }
+        } while (true);
+        String strFullDate = myDate.plusDays(10).format(DateTimeFormatter.ofPattern("EEEE, d MMMM 'de' y", new Locale("ca")));
 
         System.out.printf("En 10 días será: %s%n", strFullDate);
     }
