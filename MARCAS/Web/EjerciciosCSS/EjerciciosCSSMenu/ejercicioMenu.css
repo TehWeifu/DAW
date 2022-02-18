@@ -14,7 +14,7 @@
 }
 
 ul.menu {
-    background: linear-gradient(#555 50%, #333 50%);
+    background: linear-gradient(#eee, #333 50%, #333 75%);
     list-style: none;
     position: relative;
 }
@@ -40,11 +40,12 @@ ul.menu > li:hover ul.submenu {
 }
 
 ul.menu ul.submenu {
+    width: 100%;
     display: none;
     position: absolute;
     left: 0;
     list-style-type: none;
-    background-color: #C5C5C5;
+    background: linear-gradient(#eee, lightsteelblue 75%, lightsteelblue 25%);
 }
 
 ul.menu ul.submenu > li {
@@ -66,7 +67,6 @@ ul.menu ul.submenu ul.menuLenses {
     border: 1px solid #000;
     background-color: #fff;
     list-style-type: none;
-    padding: .5em;
     display: none;
     position: absolute;
 }
@@ -78,6 +78,7 @@ ul.menu ul.submenu > li:hover > ul {
 .menuLenses > li > a {
     display: block;
     text-decoration: none;
+    padding: .2em 5em .2em 2em;
 }
 
 .menuLenses > li > a:hover {
