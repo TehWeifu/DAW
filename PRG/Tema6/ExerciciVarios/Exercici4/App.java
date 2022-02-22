@@ -5,48 +5,36 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Scanner readFile1;
-        Scanner readFile2;
         FileWriter writeFile;
-
-        do {
-            readFile1 = promptReadFile("Introduzca la ruta del primer fichero a leer: ");
-            if (readFile1 == null) System.out.println("Error. No se ha podido abrir el primero fichero de lectura");
-        } while (readFile1 == null);
-
-        do {
-            readFile2 = promptReadFile("Introduzca la ruta del segundo fichero a leer: ");
-            if (readFile2 == null) System.out.println("Error. No se ha podido abrir el primero fichero de lectura");
-        } while (readFile2 == null);
-
         do {
             writeFile = promptWriteFile("Introduzca la ruta del fichero donde copiar: ");
             if (writeFile == null) System.out.println("Error. No se ha podido abrir el archivo de escritura");
         } while (writeFile == null);
 
-
-        boolean errorOcurred = false;
-        while (!errorOcurred && readFile1.hasNextLine()) {
+        do {
+            Scanner readFile;
             try {
-                writeFile.write(readFile1.nextLine() + System.lineSeparator());
-            } catch (IOException e) {
-                System.out.println("Se ha producido un error copiando del primer archivo. Se va a finalizar el programa");
-                e.printStackTrace();
-                errorOcurred = true;
+                readFile = promptReadFile("Introduzca la ruta de un fichero a leer (-1 para para): ");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
             }
-        }
-        while (!errorOcurred && readFile2.hasNextLine()) {
-            try {
-                writeFile.write(readFile2.nextLine() + System.lineSeparator());
-            } catch (IOException e) {
-                System.out.println("Se ha producido un error copiando del primer archivo. Se va a finalizar el programa");
-                e.printStackTrace();
-                errorOcurred = true;
-            }
-        }
 
-        readFile1.close();
-        readFile2.close();
+            if (readFile == null) break;
+
+            boolean errorOcurred = false;
+            while (!errorOcurred && readFile.hasNextLine()) {
+                try {
+                    writeFile.write(readFile.nextLine() + System.lineSeparator());
+                } catch (IOException e) {
+                    System.out.println("Se ha producido un error copiando del primer archivo. Se va a finalizar el programa");
+                    e.printStackTrace();
+                    errorOcurred = true;
+                }
+            }
+            readFile.close();
+        } while (true);
+
         try {
             writeFile.close();
         } catch (IOException e) {
@@ -55,17 +43,19 @@ public class App {
         }
     }
 
-    private static Scanner promptReadFile(final String msg) {
+    private static Scanner promptReadFile(final String msg) throws IOException {
         final Scanner scanner = new Scanner(System.in);
         System.out.print(msg);
 
         final String tmpFileUrl = scanner.nextLine();
 
+        if (tmpFileUrl.equals("-1")) return null;
+
         Scanner file;
         try {
             file = new Scanner(Paths.get(tmpFileUrl));
         } catch (IOException e) {
-            return null;
+            throw new IOException("Error. No se ha podido abrir el fichero de lectura", e);
         }
         return file;
     }
