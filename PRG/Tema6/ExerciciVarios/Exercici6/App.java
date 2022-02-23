@@ -115,25 +115,22 @@ public class App {
             return;
         }
 
-        if (startDate != null && endDate != null) {
-
-            // if startDate is after endDate swaps them to avoid infine loop
-            if (Period.between(startDate, endDate).isNegative()) {
-                LocalDate[] tmpArr = new LocalDate[]{startDate, endDate};
-                startDate = tmpArr[1];
-                endDate = tmpArr[0];
-            }
-
-            LocalDate iterDate;
-            int sundayCount = 0;
-            for (iterDate = LocalDate.from(startDate);
-                 !iterDate.isEqual(endDate);
-                 iterDate = iterDate.plusDays(1)) {
-                if (iterDate.get(ChronoField.DAY_OF_WEEK) == 7) sundayCount++;
-            }
-            System.out.printf("Han pasado %d domingos entre %s y %s%n", sundayCount, startDate, endDate);
+        // if startDate is after endDate swaps them to avoid infinite loop
+        if (Period.between(startDate, endDate).isNegative()) {
+            LocalDate[] tmpArr = new LocalDate[]{startDate, endDate};
+            startDate = tmpArr[1];
+            endDate = tmpArr[0];
         }
+
+        int sundayCount = 0;
+        for (LocalDate iterDate = LocalDate.from(startDate);
+             !iterDate.isEqual(endDate);
+             iterDate = iterDate.plusDays(1)) {
+            if (iterDate.get(ChronoField.DAY_OF_WEEK) == 7) sundayCount++;
+        }
+        System.out.printf("Han pasado %d domingos entre %s y %s%n", sundayCount, startDate, endDate);
     }
+
 
     private static int promptInt(final String message, final int minVal, final int maxVal) {
         Scanner scanner = new Scanner(System.in);

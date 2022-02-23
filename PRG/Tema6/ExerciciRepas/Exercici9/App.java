@@ -71,9 +71,12 @@ public class App {
     }
 
     private static int mainMenu() {
-        System.out.println("1. Agregar URL");
-        System.out.println("2. Cargar URL");
-        System.out.println("3. Salir");
+
+        System.out.println("╔════════════════ MENU ════════════════╗");
+        System.out.println("║ 1. Agregar URL                       ║");
+        System.out.println("║ 2. Cargar URL                        ║");
+        System.out.println("║ 3. Salir                             ║");
+        System.out.println("╚══════════════════════════════════════╝");
 
         return promptInt("Introduzca una opción: ", 1, 3);
     }
@@ -81,13 +84,28 @@ public class App {
     private static void addUser() {
         final Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Introduzca un nick: ");
-        String inputName = scanner.nextLine();
+        String inputName;
+        do {
+            System.out.print("Introduzca un nick: ");
+            inputName = scanner.nextLine().trim();
+        } while (!isCSVFriendly(inputName));
 
-        System.out.print("Introduzca una URL: ");
-        String inputUrl = scanner.nextLine();
+        String inputUrl;
+        do {
+            System.out.print("Introduzca una URL: ");
+            inputUrl = scanner.nextLine().trim();
+        } while (!isCSVFriendly(inputUrl));
+
+        if (!inputUrl.matches("^https?://")) {
+            if (!inputUrl.matches("^www\\.")) {
+                inputUrl = "https://www." + inputUrl;
+            } else {
+                inputUrl = "https://" + inputUrl;
+            }
+        }
 
         LocalDate inputDate;
+        System.out.println("Introduzca una fecha");
         try {
             inputDate = promptDate(true);
         } catch (DateTimeException e) {
@@ -104,9 +122,11 @@ public class App {
         String inputName = scanner.nextLine();
 
         LocalDate inputDate;
+        System.out.println("Introduzca la fecha");
         try {
             inputDate = promptDate(true);
         } catch (DateTimeException e) {
+            System.out.println("Se ha introducido una fecha no valida");
             return;
         }
 
@@ -123,10 +143,6 @@ public class App {
         return !message.matches(",");
     }
 
-    // TODO: si te aburres haz esto
-    private static void printMenu(String... options) {
-
-    }
 
     private static int promptInt(final String message, final int minVal, final int maxVal) {
         Scanner scanner = new Scanner(System.in);

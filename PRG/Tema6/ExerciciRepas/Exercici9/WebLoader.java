@@ -6,8 +6,8 @@ public class WebLoader {
     }
 
     private static void abrirNavegadorPredeterminadorLinux(String url) throws IOException {
-        Runtime.getRuntime().exec("sensible-browser " + url);
-//        Runtime.getRuntime().exec("xdg-open " + url);
+//        Runtime.getRuntime().exec("sensible-browser " + url);
+        Runtime.getRuntime().exec("xdg-open " + url);
     }
 
     private static void abrirNavegadorPredeterminadorMacOsx(String url) throws IOException {
