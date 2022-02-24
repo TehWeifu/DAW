@@ -24,8 +24,8 @@ public class Company {
         return currentEmployees;
     }
 
-    public void addEmployee(final String name, final int salary) throws companyException {
-        if (arrOfEmployees.length == currentEmployees) {
+    public void addEmployee(final String name, final double salary) throws companyException {
+        if (this.isFull()) {
             throw new companyException("La empresa esta a su capacidad maxima");
         }
 
@@ -59,7 +59,6 @@ public class Company {
         return arrOfEmployees[empIdx].getName();
     }
 
-
     public int findEmployeeById(final int id) {
         for (int i = 0; i < arrOfEmployees.length; i++) {
             if (arrOfEmployees[i].getId() == id) {
@@ -67,5 +66,22 @@ public class Company {
             }
         }
         return -1;
+    }
+
+    public boolean isFull() {
+        return getCurrentEmployees() == arrOfEmployees.length;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder tmpStr = new StringBuilder();
+
+        for (Employee employee : arrOfEmployees) {
+            if (employee != null) {
+                tmpStr.append(employee).append(System.lineSeparator()).append(System.lineSeparator());
+            }
+        }
+
+        return tmpStr.toString();
     }
 }

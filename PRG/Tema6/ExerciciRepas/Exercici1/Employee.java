@@ -37,4 +37,12 @@ public class Employee {
         this.salary = salary;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s%n%s: %s%n%s: %.2f$",
+                "ID", getId(),
+                "Nombre", getName(),
+                "Salario", getSalary());
+    }
 }

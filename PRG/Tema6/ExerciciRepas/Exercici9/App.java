@@ -51,6 +51,7 @@ public class App {
             myFile = new FileWriter(FILE_URL);
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo de escritura");
+            e.printStackTrace();
             return;
         }
 
@@ -59,6 +60,7 @@ public class App {
                 myFile.write(user.getName() + "," + user.getUrl() + "," + user.getDate() + System.lineSeparator());
             } catch (IOException e) {
                 System.out.println("Se ha producido un error en la escritura del fichero");
+                e.printStackTrace();
                 return;
             }
         }
@@ -67,6 +69,7 @@ public class App {
             myFile.close();
         } catch (IOException e) {
             System.out.println("Se ha producido un error al cerrar el fichero");
+            e.printStackTrace();
         }
     }
 
@@ -109,6 +112,8 @@ public class App {
         try {
             inputDate = promptDate(true);
         } catch (DateTimeException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             return;
         }
 
@@ -126,7 +131,8 @@ public class App {
         try {
             inputDate = promptDate(true);
         } catch (DateTimeException e) {
-            System.out.println("Se ha introducido una fecha no valida");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             return;
         }
 
