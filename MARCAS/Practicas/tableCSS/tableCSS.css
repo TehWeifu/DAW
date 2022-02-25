@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    /*box-sizing: border-box;*/
+}
+
+.content {
+    width: 1024px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+table {
+    width: 70%;
+    border-collapse: separate;
+    border-spacing: 20px;
+    empty-cells: hide;
+    text-align: center;
+    border: 5px solid orange;
+}
+
+table caption {
+    caption-side: bottom;
+}
+
+table tr > td {
+    border-top: 1px solid red;
+    border-bottom: 2px solid green;
+}
+

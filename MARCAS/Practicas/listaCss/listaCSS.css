@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+ul {
+    border: 1px solid red;
+    list-style: none;
+}
+
+ul li {
+    clear: both;
+    font-size: 50px;
+    border: 1px solid green;
+}
+
+ul li span {
+    display: block;
+    float: left;
+    width: 55px;
+    height: 55px;
+    background-image: url("./imgs/social-media-icons-css-sprite.png");
+}
+
+ul li.li1 span {
+    background-position: -227.5px 0;
+}
+
+ul li.li1:hover span {
+    background-position: -227.5px -57.5px;
+}
+
+ul li.li2 span {
+    background-position: -170px 0;
+}
+
+ul li.li2:hover span {
+    background-position: -170px -57.5px;
+}
+
+ul li.li3 span {
+    background-position: -115px 0;
+}
+
+ul li.li3:hover span {
+    background-position: -115px -57.5px;
+}
+
+ul li.li4 span {
+    background-position: -285px 0;
+}
+
+ul li.li4:hover span {
+    background-position: -285px -57.5px;
+}
