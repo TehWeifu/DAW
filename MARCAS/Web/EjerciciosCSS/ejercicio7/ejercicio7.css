@@ -27,7 +27,6 @@ img {
 #contenedor {
     width: 90%;
     max-width: 900px;
-    width: expression(document.body.clientWidth > 901? "900px": "auto");
     margin: 0 auto;
 }
 
@@ -125,7 +124,10 @@ img {
 }
 
 #cabecera h1 {
-    background: url(../comun/imagenes/logo.gif) no-repeat -5px -10px;
+    background: url("../imgs/logo.gif") no-repeat;
+    background-size: cover;
+    height: 53px;
+    width: 162px;
 }
 
 #cabecera h1 span {
@@ -133,9 +135,10 @@ img {
 }
 
 #menu {
+    width: 100%;
     margin-bottom: .5em;
     border-bottom: 1px solid #004C99;
-    background: url(../comun/imagenes/fondo_menu.gif) repeat-x;
+    background: url(../imgs/fondo_menu.gif) repeat-x;
 }
 
 #contenido {
@@ -181,4 +184,85 @@ img {
     margin-top: 1em;
     border: 1px dashed #C60;
     background: #FFF6CD;
+}
+
+/*MIS ESTILOS*/
+
+body {
+    color: black;
+    font-family: Arial, serif;
+    line-height: 1.4em;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+.articulo h2 {
+    color: #CC6600;
+    font-size: 1.6em;
+    line-height: 1.2em;
+    margin-bottom: .3em;
+}
+
+#menu * {
+    margin-right: 1em;
+}
+
+#menu a {
+    color: white;
+    font-size: 1.3em;
+}
+
+#lateral {
+    font-size: .9em;
+}
+
+#lateral .fecha {
+    color: #999;
+    display: block;
+}
+
+#noticias h3 {
+    color: #003366;
+}
+
+#publicidad {
+    color: #555;
+}
+
+#publicidad a {
+    color: #CC6600;
+}
+
+.articulo a {
+    color: #CC6600;
+}
+
+.articulo p {
+    margin-top: .3em;
+}
+
+#secundario {
+    color: #333;
+    margin-bottom: 1em;
+}
+
+#secundario p {
+    margin: .5em 0;
+}
+
+#secundario h2 {
+    color: white;
+    font-size: 1em;
+}
+
+#pie {
+    color: #999;
+}
+
+#logo {
+    background-position: 0 20px;
+}
+
+#buscador {
+    color: #666;
 }
