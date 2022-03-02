@@ -1,15 +1,19 @@
 ul.menu {
     width: 180px;
-    list-style: none;
     margin: 0;
     padding: 0;
     border: 1px solid #7C7C7C;
+    list-style-type: none;
 }
 
 ul.menu li {
     border-bottom: 1px solid #7C7C7C;
     border-top: 1px solid #FFF;
-    background: #F4F4F4;
+    background: #F4F4F4 url("./../imgs/flecha_inactiva.png") no-repeat 3px center;
+}
+
+ul.menu li:hover {
+    background: #E4E4E4 url("./../imgs/flecha_activa.png") no-repeat 3px center;
 }
 
 ul.menu li a:link, ul.menu li a:visited {

@@ -2,20 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-size: 0;
 }
 
 #galeria {
     width: 500px;
     margin: 0 auto;
-    border: 1px solid green;
 }
 
 #galeria img {
     display: inline;
-    border: 1px solid red;
     padding: .5em;
 
-    margin-right: 2%;
+    margin: 5px 3.33% 5px 0;
 
     width: 30%;
     height: auto;
