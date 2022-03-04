@@ -4,12 +4,51 @@
     box-sizing: border-box;
 }
 
+body {
+    padding: 20px;
+}
+
 table {
     border-collapse: collapse;
     border: 1px solid #333;
+    text-align: center;
+}
+
+table tr * {
+    padding: .5em;
+}
+
+tr.mainHeader * {
+    background-image: url("./../imgs/fondo_gris.gif");
+}
+
+tr.altColor * {
+    background-color: #FFFFCC;
+}
+
+th.headerColumn {
+    background-color: #E6F3FF;
+    text-align: left;
+    padding-left: 18px;
+
+    background-repeat: no-repeat;
+    background-position: 1px center;
+}
+
+th.euro {
+    background-image: url("./../imgs/euro.png");
+}
+
+th.dolar {
+    background-image: url("./../imgs/dolar.png");
+}
+
+th.libra {
+    background-image: url("./../imgs/libra.png");
+}
+
+th.yen {
+    background-image: url("./../imgs/yen.png");
 }
 
 
-table {
-
-}

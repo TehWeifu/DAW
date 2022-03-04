@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cls {
+    clear: both;
+}
+
+#contenedor {
+    width: 750px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    float: left;
+    padding: .5em;
+}
+
+
+input {
+    display: block;
+    height: 30px;
+    margin-top: 15px;
+    width: 75%;
+}
+
+#contenedor ul li {
+    width: 50%;
+    height: auto;
+}
+
+li:hover {
+    background-color: #FF9;
+}
+
+input:hover {
+    cursor: default;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #E6B700;
+}
+
+p.ayuda {
+    display: none;
+}
+
+label.titulo {
+    font-weight: bold;
+}
+
+label.titulo span.requerido {
+    color: red;
+}
+
+input#nombre {
+    width: 50%;
+}
+
+li > div > span {
+    display: block;
+
+}
+
+.liPhone > div > span {
+    float: left;
+    width: 50%;
+}
+
+.liPhone > div > span input {
+    width: 95%;
+}
+
+.liSubmit {
+    border-top: 2px solid grey;
+    width: 100% !important;
+}
+
+.liSubmit input {
+    float: right;
+    width: 100%;
+}
+
+
+.liAddrss input {
+    width: 100%;
+}
+
+.liAddrss > div > span {
+    float: left;
+}
+
+.liAddrss > div > span.spanProvincia {
+    width: 40%;
+}
+
+.liAddrss > div > span.spanProvincia select {
+    width: 95%;
+}
+
+.liAddrss > div > span.spanPais {
+    width: 60%;
+}
+
+.liAddrss > div > span.spanPais select {
+    width: 100%;
+}
+
+.liAddrss > div > span.spanCP {
+    width: 40%;
+}
+
+.liAddrss > div > span.spanCP input {
+    width: 95%;
+}
+
+.liAddrss > div > span.spanMunicipio {
+    width: 60%;
+}
+
+.liAddrss > div > span.spanMunicipio input {
+    width: 100%;
+}
+
+select {
+    height: 30px;
+    margin-top: 15px;
+}
+
+input#alta {
+    width: auto;
+    padding: 5px;
+}
+
+.spanAddress {
+    width: 100%;
+}
