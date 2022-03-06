@@ -12,6 +12,7 @@
     width: 770px;
     margin: 0 auto;
     border: 1px solid red;
+    padding: 2px;
 
     font-family: Verdana, sans-serif;
     color: #192666;
@@ -24,11 +25,13 @@
     height: 100px;
     background: url("./../imgs/cabecera.jpg");
 
-    padding: 20px;
+    padding: 30px;
 }
 
 #cabecera h1 {
     float: left;
+    font-size: 2em;
+    font-weight: 100;
 }
 
 #cabecera h1 a {
@@ -37,7 +40,7 @@
 
 #cabecera #buscador {
     float: right;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #buscador fieldset {
@@ -51,10 +54,10 @@
 /*MENU*/
 
 #menu {
-    background-color: darkblue;
-    width: 98.5%;
-    margin: 0 auto;
-    padding-top: 20px;
+    background-color: midnightblue;
+    padding: 20px 0 0 10px;
+    margin-left: 5px;
+    font-size: .8em;
 }
 
 #menu > ul {
@@ -62,13 +65,136 @@
 }
 
 #menu > ul > li {
-    border: 1px solid red;
     float: left;
-    background: royalblue;
+    background: #253575;
+    margin-right: 5px;
 }
 
 #menu > ul > li a {
     display: block;
+    padding: 10px 20px;
+    color: #B5C4E3;
+    text-decoration: none;
+}
+
+#menu > ul > li:hover a {
+    background-color: #31479B;
+}
+
+#menu > ul > li:active a {
+    background-color: white;
+    color: #FF9900;
+}
+
+
+/*styles for .articulo*/
+
+#principal {
+    width: 530px;
+    float: left;
+}
+
+
+.articulo {
+    background: url("./../imgs/fondo_articulo.jpg") no-repeat;
+    background-size: cover;
+    padding: 20px 0 10px 5px;
+    float: left;
+}
+
+.articulo h2 {
+    background-color: lightsteelblue;
+    color: blue;
+    font-weight: 100;
+    padding: 5px;
+
+    font-size: 1.2em;
+}
+
+.articulo p {
     padding: 10px;
-    color: white;
+    color: darkblue;
+    font-size: .8em;
+}
+
+.articulo .info {
+    color: lightskyblue;
+    text-decoration: none;
+}
+
+.articulo .info a,
+.articulo .info a:visited {
+    text-decoration: underline;
+    color: lightskyblue;
+}
+
+.articulo .info {
+    padding: 10px;
+    border-bottom: 1px solid lightskyblue;
+}
+
+.articulo span {
+    padding-left: 20px;
+}
+
+.fecha {
+    background: url("./../imgs/icono_fecha.gif") 0 center no-repeat;
+}
+
+#secundario {
+    float: left;
+    width: 200px;
+    background: aliceblue url("./../imgs/fondo_columna.gif") no-repeat 0 0;
+    font-size: .75em;
+
+}
+
+#secundario h3 {
+    background-color: lightblue;
+    padding: 10px;
+    margin: 20px 0;
+
+    font-size: 1em;
+}
+
+#secundario h3 a:link,
+#secundario h3 a:visited {
+    color: midnightblue;
+}
+
+#secundario #sobremi {
+    padding: 10px;
+    color: midnightblue;
+}
+
+#secundario #sobremi img {
+    float: left;
+    margin: 5px;
+}
+
+#secundario ul {
+    list-style-position: inside;
+    background-color: white;
+}
+
+#secundario ul li {
+    margin: 1px 0;
+    padding: 5px;
+    list-style-image: url("./../imgs/icono_elemento.gif");
+    float: left;
+
+    width: 100%;
+}
+
+#secundario ul li.seleccionado {
+    list-style-image: url("./../imgs/icono_elemento_seleccionado.gif");
+    background-color: white;
+}
+
+
+#pie {
+    background-image: url("./../imgs/fondo_pie.jpg");
+    text-align: right;
+    font-size: .8em;
+    padding-right: 10px;
 }
