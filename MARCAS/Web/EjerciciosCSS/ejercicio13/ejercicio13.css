@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clear {
+    clear: both;
+}
+
+#contenedor {
+    width: 770px;
+    margin: 0 auto;
+    border: 1px solid red;
+
+    font-family: Verdana, sans-serif;
+    color: #192666;
+    background-image: url("./../imgs/fondo.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#cabecera {
+    height: 100px;
+    background: url("./../imgs/cabecera.jpg");
+
+    padding: 20px;
+}
+
+#cabecera h1 {
+    float: left;
+}
+
+#cabecera h1 a {
+    color: white;
+}
+
+#cabecera #buscador {
+    float: right;
+    margin-top: 20px;
+}
+
+#buscador fieldset {
+    border: none;
+}
+
+#buscador legend {
+    display: none;
+}
+
+/*MENU*/
+
+#menu {
+    background-color: darkblue;
+    width: 98.5%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+#menu > ul {
+    list-style-type: none;
+}
+
+#menu > ul > li {
+    border: 1px solid red;
+    float: left;
+    background: royalblue;
+}
+
+#menu > ul > li a {
+    display: block;
+    padding: 10px;
+    color: white;
+}
