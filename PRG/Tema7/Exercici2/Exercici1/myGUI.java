@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.metal.MetalBorders;
 import java.awt.*;
 
 public class myGUI extends JFrame {
@@ -8,11 +9,10 @@ public class myGUI extends JFrame {
      * Create the frame.
      */
     public myGUI() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 600, 600);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBounds(100, 100, 600, 600);
         JPanel contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
+        this.setContentPane(contentPane);
         contentPane.setLayout(null);
 
 //        Here goes the labels
@@ -43,7 +43,6 @@ public class myGUI extends JFrame {
         textAreaPrice.setFocusable(false);
         textAreaPrice.setBorder(new LineBorder(Color.BLACK));
         contentPane.add(textAreaPrice);
-        System.out.println(textAreaPrice.getAlignmentX());
 
         JTextArea textAreaReturns = new JTextArea();
         textAreaReturns.setBounds(400, 475, 125, 50);
@@ -75,20 +74,24 @@ public class myGUI extends JFrame {
 
         JRadioButton drinkWater = new JRadioButton("Agua", true);
         drinkWater.setBounds(10, 50, 100, 20);
+        drinkWater.putClientProperty("price", "0.80");
         drinkGroup.add(drinkWater);
         contentPane.add(drinkWater);
 
         JRadioButton drinkCoke = new JRadioButton("Coca Cola");
         drinkCoke.setBounds(10, 100, 100, 20);
+        drinkCoke.putClientProperty("price", "1.20");
         drinkGroup.add(drinkCoke);
         contentPane.add(drinkCoke);
 
         JRadioButton drinkAlcohol = new JRadioButton("Güisqui");
         drinkAlcohol.setBounds(10, 150, 100, 20);
+        drinkAlcohol.putClientProperty("price", "3.10");
         drinkGroup.add(drinkAlcohol);
         contentPane.add(drinkAlcohol);
+        // Here begins the button group
 
-        // Action Listeners
+        // Start Event Listeners
         buttonCalculate.addActionListener(actionEvent -> {
             float prodcutPrice = Float.parseFloat(textAreaPrice.getText());
             float userMoney = (float) comboBoxEuros.getSelectedItem() + (float) comboBoxCents.getSelectedItem();
@@ -100,19 +103,12 @@ public class myGUI extends JFrame {
             }
         });
 
-        drinkGroup.getElements().asIterator().forEachRemaining(e -> e.addActionListener(actionEvent -> {
-            switch (e.getText()) {
-                case "Agua":
-                    textAreaPrice.setText("0.80");
-                    break;
-                case "Coca Cola":
-                    textAreaPrice.setText("1.20");
-                    break;
-                case "Güisqui":
-                    textAreaPrice.setText("3.10");
-                    break;
-            }
-        }));
+        drinkGroup.getElements().asIterator().forEachRemaining(btn -> {
+            btn.addActionListener(actionEvent -> {
+                textAreaPrice.setText(btn.getClientProperty("price").toString());
+            });
+        });
+        // End Event Listeners
     }
 
     /**
