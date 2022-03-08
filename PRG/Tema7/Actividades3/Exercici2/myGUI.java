@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class myGUI extends JFrame {
+    JTextField textFieldName;
+
+
     public myGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 300, 300);
@@ -31,7 +34,7 @@ public class myGUI extends JFrame {
         // End Labels
 
         // Start TextFields
-        JTextField textFieldName = new JTextField();
+        textFieldName = new JTextField();
         textFieldName.setBounds(140, 10, 100, 20);
         contentPane.add(textFieldName);
         // End TextFields
@@ -77,6 +80,15 @@ public class myGUI extends JFrame {
         // Start Button EventListener
         buttonSend.addActionListener(actionEvent -> {
             try {
+                validateNameTextField();
+            } catch (myTextFieldException e) {
+                textFieldName.setText("No valido");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                return;
+            }
+
+            try {
                 FileWriter myFile = new FileWriter("./users.txt", true);
                 myFile.write(String.format("%s: %s%n%s: %b%n%s: %b%n%s: %s%n%s: %s%n%n",
                         "Nombre", textFieldName.getText(),
@@ -86,10 +98,24 @@ public class myGUI extends JFrame {
                         "Ciudad", comboBoxCities.getSelectedItem()));
                 myFile.close();
             } catch (IOException e) {
+                System.out.println("Error al intentar escribir en el fichero");
+                System.out.println(e.getMessage());
                 e.printStackTrace();
             }
         });
 
+    }
+
+
+    private void validateNameTextField() throws myTextFieldException {
+        if (textFieldName.getText().length() > 25) {
+            throw new myTextFieldException("El nombre no puede tener mas de 25 caracteres");
+
+        }
+
+        if (textFieldName.getText().matches(".*\\d.*")) {
+            throw new myTextFieldException("El nombre no puede contener numeros");
+        }
     }
 
     public static void main(String[] args) {
