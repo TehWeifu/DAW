@@ -1,0 +1,169 @@
+/*Start table styles*/
+#tablas {
+    padding: .5em;
+    background-color: rosybrown;
+    text-align: center;
+}
+
+#tablas table {
+    border: 3px solid red;
+    cursor: default;
+}
+
+#tablas table td {
+    font-weight: 100;
+}
+
+#tablas table .especial {
+    font-weight: 700;
+}
+
+#tablas table .especial:hover {
+    background-color: white;
+    color: red;
+}
+
+#tablas table img {
+    width: 850px;
+    height: auto;
+}
+
+/*Start table styles*/
+#form {
+    text-align: left;
+    width: 50%;
+    float: left;
+}
+
+#form h2 {
+    margin: .5em 0;
+}
+
+#form .boton {
+    margin: .5em;
+    padding: .1em .5em;
+}
+
+#form .ylosabes {
+    text-align: center;
+    visibility: hidden;
+    margin: .5em;
+}
+
+#form .ylosabes img {
+    width: 200px;
+    height: auto;
+}
+
+#form:hover .ylosabes {
+    visibility: visible;
+}
+
+#form input:focus {
+    border: 1px solid red;
+}
+
+#form input:hover {
+    background-color: black;
+    color: white;
+}
+
+#derecha {
+    margin-top: .2em;
+    width: 50%;
+    float: right;
+}
+
+#derecha p {
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+#derecha ul {
+    list-style-image: url("./../img/FireballCard.png");
+}
+
+#derecha ul li {
+    margin: .2em 0 .2em 3em;
+    font-size: 1.5em;
+    cursor: default;
+
+    position: relative;
+}
+
+#derecha ul li:hover {
+    color: green;
+}
+
+#derecha span {
+    display: none;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 60%;
+    height: 100%;
+
+    background-image: url("./../img/FireballCard.png");
+    background-position: center center;
+    background-repeat: repeat-x;
+}
+
+#derecha li:hover span {
+    display: block;
+}
+
+.textos {
+    line-height: 1.2em;
+}
+
+.textos p {
+    margin: .8em 0;
+}
+
+/*Start pictures on the sides*/
+.cartaayer,
+.ultimacarta {
+    position: absolute;
+    top: 0;
+    border: 1px solid green;
+}
+
+.cartaayer {
+    right: 0;
+}
+
+.ultimacarta {
+    left: 0;
+}
+
+.ultimacarta img {
+    float: left;
+}
+
+.ultimacarta img.abajo,
+.cartaayer img.abajo {
+    display: none;
+}
+
+.ultimacarta:hover img.abajo,
+.cartaayer:hover img.abajo {
+    display: block;
+}
+
+.ultimacarta:hover img.arriba,
+.cartaayer:hover img.arriba {
+    display: none;
+}
+
+.ultimacarta p,
+.cartaayer p {
+    text-align: center;
+    font-weight: 700;
+}
+
+/*End pictures on the sides*/
+

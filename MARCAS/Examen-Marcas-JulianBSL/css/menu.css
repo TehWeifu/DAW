@@ -1,0 +1,112 @@
+
+#header {
+    position: relative;
+}
+
+#menulateral ul {
+    list-style-type: none;
+}
+
+#menulateral {
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-width: 50px;
+    min-height: 50px;
+    background-image: url("./../img/Hamburger_icon.png");
+    background-position: top right;
+    background-repeat: no-repeat;
+}
+
+#mprincipal {
+    display: none;
+    position: relative;
+    top: 53px;
+}
+
+#mprincipal > li > a {
+    padding: 1em 3em;
+}
+
+.submenu {
+    display: none;
+}
+
+#menulateral:hover #mprincipal {
+    display: block;
+}
+
+#menulateral a {
+    text-align: center;
+    text-decoration: none;
+    display: block;
+
+    padding: 1em;
+    background-color: white;
+}
+
+#menulateral li:hover > a {
+    background-color: black;
+    color: white;
+}
+
+#menulateral > ul > li:hover > .submenu {
+    display: block;
+}
+
+.submenu {
+    position: relative
+}
+
+.submenu ul {
+    position: absolute;
+    top: -54px;
+    right: 149px;
+    width: 600px;
+}
+
+.submenu ul li {
+    position: relative;
+
+    float: left;
+    width: 199px;
+    height: 100%;
+    text-align: center;
+}
+
+/*sprite size 146x146*/
+.imagen {
+    display: none;
+    width: 146px;
+    height: 146px;
+
+    position: absolute;
+    top: 50px;
+    left: 20px;
+
+    background-image: url("./../img/sprite-Clash.png");
+}
+
+.submenu li:hover .imagen {
+    display: block;
+}
+
+.barbaros {
+    background-position: 0 0;
+}
+
+.maquina {
+    background-position: -146px 0;
+}
+
+.pekka {
+    background-position: -292px 0;
+}
+
+.bruja {
+    background-position: -438px 0;
+}
+
+.mago {
+    background-position: 146px 0;
+}
