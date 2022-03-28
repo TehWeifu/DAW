@@ -1,0 +1,49 @@
+a[href$=".pdf"] {
+    background-image: url("./imgs/spanish_flag.png");
+    padding-left: 20px;
+    background-repeat: no-repeat;
+}
+
+/*Termina por la siguiente cadena de texto*/
+a[href$=".pdf"] {
+    background-image: url("./imgs/spanish_flag.png");
+    padding-left: 20px;
+    background-repeat: no-repeat;
+}
+
+/*Empieza por la siguiente cadena de texto*/
+a[href^=".pdf"] {
+
+}
+
+/*Contiene la siguiente cadena de texto*/
+a[href*=".pdf"] {
+
+}
+
+/*Estilos al seleccionar un elemento*/
+p::selection {
+    background-color: gold;
+    color: black;
+}
+
+/*Permite elegir a un hijo en concreto*/
+ul li:nth-child(5) {
+    color: rebeccapurple;
+}
+
+/*Elegir los numeros pares (impares con odd)*/
+ul li:nth-child(even) {
+    color: red;
+}
+
+/*Se pueden utilizar formulas matematicas*/
+ul li:nth-child(3n + 1) { /*Sale de 3 en 3 empezando por el primero*/
+    color: green;
+}
+
+div p:nth-of-type(3) {
+    color: green;
+}
+
+
