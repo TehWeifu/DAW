@@ -1,0 +1,156 @@
+<html lang="es">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Pseudoclase...</title>
+        <link rel="stylesheet" href="./selectoresAvanzados.css">
+    </head>
+
+    <body>
+        <h1>Ejemplos nth-child</h1>
+        <p class="limpiar"></p>
+        <div id="pares">
+            <p>Pares</p>
+            <p>Párrafo 1</p>
+            <p>Párrafo 2</p>
+            <p>Párrafo 3</p>
+            <p>Párrafo 4</p>
+            <p>Párrafo 5</p>
+            <p>Párrafo 6</p>
+            <p>Párrafo 7</p>
+            <p>Párrafo 8</p>
+            <p>Párrafo 9</p>
+            <p>Párrafo 10</p>
+        </div>
+
+        <div id="impares">
+            <p>Immpares</p>
+            <p>Párrafo 1</p>
+            <p>Párrafo 2</p>
+            <p>Párrafo 3</p>
+            <p>Párrafo 4</p>
+            <p>Párrafo 5</p>
+            <p>Párrafo 6</p>
+            <p>Párrafo 7</p>
+            <p>Párrafo 8</p>
+            <p>Párrafo 9</p>
+            <p>Párrafo 10</p>
+        </div>
+
+        <div id="quinto">
+            <p>Quinto. No el quinto párrafo</p>
+            <p>Párrafo 1</p>
+            <p>Párrafo 2</p>
+            <p>Párrafo 3</p>
+            <p>Párrafo 4</p>
+            <p>Párrafo 5</p>
+            <p>Párrafo 6</p>
+            <p>Párrafo 7</p>
+            <p>Párrafo 8</p>
+            <p>Párrafo 9</p>
+            <p>Párrafo 10</p>
+        </div>
+
+        <div id="raro">
+            <p>Posiciones 1, 4, 7 y 10</p>
+            <p>Párrafo 1</p>
+            <p>Párrafo 2</p>
+            <p>Párrafo 3</p>
+            <p>Párrafo 4</p>
+            <p>Párrafo 5</p>
+            <p>Párrafo 6</p>
+            <p>Párrafo 7</p>
+            <p>Párrafo 8</p>
+            <p>Párrafo 9</p>
+            <p>Párrafo 10</p>
+        </div>
+
+        <table cellpadding="0" cellspacing="0" border="1" summary="Tabla de actores y años">
+            <caption>Tabla actores</caption>
+            <thead>
+            <tr>
+                <th>Actores</th>
+                <th>Años</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>William Hartnell</th>
+                <td>1963-66</td>
+            </tr>
+            <tr>
+                <th>Patrick Troughton</th>
+                <td>1966-69</td>
+            </tr>
+            <tr>
+                <th>Jon Pertwee</th>
+                <td>1970-74</td>
+            </tr>
+            <tr>
+                <th>Tom Baker</th>
+                <td>1974-81</td>
+            </tr>
+            <tr>
+                <th>Peter Davison</th>
+                <td>1981-84</td>
+            </tr>
+            <tr>
+                <th>Colin Baker</th>
+                <td>1984-86</td>
+            </tr>
+            <tr>
+                <th>Sylvester McCoy</th>
+                <td>1987-89</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p class="limpiar"></p>
+        <h1>Ejemplos only-child</h1>
+        <ul>
+            <li>Blue
+                <ul>
+                    <li>Anekin Skywalker</li>
+                    <li>Luke Skywalker</li>
+                </ul>
+            </li>
+            <li>Green
+                <ul>
+                    <li>Yoda</li>
+                    <li>Luke Skywalker</li>
+                </ul>
+            </li>
+            <li>Purple
+                <ul>
+                    <li>Mace Windu</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h1>Ejemplos only-of-type</h1>
+        <p>Hay que tener varias cosas en la <strong>cabeza</strong> cuando escribes CSS.</p>
+        <p>Primero, conocer las <strong>palabras clave</strong>; y segundo, saber <strong>utilizarlas bien</strong>.</p>
+
+        <h1>Ejemplos enable y checked</h1>
+        <form action="#">
+            <fieldset>
+                <legend>Alimentos disponibles</legend>
+                <label for="chips">
+                    <input type="checkbox" name="patatas" id="chips" />
+                    <span>Patatas</span>
+                </label>
+                <label for="verduras">
+                    <input type="checkbox" name="verduras" id="verduras" />
+                    <span>Verduras</span>
+                </label>
+                <label for="salad">
+                    <input type="checkbox" name="ensalada" disabled="disabled" id="salad" />
+                    <span>Ensalada</span>
+                </label>
+                <label for="pasadas">
+                    <input type="checkbox" name="pasadas" disabled="disabled" id="pasadas" />
+                    <span>Patatas Asadas</span>
+                </label>
+            </fieldset>
+        </form>
+    </body>
+</html>

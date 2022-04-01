@@ -1,0 +1,29 @@
+div[class^="caja"] {
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    position: absolute;
+}
+
+.caja1 {
+    background-color: rgba(178, 187, 234);
+    border-radius: 8px/15px;
+}
+
+.caja2 {
+    top: 50px;
+    left: 50px;
+    background-color: hsla(189, 60%, 45%, 0.4);
+}
+
+.caja3 {
+    top: 25px;
+    left: 75px;
+    background-color: rgba(155, 155, 220, 0.8);
+    border-radius: 20px 5px 50px;
+}
+
+.caja3:hover {
+    background-color: rgba(155, 155, 220, 1);
+}
+

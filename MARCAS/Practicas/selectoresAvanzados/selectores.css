@@ -46,4 +46,25 @@ div p:nth-of-type(3) {
     color: green;
 }
 
+/*solo los hijos unicos, solo elmentos que no tienen hermanos*/
+:only-of-type {
+
+}
+
+/*Cuando un checkbox esta marcado*/
+input:checked + label {
+    color: green;
+}
+
+input:not(checked) + label {
+    color: red;
+}
+
+/*elementos que NO pertenezcan a una clase*/
+h3:not(.daw) {
+    font-size: small;
+}
+
+
+
 

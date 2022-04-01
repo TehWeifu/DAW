@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+.limpiar {
+    clear: both;
+}
+
+div * {
+    margin: 0;
+    padding: 0;
+}
+
+#impares, #pares, #raro, #quinto {
+    width: 19%;
+    float: left;
+    margin: .3em;
+    border: 1px solid #000;
+}
+
+#pares p:nth-child(2n) {
+    background-color: red;
+}
+
+#impares p:nth-child(2n + 1) {
+    background-color: green;
+}
+
+#quinto p:nth-child(5) {
+    background-color: yellow;
+}
+
+#raro p:nth-child(3n + 1) {
+    background-color: yellow;
+}
+
+table {
+    background-color: lightyellow;
+    font-style: italic;
+}
+
+table tr:nth-child(2n + 2) {
+    background-color: lightblue;
+}
+
+ul li:only-child {
+    font-style: italic;
+    color: purple;
+}
+
+p strong:only-of-type {
+    font-style: italic;
+    color: green;
+}
+
+input:checked + span {
+    color: green;
+}
+
+input:disabled + span {
+    color: grey;
+}
+
+fieldset {
+    border: 1px solid #000;
+}
+
