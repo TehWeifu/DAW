@@ -1,0 +1,88 @@
+.firstExercise div {
+    width: 100px;
+    height: 25px;
+    background-color: rgba(0, 0, 255, .2);
+    margin: .5em;
+}
+
+.firstExercise div + div {
+    background-color: rgba(0, 0, 255, .4);
+}
+
+.firstExercise div + div + div {
+    background-color: rgba(0, 0, 255, .6);
+}
+
+.firstExercise div + div + div + div {
+    background-color: rgba(0, 0, 255, 1);
+}
+
+/*Second exercise*/
+
+.secondExercise {
+    padding: .3em;
+    background-color: yellow;
+}
+
+.secondExercise div {
+    width: 100px;
+    height: 25px;
+    border: 3px solid white;
+    background-color: rgba(0, 255, 0, .2);
+    margin: .5em;
+}
+
+.secondExercise div + div {
+    background-color: rgba(0, 255, 0, .4);
+}
+
+.secondExercise div + div + div {
+    background-color: rgba(0, 255, 0, .6);
+}
+
+.secondExercise div + div + div + div {
+    background-color: rgba(0, 255, 0, 1);
+}
+
+/*Third exercise*/
+.thirdExercise {
+    padding: .3em;
+    background: #fff url(./imgs/nieve.gif) 0 0 repeat-x;
+}
+
+.thirdExercise div {
+    width: 100px;
+    height: 25px;
+    border: 3px solid white;
+    background-color: rgba(255, 69, 0, .2);
+    margin: .5em;
+}
+
+.thirdExercise div + div {
+    background-color: rgba(255, 69, 0, .4);
+}
+
+.thirdExercise div + div + div {
+    background-color: rgba(255, 69, 0, .6);
+}
+
+.thirdExercise div + div + div + div {
+    background-color: rgba(255, 69, 0, 1);
+}
+
+/*Fourth exercise*/
+.fourthExercise {
+    padding: .3em;
+    background: #fff url(./imgs/nieve.gif) 0 0 repeat;
+}
+
+.fourthExercise .textogrande {
+    font-size: 6em;
+    color: rgba(255, 0, 0, .3);
+}
+
+.fourthExercise .textogrande + .textogrande {
+    color: rgba(255, 0, 0, .6);
+
+}
+

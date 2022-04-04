@@ -1,0 +1,17 @@
+#contenedor {
+    width: 500px;
+    height: 500px;
+    background-color: cornflowerblue;
+    position: relative;
+}
+
+#texto {
+    width: 300px;
+    height: 200px;
+    background-color: rgba(0, 0, 255, .3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 50%;
+}

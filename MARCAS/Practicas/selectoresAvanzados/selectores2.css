@@ -17,7 +17,7 @@ div[class^="caja"] {
 }
 
 .caja3 {
-    top: 25px;
+    top: 125px;
     left: 75px;
     background-color: rgba(155, 155, 220, 0.8);
     border-radius: 20px 5px 50px;
@@ -27,3 +27,16 @@ div[class^="caja"] {
     background-color: rgba(155, 155, 220, 1);
 }
 
+/*pagina para configurar border images*/
+/*https://border-image.com/*/
+
+/*** Your CSS code ***/
+#myCaja {
+    top: 200px;
+    border-style: solid;
+    border-width: 50px 50px 50px 50px;
+    -moz-border-image: url(./imgs/border-example.jpg) 100 100 100 100 repeat repeat;
+    -webkit-border-image: url(./imgs/border-example.jpg) 100 100 100 100 repeat repeat;
+    -o-border-image: url(./imgs/border-example.jpg) 100 100 100 100 repeat repeat;
+    border-image: url(./imgs/border-example.jpg) 100 100 100 100 repeat repeat;
+}
