@@ -1,0 +1,46 @@
+#estilizado {
+    width: 500px;
+    background-color: lightgoldenrodyellow;
+    border: 2px solid grey;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 1em;
+    box-shadow: 10px 20px 20px rgba(0,0,0, .2);
+}
+
+#estilizado h1 {
+    font-size: 1em;
+
+}
+
+#estilizado p {
+    border-bottom: 1px solid gray;
+    color: gray;
+    font-size: .8em;
+    padding: .2em;
+}
+
+label {
+    font-weight: bold;
+    font-size: .8em;
+    border: 1px solid black;
+    display: block;
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+
+.small {
+    font-size: .8em;
+    font-weight: normal;
+    color: gray;
+}
+
+
+button {
+    color: white;
+    font-weight: 600;
+    background-color: gray;
+    padding: .5em 3.5em;
+    margin-left: 35%;
+}

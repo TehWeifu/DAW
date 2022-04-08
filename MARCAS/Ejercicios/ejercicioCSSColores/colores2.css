@@ -3,9 +3,11 @@
     height: 500px;
     background-color: cornflowerblue;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
-#texto {
+#capa1 {
     width: 300px;
     height: 200px;
     background-color: rgba(0, 0, 255, .3);
@@ -13,5 +15,5 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    top: 50%;
+    left: 50%;
 }

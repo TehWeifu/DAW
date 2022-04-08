@@ -1,0 +1,67 @@
+.limpiar {
+    clear: both;
+}
+
+#recuadro1, #recuadro2, #recuadro10, #recuadro20 {
+    float: left;
+    width: 200px;
+    margin: 1em;
+    padding: .5em;
+    border-radius: 15px;
+}
+
+#recuadro1, #recuadro10 {
+    background-color: #ccc;
+}
+
+#recuadro2, #recuadro20 {
+    background-color: yellowgreen;
+}
+
+#recuadro10 {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#recuadro2 {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+ul {
+    list-style-type: none
+}
+
+ul li {
+    float: left;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    padding: .5em;
+    margin: .2em;
+    border-radius: 5px;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellowgreen;
+}
+
+.cyan {
+    background-color: cyan;
+}
+
+.blue {
+    background-color: blue;
+}
