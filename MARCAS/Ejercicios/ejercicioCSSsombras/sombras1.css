@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1em;
+}
+
+#cajasombra {
+    padding: .5em;
+    background-color: lightgray;
+    box-shadow: 5px 5px black;
+    display: inline;
+}
+
+#cajanegra {
+    background-color: black;
+    padding: 1em;
+}
+
+#cajanegra #sombraclara {
+    width: 300px;
+    padding: .5em;
+    color: white;
+    background-color: gray;
+    box-shadow: 2px 2px white;
+}
+
+#sombraredondeada {
+    padding: 1em;
+    color: white;
+    width: 600px;
+    background-color: green;
+    border-radius: 10px;
+    box-shadow: 15px -15px 3px black;
+}
+
+#resplandor {
+    background-color: black;
+    padding: 4em;
+}
+
+#resplandorblanco, #resplandorverde {
+    width: 200px;
+    color: white;
+    padding: .5em;
+    margin: 3em;
+}
+
+#resplandorblanco {
+    border: 1px solid white;
+    box-shadow: 0 0 15px white;
+}
+
+#resplandorverde {
+    border: 1px solid greenyellow;
+    box-shadow: 0 0 15px greenyellow;
+}
+
+#resplandor p {
+    color: white;
+}
+
+.cajasimple {
+    float: left;
+    width: 200px;
+    height: 75px;
+    border: 1px solid #000;
+    margin: 1em;
+}
+
+.sombrasimple {
+    box-shadow: 10px 10px 0 blue;
+}
+
+.sombrainterna {
+    box-shadow: inset 2px 2px 5px black;
+}
+
+.sombramultiple {
+    box-shadow: 10px 10px 10px yellow,
+    -10px 10px 10px limegreen,
+    -10px -10px 10px blue,
+    10px -10px 10px red;
+}
+
+.sombraopaca {
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, .5);
+}
+
+.sombraintext {
+    box-shadow: inset 2px 2px 5px black, 2px 2px 5px black;
+}
