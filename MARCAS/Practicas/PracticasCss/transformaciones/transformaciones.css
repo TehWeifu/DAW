@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div {
+    margin: 2em auto;
+}
+
+#container {
+    border: 1px solid blue;
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.myBox {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: red;
+    transform: rotate(0deg);
+    transition: transform 1s linear .5s;
+}
+
+.myBox:hover {
+    transform: rotate(45deg);
+}
+
+.myOtherBox {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: blue;
+    /*Skew: primera propiedad para la derecha y la segunda para arriba*/
+    transform: skew(0, 25deg);
+    transition: transform 1s linear .5s;
+}
+
+.myOtherBox:hover {
+    transform: skew(0, -40deg);
+}
+
+.myThirdDiv {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: orange;
+    transform: scale(1);
+    transition: transform 1s linear .5s;
+}
+
+.myThirdDiv:hover {
+    transform: scale(2);
+}
+
+.myFourthDiv {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: pink;
+    transition: transform 1s linear .5s;
+}
+
+.myFourthDiv:hover {
+    transform: translate(100px,0px);
+}
+
+.myFifthDiv {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: green;
+    transition: background-color 2s steps(5) .5s;
+}
+
+.myFifthDiv:hover {
+    background-color: red;
+}
+
