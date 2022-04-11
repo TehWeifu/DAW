@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 2em;
+}
+
+.limpiar {
+    clear: both;
+}
+
+#recuadro1, #recuadro2, #recuadro3 {
+    background-color: #ccc;
+    float: left;
+    margin: 3em;
+    padding: 1em;
+    width: 220px;
+    border-radius: 15px;
+}
+
+h3 {
+    margin: .5em 0;
+}
+
+#recuadro1 {
+    box-shadow: 25px 25px 10px lime, -25px -25px 10px red;
+}
+
+#recuadro2 {
+    box-shadow: 0 0 15px yellow, inset 0 0 15px red;
+}
+
+#recuadro3 {
+    box-shadow: 25px 25px 15px rgba(255, 0, 0, .4);
+}
+
+#titulo1 {
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, .3);
+}
+
+#titulo2 {
+    text-shadow: -3px -3px 2px rgba(0, 0, 0, .3);
+}
+
+#titulo3 {
+    text-shadow: 2px 2px 1px rgba(255, 0, 0, .6),
+    4px 4px 1px rgba(0, 255, 0, .6),
+    6px 6px 1px rgba(0, 0, 255, .6);
+}
