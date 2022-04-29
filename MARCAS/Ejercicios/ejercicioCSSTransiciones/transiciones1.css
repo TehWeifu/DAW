@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1em;
+}
+
+img {
+    transition: all 1s ease-in-out;
+}
+
+.ex1 img {
+    margin: 1em;
+}
+
+.ex1 img:hover {
+    transform: translateY(-20px);
+}
+
+#containerEx2 {
+    width: 100%;
+}
+
+#ex2 {
+    width: 400px;
+    margin: 0 auto;
+}
+
+#ex2 img {
+    display: block;
+    margin: .5em;
+}
+
+#ex2 img:hover {
+    transform: scale(.8);
+}
+
+#ex3 p {
+    display: inline;
+    vertical-align: top;
+    color: grey;
+    font-size: 2em;
+    padding: 1em;
+    position: relative;
+    top: 30px;
+    font-weight: bold;
+    cursor: default;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#ex3 img:hover + p {
+    opacity: 1;
+}
+
+#containerEx4 {
+    width: 750px;
+    padding: 1em;
+    background-color: grey;
+}
+
+#ex4 img {
+    margin: 1em;
+}
+
+#ex4 img:nth-child(2) {
+    width: 150px;
+    height: auto;
+}
+
+#ex4 img:nth-child(3) {
+    width: 150px;
+    height: auto;
+}
+
+#ex4 img:nth-child(4) {
+    width: 150px;
+    height: auto;
+}
+
+#ex4 img:nth-child(6) {
+    width: 150px;
+    height: auto;
+}
+
+#ex4 img:nth-child(1):hover {
+    rotate: -20deg;
+}
+
+#ex4 img:nth-child(5):hover {
+    rotate: -20deg;
+}
+
+#containerEx5 {
+    margin: 2em 0;
+    width: 700px;
+    padding: 1em;
+    background-color: grey;
+}
+
+#containerEx5 img {
+    border: 10px solid #ccc;
+    margin: 1em;
+}
+
+#containerEx5 img:hover {
+    box-shadow: white 0 0 20px;
+}

@@ -1,0 +1,152 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: grey;
+    float: left;
+    margin: 1em;
+    padding: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8em;
+    transition: all 1s ease-in-out;
+}
+
+.uno:hover {
+    background-color: black;
+}
+
+.dos:hover {
+    border-radius: 30px;
+}
+
+.tres:hover {
+    border-radius: 50%;
+}
+
+.cuatro:hover {
+    border: 30px solid red;
+}
+
+.cinco:hover {
+    box-shadow: black 10px 10px 20px;
+}
+
+.seis:hover {
+    color: white;
+    background-color: black;
+    box-shadow: inset rgba(255, 255, 255, .3) 10px 10px 50px;
+}
+
+.siete:hover {
+    box-shadow: rgba(255, 0, 0) 10px 10px 20px;
+}
+
+.ocho:hover {
+    color: white;
+}
+
+.nueve:hover {
+    font-size: 5em;
+}
+
+.diez:hover {
+    height: 20px;
+}
+
+.once:hover {
+    letter-spacing: 30px;
+}
+
+.doce:hover {
+    outline: 10px dashed red;
+}
+
+.trece:hover {
+    padding: 10em;
+}
+
+.catorce:hover {
+    text-indent: 20px;
+}
+
+.quince:hover {
+    text-shadow: rgba(0, 0, 0, 0.3) 20px 20px 5px;
+}
+
+.dieciseis:hover {
+    text-shadow: rgba(255, 255, 255, 1) 0 0 10px;
+}
+
+.diecisiete:hover {
+    text-shadow: yellow -10px -10px 0;
+}
+
+.dieciocho:hover {
+    position: relative;
+    top: 50px;
+}
+
+.diecinueve:hover {
+    width: 50px;
+}
+
+.veinte:hover {
+    transform: rotate(45deg);
+}
+
+.veintiuno:hover {
+    transform: scale(2);
+}
+
+.veintidos:hover {
+    transform: skew(20deg);
+}
+
+.veintitres:hover {
+    display: none;
+}
+
+.veinticuatro:hover {
+    display: none;
+}
+
+.veinticinco:hover {
+    transform: rotateY(360deg);
+}
+
+.veintiseis:hover {
+    transform: rotateX(360deg);
+}
+
+.veintisiete:hover {
+    transform: rotateX(180deg) scale(1.5);
+}
+
+.veintiocho:hover {
+    transform: scale(.1);
+}
+
+.veintinueve:hover {
+    transform: rotate(90deg);
+}
+
+.treinta:hover {
+    transform: rotateY(180deg);
+}
+
