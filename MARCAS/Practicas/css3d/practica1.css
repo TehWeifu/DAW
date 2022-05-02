@@ -1,0 +1,54 @@
+#container {
+    width: 1024px;
+    margin: 0 auto;
+    border: 1px solid blue;
+}
+
+/*Al utilizar elementos 3d se debe utilizar la perspectiva del padre*/
+/*El foco de la persectiva se situara en el centro del div*/
+/*Para que todos los objetivos tengan la misma perspectiva hay que envolver el objeto individualmente*/
+/*La perspectiva debe estar entre 500px y 100px*/
+#espacio3d {
+    border: 10px solid black;
+    width: 1000px;
+    height: 400px;
+    perspective: 700px;
+}
+
+.caja1 {
+    float: left;
+    width: 100px;
+    height: 100%;
+    background-color: #50c878;
+    transform: rotateY(65deg);
+}
+
+.clr {
+    clear: both;
+}
+
+#container2 {
+    width: 1024px;
+    margin: 2em auto;
+    border: 1px solid blue;
+}
+
+#espacio3d2 {
+    border: 10px solid black;
+    width: 1000px;
+    height: 400px;
+}
+
+.obv {
+    float: left;
+    height: 100%;
+    perspective: 200px;
+}
+
+#espacio3d2 .caja2 {
+    width: 100px;
+    height: 100%;
+    background-color: indianred;
+    transform: rotateY(45deg);
+
+}
