@@ -1,0 +1,62 @@
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid blue;
+    margin-top: 200px;
+}
+
+.espacio3d {
+    width: 1150px;
+    margin: 0 auto;
+    border: 1px solid red;
+    height: 400px;
+    perspective: 700px;
+    perspective-origin: 50% 50%;
+}
+
+.card {
+    width: 250px;
+    height: 400px;
+    transition: 2s ease-in-out;
+    transform-style: preserve-3d;
+    transform: rotatey(0deg);
+    margin: .5em;
+    padding: .5em;
+
+    position: relative;
+    float: left;
+}
+
+.card:hover {
+    transform: rotateY(180deg);
+    transition: 2s ease-in-out;
+}
+
+
+.pregunta {
+    width: 250px;
+    margin: 0 auto;
+    border: 1px solid green;
+    background-color: pink;
+    height: 400px;
+    backface-visibility: hidden;
+    transform: rotatey(0deg);
+    position: absolute;
+    font-size: 2em;
+}
+
+.respuesta {
+    width: 250px;
+    height: 400px;
+    margin: 0 auto;
+    border: 1px solid lightcoral;
+    background-color: #CC3300;
+    transform: rotateY(180deg);
+
+    position: absolute;
+}
+
+img {
+    width: 250px;
+    height: 400px;
+}
