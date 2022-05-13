@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .container {
     width: 1024px;
     margin: 350px auto;
@@ -29,7 +35,7 @@
     height: 300px;
     margin: 0 auto;
     border: 1px solid red;
-perspective: 700px;
+    perspective: 700px;
 }
 
 .cubo {
@@ -70,7 +76,6 @@ perspective: 700px;
 
 .cubo:hover {
     transform: rotateX(360deg);
-    transform-origin: center center;
 }
 
 img {

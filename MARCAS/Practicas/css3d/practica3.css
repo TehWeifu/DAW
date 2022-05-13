@@ -1,13 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .container {
     width: 1024px;
-    margin: 0 auto;
+    margin: 200px auto;
     border: 1px solid #000;
-    margin-top: 150px;
 }
 
 .espacio3d {
     width: 400px;
     height: 400px;
+
     margin: 0 auto;
     border: 1px solid red;
 
@@ -15,8 +21,12 @@
 }
 
 .cubo {
+    width: 400px;
+    height: 400px;
+
     transform-style: preserve-3d;
     transition: transform 3s linear;
+    position: relative;
 }
 
 .cubo div {
@@ -66,5 +76,5 @@
 }
 
 .cubo:hover {
-    transform: rotateY(360deg);
+    transform: rotateX(360deg);
 }

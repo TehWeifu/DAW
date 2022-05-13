@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    width: 1024px;
+    height: 400px;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.cuadrado {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+}
+
+.cuadrado:hover {
+    animation: moverCuadrado 2s;
+}
+
+@keyframes moverCuadrado {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 924px;
+    }
+}
