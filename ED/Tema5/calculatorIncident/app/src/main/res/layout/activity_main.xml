@@ -11,20 +11,70 @@
         android:id="@+id/textResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:editable="false"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="none"
+        android:maxLines="1"
         android:minHeight="48dp"
         android:textAlignment="textEnd"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="20dp" />
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="20dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/opClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:minWidth="48dp"
+                android:text="C"
+                android:textColor="#e50000"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/op4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:minWidth="48dp"
+                android:text="/"
+                android:textColor="#008f39"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/op5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:minWidth="48dp"
+                android:text="^"
+                android:textColor="#008f39"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/op9999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:minWidth="48dp"
+                android:textSize="30sp" />
+
+        </TableRow>
+
 
         <TableRow
             android:layout_width="match_parent"
@@ -65,6 +115,7 @@
                 android:layout_margin="10sp"
                 android:minWidth="48dp"
                 android:text="+"
+                android:textColor="#008f39"
                 android:textSize="30sp" />
 
         </TableRow>
@@ -108,6 +159,7 @@
                 android:layout_margin="10sp"
                 android:minWidth="48dp"
                 android:text="-"
+                android:textColor="#008f39"
                 android:textSize="30sp" />
 
         </TableRow>
@@ -151,6 +203,7 @@
                 android:layout_margin="10sp"
                 android:minWidth="48dp"
                 android:text="*"
+                android:textColor="#008f39"
                 android:textSize="30sp" />
 
         </TableRow>
@@ -180,7 +233,7 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/op4"
+                android:id="@+id/opPoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
@@ -194,6 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
+                android:backgroundTint="#008f39"
                 android:minWidth="48dp"
                 android:text="="
                 android:textSize="30sp" />
