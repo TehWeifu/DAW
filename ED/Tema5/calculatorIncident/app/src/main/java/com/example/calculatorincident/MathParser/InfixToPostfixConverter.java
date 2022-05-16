@@ -3,12 +3,14 @@ package com.example.calculatorincident.MathParser;
 import java.util.Scanner;
 
 public class InfixToPostfixConverter {
-    public static StringBuffer convertToPostfix(final StringBuffer infix) {
+    public static StringBuffer convertToPostfix(StringBuffer infix) {
         StringBuffer postfix = new StringBuffer();
 
         StringBuilder tmpNum = new StringBuilder();
 
         Stack<Character> stack = new Stack<>();
+
+        infix = new StringBuffer(infix.toString().replaceAll("([+\\-*/^])", " $1 "));
 
         stack.push('(');
         infix.append(')');

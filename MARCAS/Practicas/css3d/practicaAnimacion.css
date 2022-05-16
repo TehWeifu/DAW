@@ -9,25 +9,243 @@
     height: 400px;
     margin: 0 auto;
     border: 1px solid #000;
-}
 
-.cuadrado {
-    width: 100px;
-    height: 100px;
-    background-color: red;
     position: relative;
 }
 
-.cuadrado:hover {
-    animation: moverCuadrado 2s;
+.contenedor div {
+    width: 100px;
+    height: 100px;
+    position: absolute;
 }
 
-@keyframes moverCuadrado {
+.contenedor div:nth-child(1) {
+    top: 0;
+    left: 0;
+
+    background-color: red;
+    animation: moverCuadrado1 16s linear infinite;
+}
+
+.contenedor div:nth-child(2) {
+    top: 0;
+    left: 924px;
+
+    background-color: blue;
+    animation: moverCuadrado2 16s linear infinite;
+}
+
+.contenedor div:nth-child(3) {
+    top: 300px;
+    left: 924px;
+
+    background-color: green;
+    animation: moverCuadrado3 16s linear infinite;
+}
+
+.contenedor div:nth-child(4) {
+    top: 300px;
+    left: 0;
+
+    background-color: hotpink;
+    animation: moverCuadrado4 16s linear infinite;
+}
+
+@keyframes moverCuadrado1 {
     0% {
         left: 0;
+        top: 0;
+    }
+
+    6.25% {
+        left: 924px;
+        top: 0;
+    }
+
+    25% {
+        left: 924px;
+        top: 0;
+    }
+
+    31.25% {
+        left: 924px;
+        top: 300px;
+    }
+
+    50% {
+        left: 924px;
+        top: 300px;
+    }
+
+    56.25% {
+        left: 0;
+        top: 300px;
+    }
+
+    75% {
+        left: 0;
+        top: 300px;
+    }
+
+    81.25% {
+        left: 0;
+        top: 0;
+    }
+
+    100% {
+        left: 0;
+        top: 0;
+    }
+}
+
+@keyframes moverCuadrado2 {
+    0% {
+        left: 924px;
+        top: 0;
+    }
+
+    6.25% {
+        left: 924px;
+        top: 0;
+    }
+
+    12.5% {
+        left: 924px;
+        top: 300px;
+    }
+
+
+    31.25% {
+        left: 924px;
+        top: 300px;
+    }
+
+    37.5% {
+        left: 0;
+        top: 300px;
+    }
+
+    56.25% {
+        left: 0;
+        top: 300px;
+    }
+
+    62.5% {
+        left: 0;
+        top: 0;
+    }
+
+    81.25% {
+        left: 0;
+        top: 0;
+    }
+
+    87.5% {
+        left: 924px;
+        top: 0;
     }
 
     100% {
         left: 924px;
+        top: 0;
+    }
+}
+
+@keyframes moverCuadrado3 {
+    0% {
+        left: 924px;
+        top: 300px;
+    }
+
+    12.5% {
+        left: 924px;
+        top: 300px;
+    }
+
+    18.5% {
+        left: 0;
+        top: 300px;
+    }
+
+    37% {
+        left: 0;
+        top: 300px;
+    }
+
+    43.25% {
+        left: 0;
+        top: 0;
+    }
+
+    62% {
+        left: 0;
+        top: 0;
+    }
+
+    68.25% {
+        left: 924px;
+        top: 0;
+    }
+
+    87% {
+        left: 924px;
+        top: 0;
+    }
+
+    93.25% {
+        left: 924px;
+        top: 300px;
+    }
+
+    100% {
+        left: 924px;
+        top: 300px;
+    }
+}
+
+@keyframes moverCuadrado4 {
+    0% {
+        left: 0;
+        top: 300px;
+    }
+
+    18.75% {
+        left: 0;
+        top: 300px;
+    }
+
+    25% {
+        left: 0;
+        top: 0;
+    }
+
+    43.75% {
+        left: 0;
+        top: 0;
+    }
+
+    50% {
+        left: 924px;
+        top: 0;
+    }
+
+    68.75% {
+        left: 924px;
+        top: 0;
+    }
+
+    75% {
+        left: 924px;
+        top: 300px;
+    }
+
+    93.75% {
+        left: 924px;
+        top: 300px;
+    }
+
+    100% {
+        left: 0;
+        top: 300px;
     }
 }
