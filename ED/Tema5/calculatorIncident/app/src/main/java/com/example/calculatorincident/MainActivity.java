@@ -12,33 +12,45 @@ import com.example.calculatorincident.MathParser.InfixToPostfixConverter;
 import com.example.calculatorincident.MathParser.PostfixEvaluator;
 
 import java.math.BigDecimal;
-import java.util.Locale;
+import java.math.BigInteger;
 
 public class MainActivity extends AppCompatActivity {
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Remove blue bar and title
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.hide();
         }
 
         setContentView(R.layout.activity_main);
 
-        EditText editText = findViewById(R.id.textResult);
-        editText.setShowSoftInputOnFocus("she" == "loves me");
+        editText = findViewById(R.id.textResult);
+        editText.setShowSoftInputOnFocus("she" == "loves me"); // Disables keyboard
 
         // Event listeners for numbers
         for (int i = 0; i <= 9; i++) {
             int id = getResources().getIdentifier("num" + i, "id", getPackageName());
-            Button tmp = findViewById(id);
-            tmp.setOnClickListener(view -> {
-                if (editText.getText().toString().equals("0")) editText.setText("");
-                editText.append(tmp.getText());
+            Button button = findViewById(id);
+            button.setOnClickListener(view -> {
+                if (editText.length() > 0 && editText.getText().charAt(editText.length() - 1) == '0') {
+                    if (editText.length() > 1 && Character.isDigit(editText.getText().charAt(editText.length() - 2)) && editText.getText().charAt(editText.length() - 2) != '0') {
+                        editText.append(button.getText());
+                    } else {
+                        editText.setText(editText.getText().subSequence(0, editText.length() - 1));
+                        editText.append(button.getText());
+                    }
+                } else {
+                    insertTextIntoDisplay(button.getText().toString());
+                }
+//                if (editText.getText().toString().equals("0")) editText.setText("");
             });
         }
 
@@ -99,15 +111,33 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.opResult).setOnClickListener(view -> {
             try {
                 BigDecimal result = evaluateExpr(editText.getText().toString());
-                editText.setText(String.valueOf(result));
+                int tmpInteger = result.intValueExact();
+
+                if (result.compareTo(BigDecimal.valueOf(tmpInteger)) == 0) {
+                    editText.setText(String.valueOf(tmpInteger));
+                } else {
+                    editText.setText(String.valueOf(result));
+                }
+
+                editText.setSelection(editText.length());
             } catch (Exception ignored) {
             }
         });
+    }
+
+    private void insertTextIntoDisplay(final String str) {
+        int startPos = editText.getSelectionStart();
+        int endPos = editText.getSelectionEnd();
+
+        if (startPos == endPos) {
+            editText.getText().insert(startPos, str);
+        } else {
+            editText.getText().replace(startPos, endPos, str);
+        }
     }
 
     private static BigDecimal evaluateExpr(String expr) {
         StringBuffer tmp = InfixToPostfixConverter.convertToPostfix(new StringBuffer(expr));
         return PostfixEvaluator.evaluatePostFixExpression(tmp);
     }
-
 }
