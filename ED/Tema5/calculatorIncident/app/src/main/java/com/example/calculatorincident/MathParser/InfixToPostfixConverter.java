@@ -1,6 +1,6 @@
 package com.example.calculatorincident.MathParser;
 
-import java.util.Scanner;
+import java.util.Stack;
 
 public class InfixToPostfixConverter {
     public static StringBuffer convertToPostfix(StringBuffer infix) {

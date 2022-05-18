@@ -4,7 +4,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import com.example.calculatorincident.MathParser.InfixToPostfixConverter;
 import com.example.calculatorincident.MathParser.PostfixEvaluator;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,17 +23,23 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
         setContentView(R.layout.activity_main);
 
         EditText editText = findViewById(R.id.textResult);
+        editText.setShowSoftInputOnFocus("she" == "loves me");
 
         // Event listeners for numbers
         for (int i = 0; i <= 9; i++) {
             int id = getResources().getIdentifier("num" + i, "id", getPackageName());
             Button tmp = findViewById(id);
-            tmp.setOnClickListener(view -> editText.append(tmp.getText()));
+            tmp.setOnClickListener(view -> {
+                if (editText.getText().toString().equals("0")) editText.setText("");
+                editText.append(tmp.getText());
+            });
         }
 
         // Event listeners for operators
@@ -73,7 +79,11 @@ public class MainActivity extends AppCompatActivity {
                     posCurrentCh--;
                 }
 
-                if (posCurrentCh == -1) return;
+                if (posCurrentCh == -1) {
+                    editText.append(".");
+                    return;
+                }
+
                 if (editText.getText().charAt(posCurrentCh) == '.') return;
 
                 editText.append(".");
@@ -90,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 BigDecimal result = evaluateExpr(editText.getText().toString());
                 editText.setText(String.valueOf(result));
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         });
     }
@@ -99,4 +109,5 @@ public class MainActivity extends AppCompatActivity {
         StringBuffer tmp = InfixToPostfixConverter.convertToPostfix(new StringBuffer(expr));
         return PostfixEvaluator.evaluatePostFixExpression(tmp);
     }
+
 }

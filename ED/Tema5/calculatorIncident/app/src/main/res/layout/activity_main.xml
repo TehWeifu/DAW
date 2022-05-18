@@ -13,11 +13,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:editable="false"
         android:ems="10"
-        android:inputType="none"
+        android:inputType="none|text"
         android:maxLines="1"
         android:minHeight="48dp"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
         android:textAlignment="textEnd"
+        android:textIsSelectable="true"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +54,7 @@
                 android:textSize="40sp" />
 
             <Button
-                android:id="@+id/op4"
+                android:id="@+id/op99999999"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15sp"
@@ -58,7 +62,6 @@
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
-                android:text="/"
                 android:textColor="#008f39"
                 android:textSize="40sp" />
 
@@ -76,7 +79,7 @@
                 android:textSize="40sp" />
 
             <Button
-                android:id="@+id/op9999"
+                android:id="@+id/op4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15sp"
@@ -84,6 +87,8 @@
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
+                android:text="/"
+                android:textColor="#008f39"
                 android:textSize="40sp" />
 
         </TableRow>
@@ -104,6 +109,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="7"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -116,6 +122,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="8"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -128,6 +135,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="9"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -139,7 +147,7 @@
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
-                android:text="+"
+                android:text="*"
                 android:textColor="#008f39"
                 android:textSize="40sp" />
 
@@ -160,6 +168,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="4"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -172,6 +181,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="5"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -184,6 +194,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="6"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -216,6 +227,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="1"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -228,6 +240,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="2"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -240,6 +253,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="3"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
@@ -251,7 +265,7 @@
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
-                android:text="*"
+                android:text="+"
                 android:textColor="#008f39"
                 android:textSize="40sp" />
 
@@ -285,6 +299,7 @@
                 android:layout_marginBottom="5sp"
                 android:minWidth="48dp"
                 android:text="0"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <Button
