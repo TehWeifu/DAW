@@ -33,74 +33,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editText = findViewById(R.id.textResult);
-        editText.setShowSoftInputOnFocus("she" == "loves me"); // Disables keyboard
+        editText.setShowSoftInputOnFocus(false); // Disables keyboard
 
-        // Event listeners for numbers
-        for (int i = 0; i <= 9; i++) {
-            int id = getResources().getIdentifier("num" + i, "id", getPackageName());
+        // Event listeners for numbers, operators and the dot
+        for (int i = 0; i <= 15; i++) {
+            int id = getResources().getIdentifier("btn" + i, "id", getPackageName());
             Button button = findViewById(id);
-            button.setOnClickListener(view -> {
-                if (editText.length() > 0 && editText.getText().charAt(editText.length() - 1) == '0') {
-                    if (editText.length() > 1 && Character.isDigit(editText.getText().charAt(editText.length() - 2)) && editText.getText().charAt(editText.length() - 2) != '0') {
-                        editText.append(button.getText());
-                    } else {
-                        editText.setText(editText.getText().subSequence(0, editText.length() - 1));
-                        editText.append(button.getText());
-                    }
-                } else {
-                    insertTextIntoDisplay(button.getText().toString());
-                }
-//                if (editText.getText().toString().equals("0")) editText.setText("");
-            });
-        }
-
-        // Event listeners for operators
-        for (int i = 1; i <= 5; i++) {
-            int id = getResources().getIdentifier("op" + i, "id", getPackageName());
-            Button tmp = findViewById(id);
-            tmp.setOnClickListener(view -> {
-                if (editText.length() > 0 && Character.isDigit(editText.getText().charAt(editText.length() - 1))) {
-                    editText.append(tmp.getText());
-                    return;
-                }
-                if (editText.length() > 0 && editText.getText().charAt(editText.length() - 1) == '.') {
-                    editText.setText(editText.getText().subSequence(0, editText.length() - 1));
-                    editText.append(tmp.getText());
-                }
-            });
+            button.setOnClickListener(view -> insertTextIntoDisplay(button.getText().toString()));
         }
 
         // Event listener for Backspace
         findViewById(R.id.opBack).setOnClickListener(view -> {
-            if (!editText.getText().toString().isEmpty())
-                editText.setText(editText.getText().subSequence(0, editText.length() - 1));
-        });
+            if (editText.getSelectionStart() == editText.getSelectionEnd()) {
+                if (editText.getSelectionEnd() != 0) {
+                    int currentCursorPosition = editText.getSelectionStart();
 
-        // Event listener for Point
-        findViewById(R.id.opPoint).setOnClickListener(view -> {
-            if (editText.length() == 0) {
-                editText.setText("0.");
-                return;
-            }
+                    editText.setText(String.format("%s%s",
+                            editText.getText().subSequence(0, editText.getSelectionStart() - 1),
+                            editText.getText().subSequence(editText.getSelectionStart(), editText.length())
+                    ));
 
-            char lastCh = editText.getText().charAt(editText.length() - 1);
-            if (lastCh == '.') return;
-            if (Character.isDigit(lastCh)) {
-                int posCurrentCh = editText.length() - 1;
-                while (posCurrentCh >= 0 && Character.isDigit(editText.getText().toString().charAt(posCurrentCh))) {
-                    posCurrentCh--;
+                    editText.setSelection(currentCursorPosition - 1);
                 }
-
-                if (posCurrentCh == -1) {
-                    editText.append(".");
-                    return;
-                }
-
-                if (editText.getText().charAt(posCurrentCh) == '.') return;
-
-                editText.append(".");
             } else {
-                editText.append("0.");
+                insertTextIntoDisplay("");
             }
         });
 

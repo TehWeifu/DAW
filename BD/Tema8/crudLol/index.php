@@ -10,11 +10,13 @@
 <body>
 <h1>CRUD LoL - Index</h1>
 <ul>
-    <li><a href="#">Campeones</a></li>
+    <li><a href="./campeones.php">Campeones</a></li>
     <li><a href="./jugadores.php">Jugadores</a></li>
-    <li><a href="#">Habilidades</a></li>
-    <li><a href="#">Tienen</a></li>
+    <li><a href="./habilidades.php">Habilidades</a></li>
+    <li><a href="./tienen.php">Campeones por Jugador</a></li>
 </ul>
+
+<p>Me gustan los porros</p>
 
 </body>
 </html>

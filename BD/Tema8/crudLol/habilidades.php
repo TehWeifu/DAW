@@ -2,16 +2,15 @@
 <html lang="en">
 
 <?php
-
 require_once './FormHelper.php';
 require_once './connexion.php';
 
-FormHelper::printHeader("Jugadores", ["./styles.css"]);
+FormHelper::printHeader("Habilidades", ["./styles.css"]);
 
 print "<body>";
 
 FormHelper::printMenu();
-print  "<h1>Campeones Por Jugadores</h1>";
+print  "<h1>Campeones</h1>";
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET')
 {
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $idx = $_GET['idx'];
 
-        $sql = "DELETE FROM Jugador WHERE id = :idx";
+        $sql = "DELETE FROM Habilidad WHERE id = :idx";
         $stmt = $connexion->prepare($sql);
         $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
         $stmt->execute();
@@ -32,30 +31,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $data = [
             'name' => $_POST['name'],
-            'league' => $_POST['league'],
-            'points' => $_POST['points'],
-            'coins' => $_POST['coins'],
+            'energy' => $_POST['energy'],
+            'cooldown' => $_POST['cooldown'],
+            'champ_id' => $_POST['champ_id'],
             'idx' => $_POST['idx']
         ];
 
-        $sql = "UPDATE Jugador SET nombre=:name, liga=:league, puntosLiga=:points, monedas=:coins WHERE id=:idx";
+        $sql = "UPDATE Habilidad SET nombre=:name, puntosEnergia=:energy, enfriamiento=:cooldown, campeon=:champ_id WHERE id=:idx";
         $stmt = $connexion->prepare($sql);
         $stmt->execute($data);
 
     } else
     {
         $name = $_POST['name'];
-        $league = $_POST['league'];
-        $points = $_POST['points'];
-        $coins = $_POST['coins'];
+        $energy = $_POST['energy'];
+        $cooldown = $_POST['cooldown'];
+        $champ_id = $_POST['champ_id'];
 
-        $sql = "INSERT INTO Jugador (nombre, liga, puntosLiga,monedas) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO Habilidad (nombre, puntosEnergia, enfriamiento,campeon) VALUES (?,?,?,?)";
         $stmt = $connexion->prepare($sql);
-        $stmt->execute([$name, $league, $points, $coins]);
+        $stmt->execute([$name, $energy, $cooldown, $champ_id]);
     }
 }
 
-$sql = "SELECT * from Jugador ";
+$sql = "SELECT Habilidad.id, Habilidad.nombre, puntosEnergia, enfriamiento, C.nombre as 'Campeon' FROM Habilidad JOIN Campeon C on C.id = Habilidad.campeon ";
 
 if (isset($_GET['sort']))
 {
@@ -102,7 +101,7 @@ if (isset($_GET['edit']))
 {
     $idx = $_GET['idx'];
 
-    $sql = "SELECT * FROM Jugador WHERE id = :idx";
+    $sql = "SELECT * FROM Habilidad WHERE id = :idx";
     $stmt = $connexion->prepare($sql);
     $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
     $stmt->execute();
@@ -110,36 +109,58 @@ if (isset($_GET['edit']))
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $idx = $result['id'];
     $name = $result['nombre'];
-    $league = $result['liga'];
-    $points = $result['puntosLiga'];
-    $coins = $result['monedas'];
+    $energy = $result['puntosEnergia'];
+    $cooldown = $result['enfriamiento'];
+    $champ_id = $result['campeon'];
 
-    print "<p><strong>Editar Jugador</strong></p>";
+    print "<p><strong>Editar Habilidad</strong></p>";
     print "<form method='post' action='" . $_SERVER['PHP_SELF'] . "'>";
     print "<input type='hidden' name='idx' value='$idx'>";
     print "<label>Nombre: <input type='text' name='name' value='" . $name . "'></label>";
-    print "<label>Liga: <input type='text' name='league' value='" . $league . "'></label>";
-    print "<label>Puntos de liga: <input type='number' name='points' value='" . $points . "'></label>";
-    print "<label>Monedas: <input type='number' name='coins' value='" . $coins . "'></label>";
+    print "<label>Puntos de energia: <input type='number' name='energy' value='" . $energy . "'></label>";
+    print "<label>Tiempo de enfriamiento: <input type='number' step='0.01' name='cooldown' value='" . $cooldown . "'></label>";
+
+    print "<label>Campeon: <select name='champ_id'>";
+    foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila)
+    {
+        $id = $fila['id'];
+        $name = $fila['nombre'];
+
+        print "<option ";
+        if ($id == $champ_id) print "selected ";
+        print "value='$id'>$name</option>";
+    }
+    print "</select></label>";
+
     print "<input type='submit' name='edit' value='Editar'>";
     print "</form>";
-    print "<p><a href='" . $_SERVER['PHP_SELF'] . "?" . "'>Volver a nuevo jugador</a></p>";
+    print "<p><a href='" . $_SERVER['PHP_SELF'] . "?" . "'>Volver a nueva habilidad</a></p>";
 } else
 { ?>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-        <p><strong>Nuevo Jugador</strong></p>
+        <p><strong>Nueva Habilidad</strong></p>
 
         <label>
             Nombre: <input type="text" name="name" required>
         </label>
         <label>
-            Liga: <input type="text" name="league" required>
+            Puntos energia: <input type="number" name="energy" required>
         </label>
         <label>
-            Puntos de liga: <input type="number" name="points" required>
+            Tiempo de enfriamiento: <input type="number" name="cooldown" required>
         </label>
         <label>
-            Monedas: <input type="number" name="coins" required>
+            Campeon: <select name="champ_id">
+                <?php
+                foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila)
+                {
+                    $id = $fila['id'];
+                    $name = $fila['nombre'];
+
+                    print "<option value='$id'>$name</option>";
+                }
+                ?>
+            </select>
         </label>
         <input type="submit" name="submit" value="Nuevo">
     </form>
