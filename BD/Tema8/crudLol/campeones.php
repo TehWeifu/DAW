@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $idx = $_GET['idx'];
 
-        $sql = "DELETE FROM Jugador WHERE id = :idx";
+        $sql = "DELETE FROM Campeon WHERE id = :idx";
         $stmt = $connection->prepare($sql);
         $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
         $stmt->execute();
@@ -30,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     if (isset($_POST['edit']))
     {
         $data = [
+            'class' => $_GET['class'],
             'name' => $_GET['name'],
-            'leauge' => $_GET['leauge'],
-            'points' => $_GET['points'],
-            'coins' => $_GET['coins'],
+            'launchDate' => $_GET['points'],
+            'price' => $_GET['price'],
             'idx' => $_GET['idx']
         ];
-        $sql = "UPDATE Jugador SET nombre=:name, liga=:leauge, puntosLiga=:points, monedas=:coins WHERE id=:idx";
+        $sql = "UPDATE Campeon SET nombre=:name, clase=:class, fechaLanzamiento=:launchDate, precio=:price WHERE id=:idx";
 
     } else
     {
