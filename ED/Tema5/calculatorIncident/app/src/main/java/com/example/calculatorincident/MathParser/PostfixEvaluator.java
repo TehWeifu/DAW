@@ -44,7 +44,7 @@ public class PostfixEvaluator {
             case '*':
                 return op1.multiply(op2);
             case '/':
-                return op1.divide(op2, RoundingMode.HALF_UP);
+                return op1.divide(op2, 5, RoundingMode.HALF_UP);
 //            case '%':
 //                return op1.remainder(op2, MathContext.DECIMAL32);
             case '^':

@@ -3,19 +3,32 @@ package com.example.calculatorincident;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.calculatorincident.MathParser.InfixToPostfixConverter;
 import com.example.calculatorincident.MathParser.PostfixEvaluator;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editText;
+    private Toast toast;
+
+    private String displayExpression;
+    private String mathExpression;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.textResult);
         editText.setShowSoftInputOnFocus(false); // Disables keyboard
 
+        // Pop up message when evaluating a bad expression
+        Context context = getApplicationContext();
+        CharSequence text = "Not a valid expression";
+        int duration = Toast.LENGTH_SHORT;
+        toast = Toast.makeText(context, text, duration);
+
+
         // Event listeners for numbers, operators and the dot
         for (int i = 0; i <= 15; i++) {
             int id = getResources().getIdentifier("btn" + i, "id", getPackageName());
@@ -53,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                             editText.getText().subSequence(editText.getSelectionStart(), editText.length())
                     ));
 
-                    editText.setSelection(currentCursorPosition - 1);
+                    insertTextIntoDisplay(""); //TODO: ?
                 }
             } else {
                 insertTextIntoDisplay("");
@@ -67,16 +87,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.opResult).setOnClickListener(view -> {
             try {
                 BigDecimal result = evaluateExpr(editText.getText().toString());
-                int tmpInteger = result.intValueExact();
+                int tmpInteger = result.intValue();
 
                 if (result.compareTo(BigDecimal.valueOf(tmpInteger)) == 0) {
                     editText.setText(String.valueOf(tmpInteger));
                 } else {
                     editText.setText(String.valueOf(result));
                 }
-
-                editText.setSelection(editText.length());
             } catch (Exception ignored) {
+                showToast("Not a valid expression");
+            } finally {
+                textCleanUp();
+                fancyText();
+                editText.setSelection(editText.length());
             }
         });
     }
@@ -90,10 +113,53 @@ public class MainActivity extends AppCompatActivity {
         } else {
             editText.getText().replace(startPos, endPos, str);
         }
+
+        textCleanUp();
+        fancyText();
+
+        editText.setSelection(editText.length());
+    }
+
+    private void textCleanUp() {
+        // REGEX TRAP HOUSE
+        editText.setText(editText.getText().toString().replaceAll("^0(\\d.*)", "$1"));
+        editText.setText(editText.getText().toString().replaceAll("(.*[+\\-*/^])0(\\d.*)", "$1$2"));
+
+        editText.setText(editText.getText().toString().replaceAll("^\\.", "0."));
+        editText.setText(editText.getText().toString().replaceAll("\\.\\.", "."));
+        editText.setText(editText.getText().toString().replaceAll("(.*)\\.([+\\-*/^])", "$1$2"));
+        editText.setText(editText.getText().toString().replaceAll("(\\.\\d+)\\.", "$1"));
+        editText.setText(editText.getText().toString().replaceAll("([+\\-*/^])(\\.)", "$10$2"));
+
+        editText.setText(editText.getText().toString().replaceAll("([+\\-*/^])([+\\-*/^])", "$1"));
+
+        editText.setText(editText.getText().toString().replaceAll("(\\.[1-9])0+$", "$1")); // trailing 0
+        editText.setText(editText.getText().toString().replaceAll("(\\.[1-9])0+(\\D)", "$1$2")); // trailing 0
+        editText.setText(editText.getText().toString().replaceAll("\\.0+(\\D)", "$1")); // trailing 0
     }
 
     private static BigDecimal evaluateExpr(String expr) {
         StringBuffer tmp = InfixToPostfixConverter.convertToPostfix(new StringBuffer(expr));
         return PostfixEvaluator.evaluatePostFixExpression(tmp);
+    }
+
+    private void fancyText() {
+        Editable result = editText.getText();
+
+        for (int i = 0; i < result.length(); i++) {
+            if ((result.charAt(i) + "").matches("[+\\-*/^]")) {
+                result.setSpan(new ForegroundColorSpan(Color.parseColor("#008f39")), i, i + 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+            }
+        }
+        editText.setText(result);
+    }
+
+
+    private void showToast(final String message) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
