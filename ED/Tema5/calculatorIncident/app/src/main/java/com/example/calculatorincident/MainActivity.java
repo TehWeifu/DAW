@@ -7,8 +7,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.WindowManager;
@@ -20,15 +18,10 @@ import com.example.calculatorincident.MathParser.InfixToPostfixConverter;
 import com.example.calculatorincident.MathParser.PostfixEvaluator;
 
 import java.math.BigDecimal;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editText;
     private Toast toast;
-
-    private String displayExpression;
-    private String mathExpression;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +59,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.opBack).setOnClickListener(view -> {
             if (editText.getSelectionStart() == editText.getSelectionEnd()) {
                 if (editText.getSelectionEnd() != 0) {
-                    int currentCursorPosition = editText.getSelectionStart();
+                    int positionsFromEnd = editText.length() - editText.getSelectionEnd();
 
                     editText.setText(String.format("%s%s",
                             editText.getText().subSequence(0, editText.getSelectionStart() - 1),
                             editText.getText().subSequence(editText.getSelectionStart(), editText.length())
                     ));
 
-                    insertTextIntoDisplay(""); //TODO: ?
+                    insertTextIntoDisplay("");
+                    editText.setSelection(editText.length() - positionsFromEnd);
                 }
             } else {
                 insertTextIntoDisplay("");
@@ -107,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     private void insertTextIntoDisplay(final String str) {
         int startPos = editText.getSelectionStart();
         int endPos = editText.getSelectionEnd();
+        int positionsFromEnd = editText.length() - endPos;
 
         if (startPos == endPos) {
             editText.getText().insert(startPos, str);
@@ -117,7 +112,12 @@ public class MainActivity extends AppCompatActivity {
         textCleanUp();
         fancyText();
 
-        editText.setSelection(editText.length());
+        editText.setSelection(editText.length() - positionsFromEnd);
+    }
+
+    private static BigDecimal evaluateExpr(String expr) {
+        StringBuffer tmp = InfixToPostfixConverter.convertToPostfix(new StringBuffer(expr));
+        return PostfixEvaluator.evaluatePostFixExpression(tmp);
     }
 
     private void textCleanUp() {
@@ -138,10 +138,6 @@ public class MainActivity extends AppCompatActivity {
         editText.setText(editText.getText().toString().replaceAll("\\.0+(\\D)", "$1")); // trailing 0
     }
 
-    private static BigDecimal evaluateExpr(String expr) {
-        StringBuffer tmp = InfixToPostfixConverter.convertToPostfix(new StringBuffer(expr));
-        return PostfixEvaluator.evaluatePostFixExpression(tmp);
-    }
 
     private void fancyText() {
         Editable result = editText.getText();

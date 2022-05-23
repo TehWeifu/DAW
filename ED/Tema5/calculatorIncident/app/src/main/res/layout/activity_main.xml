@@ -57,16 +57,20 @@
                 android:textSize="40sp" />
 
             <Button
-                android:id="@+id/op99999999"
+                android:id="@+id/opParen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
+                android:maxWidth="48dp"
                 android:minWidth="48dp"
-                android:textColor="#008f39"
-                android:textSize="40sp" />
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#000"
+                android:textSize="40sp"
+                tools:text="@string/parenButton" />
 
             <Button
                 android:id="@+id/btn11"
@@ -289,8 +293,10 @@
                 android:layout_marginBottom="5sp"
                 android:maxWidth="0sp"
                 android:minWidth="48dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:text="@string/backButton"
-                android:textColor="#000000"
+                android:textColor="#e50000"
                 android:textSize="40sp" />
 
             <Button
