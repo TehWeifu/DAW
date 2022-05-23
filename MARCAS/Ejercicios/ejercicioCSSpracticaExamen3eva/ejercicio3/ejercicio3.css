@@ -5,8 +5,10 @@
 }
 
 .container {
-    width: 1024px;
+    width: 1000px;
     margin: 200px auto;
+
+    border: 1px solid #000;
 }
 
 .espacio3d {
@@ -16,6 +18,7 @@
     margin: 0 auto;
 
     perspective: 700px;
+    position: relative;
 }
 
 .cubo {
@@ -24,16 +27,11 @@
 
     transform-style: preserve-3d;
     position: relative;
+
+    -webkit-animation: cubeAnimation 4s linear infinite;
+    -o-animation: cubeAnimation 4s linear infinite;
+    animation: cubeAnimation 4s linear infinite;
 }
-
-.cubo:hover {
-    position: relative;
-
-    -webkit-animation: cubeAnimation 10s linear;
-    -o-animation: cubeAnimation 10s linear;
-    animation: cubeAnimation 10s linear;
-}
-
 
 .cubo div {
     width: 200px;
@@ -43,13 +41,10 @@
     font-size: 5em;
     position: absolute;
 
-    opacity: .5;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 
 .cubo div:nth-child(1) {
     background-color: rgba(145, 78, 45);
@@ -83,20 +78,22 @@
 
 @keyframes cubeAnimation {
     0% {
-        position: relative;
+        left: 0;
         transform: rotateY(0);
-        opacity: 1;
     }
 
-    50% {
-        position: relative;
-        transform: rotateY(-360deg);
-        opacity: 0;
+    25% {
+        left: 400px;
+        transform: rotateY(-90deg);
+    }
+
+    75% {
+        left: -400px;
+        transform: rotateY(270deg);
     }
 
     100% {
-        position: relative;
-        transform: rotateY(-720deg);
-        opacity: 1;
+        left: 0;
+        transform: rotateY(360deg);
     }
 }

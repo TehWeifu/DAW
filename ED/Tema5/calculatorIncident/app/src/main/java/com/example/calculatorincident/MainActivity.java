@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception ignored) {
                 showToast("Not a valid expression");
             } finally {
-                textCleanUp();
+                editText.setText(expressionCleanUp(editText.getText().toString()));
                 fancyText();
                 editText.setSelection(editText.length());
             }
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             editText.getText().replace(startPos, endPos, str);
         }
 
-        textCleanUp();
+        editText.setText(expressionCleanUp(editText.getText().toString()));
         fancyText();
 
         editText.setSelection(editText.length() - positionsFromEnd);
@@ -120,24 +120,25 @@ public class MainActivity extends AppCompatActivity {
         return PostfixEvaluator.evaluatePostFixExpression(tmp);
     }
 
-    private void textCleanUp() {
+    private String expressionCleanUp(String expression) {
         // REGEX TRAP HOUSE
-        editText.setText(editText.getText().toString().replaceAll("^0(\\d.*)", "$1"));
-        editText.setText(editText.getText().toString().replaceAll("(.*[+\\-*/^])0(\\d.*)", "$1$2"));
+        expression = expression.replaceAll("^0(\\d.*)", "$1");
+        expression = expression.replaceAll("(.*[+\\-*/^])0(\\d.*)", "$1$2");
 
-        editText.setText(editText.getText().toString().replaceAll("^\\.", "0."));
-        editText.setText(editText.getText().toString().replaceAll("\\.\\.", "."));
-        editText.setText(editText.getText().toString().replaceAll("(.*)\\.([+\\-*/^])", "$1$2"));
-        editText.setText(editText.getText().toString().replaceAll("(\\.\\d+)\\.", "$1"));
-        editText.setText(editText.getText().toString().replaceAll("([+\\-*/^])(\\.)", "$10$2"));
+        expression = expression.replaceAll("^\\.", "0.");
+        expression = expression.replaceAll("\\.\\.", ".");
+        expression = expression.replaceAll("(.*)\\.([+\\-*/^])", "$1$2");
+        expression = expression.replaceAll("(\\.\\d+)\\.", "$1");
+        expression = expression.replaceAll("([+\\-*/^])(\\.)", "$10$2");
 
-        editText.setText(editText.getText().toString().replaceAll("([+\\-*/^])([+\\-*/^])", "$1"));
+        expression = expression.replaceAll("([+\\-*/^])([+\\-*/^])", "$1");
 
-        editText.setText(editText.getText().toString().replaceAll("(\\.[1-9])0+$", "$1")); // trailing 0
-        editText.setText(editText.getText().toString().replaceAll("(\\.[1-9])0+(\\D)", "$1$2")); // trailing 0
-        editText.setText(editText.getText().toString().replaceAll("\\.0+(\\D)", "$1")); // trailing 0
+        expression = expression.replaceAll("(\\.[1-9])0+$", "$1"); // trailing 0
+        expression = expression.replaceAll("(\\.[1-9])0+(\\D)", "$1$2"); // trailing 0
+        expression = expression.replaceAll("\\.0+(\\D)", "$1"); // trailing 0
+
+        return expression;
     }
-
 
     private void fancyText() {
         Editable result = editText.getText();
@@ -149,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
         }
         editText.setText(result);
     }
-
 
     private void showToast(final String message) {
         if (toast != null) {

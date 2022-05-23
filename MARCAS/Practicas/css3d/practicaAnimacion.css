@@ -17,6 +17,14 @@
     width: 100px;
     height: 100px;
     position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 2.5em;
+    font-weight: 500;
 }
 
 .contenedor div:nth-child(1) {
@@ -167,32 +175,32 @@
         top: 300px;
     }
 
-    37% {
+    37.50% {
         left: 0;
         top: 300px;
     }
 
-    43.25% {
+    43.75% {
         left: 0;
         top: 0;
     }
 
-    62% {
+    62.50% {
         left: 0;
         top: 0;
     }
 
-    68.25% {
+    68.75% {
         left: 924px;
         top: 0;
     }
 
-    87% {
+    87.5% {
         left: 924px;
         top: 0;
     }
 
-    93.25% {
+    93.75% {
         left: 924px;
         top: 300px;
     }

@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    width: 1024px;
+    height: 400px;
+    margin: 50px auto;
+    border: 1px solid #000;
+
+    position: relative;
+}
+
+.contenedor div {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 2.5em;
+    font-weight: 500;
+}
+
+.contenedor div:nth-child(1) {
+    top: 0;
+    left: 0;
+
+    background-color: red;
+    animation: moverCuadrado1 2s linear infinite alternate;
+}
+
+.contenedor div:nth-child(2) {
+    top: 0;
+    left: 924px;
+
+    background-color: blue;
+    animation: moverCuadrado2 2s linear infinite alternate;
+}
+
+.contenedor div:nth-child(3) {
+    top: 300px;
+    left: 924px;
+
+    background-color: green;
+    animation: moverCuadrado3 2s linear infinite alternate;
+}
+
+.contenedor div:nth-child(4) {
+    top: 300px;
+    left: 0;
+
+    background-color: hotpink;
+    animation: moverCuadrado4 2s linear infinite alternate;
+}
+
+@keyframes moverCuadrado1 {
+    0% {
+        top: 0;
+        left: 0;
+    }
+
+    50% {
+        top: 300px;
+        left: 924px;
+    }
+
+    100% {
+        top: 300px;
+        left: 924px;
+    }
+}
+
+@keyframes moverCuadrado2 {
+    0% {
+        top: 0;
+        left: 924px;
+    }
+
+    50% {
+        top: 300px;
+        left: 0;
+    }
+
+    100% {
+        top: 300px;
+        left: 0;
+    }
+}
+
+@keyframes moverCuadrado3 {
+    0% {
+        top: 300px;
+        left: 924px;
+    }
+
+    50% {
+        top: 300px;
+        left: 924px;
+    }
+
+    100% {
+        top: 0;
+        left: 0;
+    }
+}
+
+@keyframes moverCuadrado4 {
+    0% {
+        top: 300px;
+        left: 0;
+    }
+
+    50% {
+        top: 300px;
+        left: 0;
+    }
+
+    100% {
+        top: 0;
+        left: 924px;
+    }
+}
