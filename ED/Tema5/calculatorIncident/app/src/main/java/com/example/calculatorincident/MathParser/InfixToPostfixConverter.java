@@ -10,7 +10,10 @@ public class InfixToPostfixConverter {
 
         Stack<Character> stack = new Stack<>();
 
-        infix = new StringBuffer(infix.toString().replaceAll("([+\\-*/^])", " $1 "));
+        infix = new StringBuffer(infix.toString().replaceAll("(-\\d+(\\.\\d+)?)", "+(0$1)"));
+        infix = new StringBuffer(infix.toString().replaceAll("^\\+", ""));
+
+        infix = new StringBuffer(infix.toString().replaceAll("([+\\-*/^])", " $1 ")); // adds space
 
         stack.push('(');
         infix.append(')');
