@@ -57,20 +57,20 @@
                 android:textSize="40sp" />
 
             <Button
-                android:id="@+id/opParen"
+                android:id="@+id/opBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
-                android:maxWidth="48dp"
+                android:maxWidth="0sp"
                 android:minWidth="48dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:textColor="#000"
-                android:textSize="40sp"
-                tools:text="@string/parenButton" />
+                android:text="@string/backButton"
+                android:textColor="#e50000"
+                android:textSize="40sp" />
 
             <Button
                 android:id="@+id/btn11"
@@ -284,20 +284,19 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/opBack"
+                android:id="@+id/btnParen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15sp"
                 android:layout_marginTop="5sp"
                 android:layout_marginRight="15sp"
                 android:layout_marginBottom="5sp"
-                android:maxWidth="0sp"
                 android:minWidth="48dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="@string/backButton"
-                android:textColor="#e50000"
-                android:textSize="40sp" />
+                android:minHeight="78dip"
+                android:text="@string/parenButton"
+                android:textColor="#000"
+                android:textSize="35sp" />
+
 
             <Button
                 android:id="@+id/btn0"
