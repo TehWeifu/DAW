@@ -5,7 +5,7 @@
 require_once './FormHelper.php';
 require_once './connexion.php';
 
-FormHelper::printHeader("Campeones", ["./styles.css"]);
+FormHelper::printHeader("Campeones", ["./styles3.css"]);
 
 print "<body>";
 
@@ -53,25 +53,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $stmt->execute([$name, $class, $launchDate, $price]);
     }
 }
+$currentPage = $_GET['p'] ?? 1;
+if ($currentPage < 1) $currentPage = 1;
 
 $sql = "SELECT * FROM Campeon ";
 
-if (isset($_GET['sort']))
+if (!isset($_GET['sort']))
 {
-    $field_sort = $_GET['sort'];
-    $sql .= " ORDER BY $field_sort";
-    if (isset($_GET['asc']))
-    {
-        $sql .= " ASC";
-    } else
-    {
-        $sql .= " DESC";
-    }
+    $_GET['sort'] = 'id';
+}
+$field_sort = $_GET['sort'];
+$sql .= " ORDER BY $field_sort ";
+if (isset($_GET['des']))
+{
+    $sql .= " DESC";
+} else
+{
+    $sql .= " ASC";
 }
 
-$stmt = $connexion->query($sql);
-$fields = array_keys($stmt->fetch(PDO::FETCH_ASSOC));
-print "<table border='1'>";
+$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
+
+
+$stmt = $connexion->query("DESCRIBE Campeon");
+
+$fields = array_map(function ($row) {
+    return $row['Field'];
+}, $stmt->fetchAll(PDO::FETCH_ASSOC));
+
+print "<table>";
 print "<tr>";
 foreach ($fields as $field)
 {
@@ -88,12 +98,25 @@ while ($row = $stmt->fetch(PDO::FETCH_NUM))
     print "<tr>";
     print "<td>";
     print implode("</td><td>", $row);
-    print "<td><a href='" . $_SERVER['PHP_SELF'] . "?del&idx=" . $tmp_idx . "'>Eliminar</a></td>";
-    print "<td><a href='" . $_SERVER['PHP_SELF'] . "?edit&idx=" . $tmp_idx . "'>Editar</a></td>";
+    print "<td><a class='delete' href='" . $_SERVER['PHP_SELF'] . "?del&idx=" . $tmp_idx . "'>Eliminar</a></td>";
+    print "<td><a class='edit' href='" . $_SERVER['PHP_SELF'] . "?edit&idx=" . $tmp_idx . "'>Editar</a></td>";
     print "</td>";
     print "</tr>";
 }
 print "</table>";
+
+print "<p>";
+print "Pagina " . $currentPage;
+print "</p>";
+print "<p>";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage - 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Anterior</a>";
+print " | ";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage + 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Siguiente</a>";
+print "</p>";
+
+print "<p>";
+print "Mostrando los resultados: " . (($currentPage - 1) * 50 + 1) . " al " . ($currentPage * 50);
+print "<p>";
 ?>
 
 <?php
@@ -113,33 +136,40 @@ if (isset($_GET['edit']))
     $launchDate = $result['fechaLanzamiento'];
     $price = $result['precio'];
 
-    print "<p><strong>Editar Campeon</strong></p>";
-    print "<form method='post' action='" . $_SERVER['PHP_SELF'] . "'>";
+    print "<form class='editForm' method='post' action='" . $_SERVER['PHP_SELF'] . "'>";
+    print "<h3><strong>Editar Campeón</strong></h3>";
     print "<input type='hidden' name='idx' value='$idx'>";
-    print "<label>Nombre: <input type='text' name='name' value='" . $name . "'></label>";
-    print "<label>Clase: <input type='text' name='class' value='" . $class . "'></label>";
-    print "<label>Fecha Lanzamiento: <input type='date' name='launchDate' value='" . $launchDate . "'></label>";
-    print "<label>Precio: <input type='number' name='price' value='" . $price . "'></label>";
-    print "<input type='submit' name='edit' value='Editar'>";
+    print "<p><label>Nombre: <input type='text' name='name' value='" . $name . "'></label></p>";
+    print "<p><label>Clase: <input type='text' name='class' value='" . $class . "'></label></p>";
+    print "<p><label>Fecha Lanzamiento: <input type='date' name='launchDate' value='" . $launchDate . "'></label></p>";
+    print "<p><label>Precio: <input type='number' name='price' value='" . $price . "'></label></p>";
+    print "<p><input type='submit' name='edit' value='Editar'>";
     print "</form>";
     print "<p><a href='" . $_SERVER['PHP_SELF'] . "?" . "'>Volver a nuevo campeon</a></p>";
-} else
-{ ?>
-    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-        <p><strong>Nuevo Campeon</strong></p>
+} else { ?>
+    <form class="newForm" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+        <h3><strong>Nuevo Campeon</strong></h3>
 
-        <label>
-            Nombre: <input type="text" name="name" required>
-        </label>
-        <label>
-            Clase: <input type="text" name="class" required>
-        </label>
-        <label>
-            Fecha lanzamiento: <input type="date" name="launchDate" required>
-        </label>
-        <label>
-            Precio: <input type="number" name="price" required>
-        </label>
+        <p>
+            <label>
+                Nombre: <input type="text" name="name" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                Clase: <input type="text" name="class" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                Fecha lanzamiento: <input type="date" name="launchDate" required>
+            </label>
+        </p>
+        <p>
+            <label>
+                Precio: <input type="number" name="price" required>
+            </label>
+        </p>
         <input type="submit" name="submit" value="Nuevo">
     </form>
 

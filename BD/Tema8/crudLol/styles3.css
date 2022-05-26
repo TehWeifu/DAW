@@ -64,8 +64,9 @@ table tr:last-child {
 
 table td,
 table th {
-    padding: 5px;
+    padding: 10px;
     margin: 0;
+    text-align: center;
 }
 
 hr {
@@ -79,6 +80,7 @@ a.edit {
     border: 1px solid #000;
     border-radius: 5px;
     padding: 5px;
+    text-decoration: none;
 }
 
 a.edit:visited,
@@ -109,6 +111,10 @@ a.edit {
     padding: 5px;
     margin: 20px auto;
     width: 800px;
+}
+
+.editForm {
+    border: 3px solid orange;
 }
 
 .newForm p,
@@ -143,4 +149,21 @@ a.edit {
 .newForm input[type=submit]:active,
 .editForm input[type=submit]:active {
     transform: scale(.9);
+}
+
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 5rem;
+    text-align: center;
+    color: #fcedd8;
+    background: transparent;
+    font-family: 'Niconne', cursive;
+    font-weight: 700;
+    text-shadow: 5px 5px 0 #eb452b,
+    10px 10px 0 #efa032,
+    15px 15px 0 #46b59b,
+    20px 20px 0 #017e7f,
+    25px 25px 0 #052939,
+    30px 30px 0 #c11a2b
 }

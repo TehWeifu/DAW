@@ -16,7 +16,5 @@
     <li><a href="./tienen.php">Campeones por Jugador</a></li>
 </ul>
 
-<p>Me gustan los porros</p>
-
 </body>
 </html>

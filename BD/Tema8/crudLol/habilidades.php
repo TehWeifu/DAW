@@ -10,12 +10,10 @@ FormHelper::printHeader("Habilidades", ["./styles.css"]);
 print "<body>";
 
 FormHelper::printMenu();
-print  "<h1>Campeones</h1>";
+print  "<h1>Habilidades</h1>";
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET')
-{
-    if (isset($_GET['del']))
-    {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['del'])) {
         $idx = $_GET['idx'];
 
         $sql = "DELETE FROM Habilidad WHERE id = :idx";
@@ -25,10 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-    if (isset($_POST['edit']))
-    {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['edit'])) {
         $data = [
             'name' => $_POST['name'],
             'energy' => $_POST['energy'],
@@ -41,8 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $stmt = $connexion->prepare($sql);
         $stmt->execute($data);
 
-    } else
-    {
+    } else {
         $name = $_POST['name'];
         $energy = $_POST['energy'];
         $cooldown = $_POST['cooldown'];
@@ -53,36 +48,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $stmt->execute([$name, $energy, $cooldown, $champ_id]);
     }
 }
+$currentPage = $_GET['p'] ?? 1;
+if ($currentPage < 1) $currentPage = 1;
 
 $sql = "SELECT Habilidad.id, Habilidad.nombre, puntosEnergia, enfriamiento, C.nombre as 'Campeon' FROM Habilidad JOIN Campeon C on C.id = Habilidad.campeon ";
 
-if (isset($_GET['sort']))
-{
-    $field_sort = $_GET['sort'];
-    $sql .= " ORDER BY $field_sort";
-    if (isset($_GET['asc']))
-    {
-        $sql .= " ASC";
-    } else
-    {
-        $sql .= " DESC";
-    }
+if (!isset($_GET['sort'])) {
+    $_GET['sort'] = 'id';
+}
+$field_sort = $_GET['sort'];
+$sql .= " ORDER BY $field_sort ";
+if (isset($_GET['des'])) {
+    $sql .= " DESC";
+} else {
+    $sql .= " ASC";
 }
 
-$stmt = $connexion->query($sql);
-$fields = array_keys($stmt->fetch(PDO::FETCH_ASSOC));
+$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
+
+$stmt = $connexion->query("DESCRIBE Habilidad");
+
+$fields = array_map(function ($row) {
+    return $row['Field'];
+}, $stmt->fetchAll(PDO::FETCH_ASSOC));
+
 print "<table border='1'>";
 print "<tr>";
-foreach ($fields as $field)
-{
+foreach ($fields as $field) {
     print "<th>$field <a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&asc" . "'>↑</a> " .
         "<a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&des" . "'>↓</a> </th>";
 }
 print "</tr>";
 
 $stmt = $connexion->query($sql);
-while ($row = $stmt->fetch(PDO::FETCH_NUM))
-{
+while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
     $tmp_idx = $row[0];
 
     print "<tr>";
@@ -94,11 +93,21 @@ while ($row = $stmt->fetch(PDO::FETCH_NUM))
     print "</tr>";
 }
 print "</table>";
+
+print "<p>";
+print "Pagina " . $currentPage;
+print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage - 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Anterior</a>";
+print " | ";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage + 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Siguiente</a>";
+print "</p>";
+
+print "<p>";
+print "Mostrando los resultados: " . (($currentPage - 1) * 50 + 1) . " al " . ($currentPage * 50);
+print "<p>";
 ?>
 
 <?php
-if (isset($_GET['edit']))
-{
+if (isset($_GET['edit'])) {
     $idx = $_GET['idx'];
 
     $sql = "SELECT * FROM Habilidad WHERE id = :idx";
@@ -121,8 +130,7 @@ if (isset($_GET['edit']))
     print "<label>Tiempo de enfriamiento: <input type='number' step='0.01' name='cooldown' value='" . $cooldown . "'></label>";
 
     print "<label>Campeon: <select name='champ_id'>";
-    foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila)
-    {
+    foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila) {
         $id = $fila['id'];
         $name = $fila['nombre'];
 
@@ -135,8 +143,7 @@ if (isset($_GET['edit']))
     print "<input type='submit' name='edit' value='Editar'>";
     print "</form>";
     print "<p><a href='" . $_SERVER['PHP_SELF'] . "?" . "'>Volver a nueva habilidad</a></p>";
-} else
-{ ?>
+} else { ?>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
         <p><strong>Nueva Habilidad</strong></p>
 
@@ -152,8 +159,7 @@ if (isset($_GET['edit']))
         <label>
             Campeon: <select name="champ_id">
                 <?php
-                foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila)
-                {
+                foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila) {
                     $id = $fila['id'];
                     $name = $fila['nombre'];
 

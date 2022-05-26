@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1em;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    padding: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: pink;
+
+    background-color: #ccc;
+}
+
+.menu a {
+    color: black;
+    font-size: 1.5em;
+    margin: 0 10px;
+}
+
+.errMsg {
+    color: red;
+}
+
+table {
+    border: none;
+}
+
+table tr {
+    border-top: 1px solid #333;
+}
+
+table tr:last-child {
+    border-bottom: 1px solid #333;
+}
+
+table {
+    background-color: aqua;
+}

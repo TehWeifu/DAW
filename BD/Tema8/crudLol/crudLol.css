@@ -64,7 +64,7 @@ table tr:last-child {
 
 table td,
 table th {
-    padding: 5px;
+    padding: 10px;
     margin: 0;
 }
 
@@ -93,10 +93,12 @@ a.delete:active {
 
 a.delete {
     background: red;
+    text-decoration: none;
 }
 
 a.edit {
     background: orange;
+    text-decoration: none;
 }
 
 .newForm,
@@ -137,7 +139,7 @@ a.edit {
 }
 
 .editForm input[type=submit] {
-    background: darkorange;
+    background: orange;
 }
 
 .newForm input[type=submit]:active,
