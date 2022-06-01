@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: white url("./../imgs/poros.jpg") center center;
+    background-size: cover;
+    padding: 50px;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding-left: 100px;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 5rem;
+    color: #fcedd8;
+    background: transparent;
+    font-family: 'Niconne', cursive;
+    font-weight: 700;
+    text-shadow: 5px 5px 0 #eb452b,
+    10px 10px 0 #efa032,
+    15px 15px 0 #46b59b,
+    20px 20px 0 #017e7f,
+    25px 25px 0 #052939,
+    30px 30px 0 #c11a2b
+}
+
+h1:nth-child(2) {
+    font-size: 2em;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+}
+
+span {
+    position: relative;
+    display: block;
+    color: #cf1b1b;
+    font-size: 50px;
+    letter-spacing: 8px;
+    cursor: pointer;
+}
+
+a * {
+    cursor: pointer;
+}
+
+span::before {
+    content: "Campeones";
+    position: absolute;
+    color: transparent;
+    background-image: repeating-linear-gradient(
+            45deg,
+            transparent 0,
+            transparent 2px,
+            black 2px,
+            black 4px
+    );
+    -webkit-background-clip: text;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: 1s;
+}
+
+span::after {
+    content: "Campeones";
+    position: absolute;
+    color: transparent;
+    background-image: repeating-linear-gradient(
+            135deg,
+            transparent 0,
+            transparent 2px,
+            black 2px,
+            black 4px
+    );
+    -webkit-background-clip: text;
+    top: 0;
+    left: 0;
+    transition: 1s;
+}
+
+span:hover:before {
+    top: 10px;
+    left: 10px;
+}
+
+span:hover:after {
+    top: -10px;
+    left: -10px;
+}
+
+span.second::before {
+    content: "Jugadores";
+}
+
+span.second::after {
+    content: "Jugadores";
+}
+
+span.third::before {
+    content: "Habilidades";
+}
+
+span.third::after {
+    content: "Habilidades";
+}
+
+span.fourth::before {
+    content: "Campeones por Jugador";
+}
+
+span.fourth::after {
+    content: "Campeones por Jugador";
+}
+
+
+.ilum {
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    border: 2px solid #fc9eac;
+    color: transparent;
+
+    font-weight: 400;
+    letter-spacing: 5px;
+    font-family: Arial, 'sans-serif';
+    padding: 5px 5px 5px 10px;
+
+    cursor: default;
+}
+
+.ilum:hover {
+    color: #fc9eac;
+}

@@ -3,29 +3,45 @@
 
 <?php
 
-require_once './FormHelper.php';
-require_once './connexion.php';
+require_once './resources/dependencies/FormHelper.php';
 
-FormHelper::printHeader("Jugadores", ["./styles.css"]);
+require_once './resources/dependencies/connexion.php';
+/** @var PDO $connexion */
+
+FormHelper::printHeader("Jugadores", ["./resources/styles/styles.css"]);
 
 print "<body>";
 
 FormHelper::printMenu();
 print  "<h1>Jugadores</h1>";
+print "<div class='container'>";
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['del'])) {
-        $idx = $_GET['idx'];
+if ($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+    if (isset($_GET['del']))
+    {
+        foreach ($_GET['delArr'] as $idx)
+        {
+            $sql = "DELETE FROM Jugador WHERE id = :idx";
+            $stmt = $connexion->prepare($sql);
+            $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
+            try
+            {
+                $stmt->execute();
+                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El jugador ha sido eliminado correctamente. </p>";
 
-        $sql = "DELETE FROM Jugador WHERE id = :idx";
-        $stmt = $connexion->prepare($sql);
-        $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
-        $stmt->execute();
+            } catch (PDOException $e)
+            {
+                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! No se puede eliminar un jugador que tiene campeones asociados. </p>";
+            }
+        }
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['edit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if (isset($_POST['edit']))
+    {
         $data = [
             'name' => $_POST['name'],
             'league' => $_POST['league'],
@@ -34,83 +50,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'idx' => $_POST['idx']
         ];
 
-        $sql = "UPDATE Jugador SET nombre=:name, liga=:league, puntosLiga=:points, monedas=:coins WHERE id=:idx";
-        $stmt = $connexion->prepare($sql);
-        $stmt->execute($data);
+        $row = $connexion->query("SELECT * FROM Jugador WHERE nombre='" . $_POST['name'] . "' AND id <> '" . $_POST['idx'] . "'");
 
-    } else {
+        if ($row->fetch(PDO::FETCH_ASSOC))
+        {
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe un jugador con tal nombre. </p>";
+        } else
+        {
+            $sql = "UPDATE Jugador SET nombre=:name, liga=:league, puntosLiga=:points, monedas=:coins WHERE id=:idx";
+            $stmt = $connexion->prepare($sql);
+            $stmt->execute($data);
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El jugador ha sido editado correctamente. </p>";
+        }
+
+    } else if (isset($_POST['new']))
+    {
         $name = $_POST['name'];
         $league = $_POST['league'];
         $points = $_POST['points'];
         $coins = $_POST['coins'];
 
-        $sql = "INSERT INTO Jugador (nombre, liga, puntosLiga,monedas) VALUES (?,?,?,?)";
-        $stmt = $connexion->prepare($sql);
-        $stmt->execute([$name, $league, $points, $coins]);
+        $row = $connexion->query("SELECT * FROM Jugador WHERE nombre='$name'");
+
+        if ($row->fetch(PDO::FETCH_ASSOC))
+        {
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe un jugador con tal nombre. </p>";
+        } else
+        {
+            $sql = "INSERT INTO Jugador (nombre, liga, puntosLiga,monedas) VALUES (?,?,?,?)";
+            $stmt = $connexion->prepare($sql);
+            $stmt->execute([$name, $league, $points, $coins]);
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El jugador ha sido agregado correctamente. </p>";
+        }
     }
 }
 
-$currentPage = $_GET['p'] ?? 1;
-if ($currentPage < 1) $currentPage = 1;
-
-
-$sql = "SELECT * from Jugador ";
-
-if (!isset($_GET['sort'])) {
-    $_GET['sort'] = 'id';
-}
-$field_sort = $_GET['sort'];
-$sql .= " ORDER BY $field_sort ";
-if (isset($_GET['des'])) {
-    $sql .= " DESC";
-} else {
-    $sql .= " ASC";
-}
-
-$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
-
-$stmt = $connexion->query("DESCRIBE Jugador");
-
-$fields = array_map(function ($row) {
-    return $row['Field'];
-}, $stmt->fetchAll(PDO::FETCH_ASSOC));
-
-print "<table border='1'>";
-print "<tr>";
-foreach ($fields as $field) {
-    print "<th>$field <a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&asc" . "'>↑</a> " .
-        "<a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&des" . "'>↓</a> </th>";
-}
-print "</tr>";
-
-$stmt = $connexion->query($sql);
-while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-    $tmp_idx = $row[0];
-
-    print "<tr>";
-    print "<td>";
-    print implode("</td><td>", $row);
-    print "<td><a href='" . $_SERVER['PHP_SELF'] . "?del&idx=" . $tmp_idx . "'>Eliminar</a></td>";
-    print "<td><a href='" . $_SERVER['PHP_SELF'] . "?edit&idx=" . $tmp_idx . "'>Editar</a></td>";
-    print "</td>";
-    print "</tr>";
-}
-print "</table>";
-
-print "<p>";
-print "Pagina " . $currentPage;
-print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage - 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Anterior</a>";
-print " | ";
-print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage + 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Siguiente</a>";
-print "</p>";
-
-print "<p>";
-print "Mostrando los resultados: " . (($currentPage - 1) * 50 + 1) . " al " . ($currentPage * 50);
-print "<p>";
-?>
-
-<?php
-if (isset($_GET['edit'])) {
+if (isset($_GET['edit']))
+{
     $idx = $_GET['idx'];
 
     $sql = "SELECT * FROM Jugador WHERE id = :idx";
@@ -125,41 +101,275 @@ if (isset($_GET['edit'])) {
     $points = $result['puntosLiga'];
     $coins = $result['monedas'];
 
-    print "<p><strong>Editar Jugador</strong></p>";
-    print "<form method='post' action='" . $_SERVER['PHP_SELF'] . "'>";
-    print "<input type='hidden' name='idx' value='$idx'>";
-    print "<label>Nombre: <input type='text' name='name' value='" . $name . "'></label>";
-    print "<label>Liga: <input type='text' name='league' value='" . $league . "'></label>";
-    print "<label>Puntos de liga: <input type='number' name='points' value='" . $points . "'></label>";
-    print "<label>Monedas: <input type='number' name='coins' value='" . $coins . "'></label>";
-    print "<input type='submit' name='edit' value='Editar'>";
-    print "</form>";
-    print "<p><a href='" . $_SERVER['PHP_SELF'] . "?" . "'>Volver a nuevo jugador</a></p>";
-} else { ?>
-    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-        <p><strong>Nuevo Jugador</strong></p>
+    ?>
+    <form class='editForm' method='post' action='<?= $_SERVER["PHP_SELF"] ?>'>
+        <h3><strong>Editar Jugador</strong></h3>
+        <input type='hidden' name='idx' value='<?= $idx ?>'>
 
-        <label>
-            Nombre: <input type="text" name="name" required>
-        </label>
-        <label>
-            Liga: <input type="text" name="league" required>
-        </label>
-        <label>
-            Puntos de liga: <input type="number" name="points" required>
-        </label>
-        <label>
-            Monedas: <input type="number" name="coins" required>
-        </label>
-        <input type="submit" name="submit" value="Nuevo">
+        <table class="formTable">
+            <tr>
+                <td>
+                    <label for="name">Nombre: </label>
+                </td>
+                <td>
+                    <input type='text' id="name" name='name' value='<?= $name ?>' required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="league">Liga: </label>
+                </td>
+                <td>
+                    <input type='text' id="league" name='league' value='<?= $league ?>' required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="points">Puntos de Liga: </label>
+                </td>
+                <td>
+                    <input type='number' step="1" id="points" name='points' value='<?= $points ?>' required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="coins">Monedas: </label>
+                </td>
+                <td>
+                    <input type='number' step="1" id="coins" name='coins' value='<?= $coins ?>' required>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="buttons">
+            <a class="btn cancelBtn" href="<?= $_SERVER['PHP_SELF'] ?>"><i class="fa-solid fa-arrow-rotate-left"></i>Cancelar</a>
+            <input class="btn editBtn" type='submit' name='edit' value='Aceptar'>
+        </div>
     </form>
 
     <?php
+} else if (isset($_GET['new']))
+{ ?>
+    <form class="newForm" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+        <h3><strong>Nuevo Jugador</strong></h3>
+
+        <table class="formTable">
+            <tr>
+                <td>
+                    <label for="name">Nombre: </label>
+                </td>
+                <td>
+                    <input type="text" id="name" name="name" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="league">Liga: </label>
+                </td>
+                <td>
+                    <input type="text" id="league" name="league" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="points">Puntos de Liga: </label>
+                </td>
+                <td>
+                    <input type="number" step="1" id="points" name="points" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="coins">Monedas: </label>
+                </td>
+                <td>
+                    <input type="number" step="1" id="coins" name="coins" required>
+                </td>
+            </tr>
+
+        </table>
+        <div class="buttons">
+            <a class="btn cancelBtn" href="<?= $_SERVER['PHP_SELF'] ?>"><i class="fa-solid fa-arrow-rotate-left"></i>Cancelar</a>
+            <input class="btn newBtn" type="submit" name="new" value="Aceptar">
+        </div>
+    </form>
+
+    <?php
+} else
+{ ?>
+
+    <form class="searchForm" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+        <h3><strong>Buscar Jugador</strong></h3>
+
+        <table class="formTable">
+            <tr>
+                <td>
+                    <label for="name">Nombre: </label>
+                </td>
+                <td>
+                    <input type="text" id="name" name="name">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="league">Liga: </label>
+                </td>
+                <td>
+                    <input type="text" id="league" name="league">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="points">Puntos de Liga: </label>
+                </td>
+                <td>
+                    <input type="number" step="1" id="points" name="points">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="coins">Monedas: </label>
+                </td>
+                <td>
+                    <input type="number" step="1" id="coins" name="coins">
+                </td>
+            </tr>
+
+        </table>
+        <input type="submit" name="search" value="Aceptar">
+    </form>
+
+
+<?php }
+
+print "<div class='buttons'>";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?search' class='btn searchBtn'><i class='fa-solid fa-magnifying-glass'></i>Buscar</a>";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?new' class='btn newBtn'><i class='fa-solid fa-plus'></i>Nuevo</a>";
+print "<button class='btn editBtn js_editBtn'><i class='fa-solid fa-pen-to-square'></i>Editar</button>";
+print "<button class='btn deleteBtn js_deleteBtn'><i class='fa-solid fa-trash-can'></i>Eliminar</button>";
+print "</div>";
+
+
+$currentPage = $_GET['p'] ?? 1;
+if ($currentPage < 1) $currentPage = 1;
+
+
+$sql = "SELECT * from Jugador ";
+
+if (isset($_POST['search']))
+{
+    $sql .= " WHERE 1 ";
+
+    // TODO refactor this with prepare
+    if (!empty($_POST['name']))
+    {
+        $sql .= " AND nombre LIKE '%" . $_POST['name'] . "%' ";
+    }
+
+    if (!empty($_POST['league']))
+    {
+        $sql .= " AND liga LIKE '%" . $_POST['league'] . "%' ";
+    }
+
+    if (!empty($_POST['points']))
+    {
+        $sql .= " AND puntosLiga = '" . $_POST['points'] . "' ";
+    }
+
+    if (!empty($_POST['coins']))
+    {
+        $sql .= " AND monedas = '" . $_POST['coins'] . "' ";
+    }
 }
+
+if (!isset($_GET['sort']))
+{
+    $_GET['sort'] = 'id';
+}
+$field_sort = $_GET['sort'];
+$sql .= " ORDER BY $field_sort ";
+if (isset($_GET['des']))
+{
+    $sql .= " DESC";
+} else
+{
+    $sql .= " ASC";
+}
+
+$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
+
+$stmt = $connexion->query("DESCRIBE Jugador");
+
+$fields = array_map(function ($row) {
+    return $row['Field'];
+}, $stmt->fetchAll(PDO::FETCH_ASSOC));
+
+print "<table class='resultsTable'>";
+print "<tr><td></td>";
+array_shift($fields);
+foreach ($fields as $field)
+{
+    $fancyField = preg_replace("/([a-z])([A-Z])/", "$1 $2", $field);
+    print "<th class='headerSort'>$fancyField <a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&asc" . "'><i class='fa-solid fa-sort-up'></i></a> " .
+        "<a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&des" . "'><i class='fa-solid fa-sort-down'></i></a> </th>";
+}
+print "</tr>";
+
+$stmt = $connexion->query($sql);
+while ($row = $stmt->fetch(PDO::FETCH_NUM))
+{
+    $tmp_idx = array_shift($row);
+
+    print "<tr>";
+
+    print "<td>";
+    print "<div class='squaredThree'>";
+    print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
+    print "<label for='squaredThree$tmp_idx'></label>";
+    print "</div>";
+    print "</td>";
+
+    print "<td>";
+    print implode("</td><td>", $row);
+    print "</td>";
+    print "</tr>";
+}
+
+print "<tr><td></td>";
+foreach ($fields as $field)
+{
+    $field = preg_replace("/([a-z])([A-Z])/", "$1 $2", $field);
+    print "<th>$field</th>";
+}
+print "</tr>";
+
+print "</table>";
+
+print "<p>";
+print "Pagina " . $currentPage;
+print "</p>";
+print "<p>";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage - 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'><i class='fa-solid fa-arrow-left'></i>Anterior</a>";
+print " | ";
+print "<a href='" . $_SERVER['PHP_SELF'] . "?p=" . ($currentPage + 1) . "&sort=" . $_GET['sort'] . "&" . (isset($_GET['asc']) ? "asc" : "desc") . "'>Siguiente<i class='fa-solid fa-arrow-right''></i></a>";
+print "</p>";
+
+print "<p>";
+print "Mostrando los resultados: " . (($currentPage - 1) * 50 + 1) . " al " . ($currentPage * 50);
+print "<p>";
 ?>
 
-<hr>
-<p><a href="./index.php"> Volver al índice</a></p>
-
+<script src="./resources/scripts/script.js"></script>
+</div>
 </body>
 </html>
