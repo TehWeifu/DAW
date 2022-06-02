@@ -252,6 +252,7 @@ if (isset($_GET['edit']))
                             $name = $fila['nombre'];
 
                             print "<option ";
+                            if ($id == $_POST['champ_id']) print " selected ";
                             print "value='$id'>$name</option>";
                         }
                         ?>
@@ -273,6 +274,7 @@ if (isset($_GET['edit']))
                             $name = $fila['nombre'];
 
                             print "<option ";
+                            if ($id == $_POST['player_id']) print " selected ";
                             print "value='$id'>$name</option>";
                         }
                         ?>
@@ -285,7 +287,7 @@ if (isset($_GET['edit']))
                     <label for="points">Puntos de Maestria: </label>
                 </td>
                 <td>
-                    <input type='number' id="points" name='points'>
+                    <input type='number' id="points" name='points' value="<?= $_POST['points'] ?? "" ?>">
                 </td>
             </tr>
         </table>

@@ -214,7 +214,7 @@ if (isset($_GET['edit']))
                     <label for="name">Nombre: </label>
                 </td>
                 <td>
-                    <input type="text" id="name" name="name">
+                    <input type="text" id="name" name="name" value="<?= $_POST['name'] ?? "" ?>">
                 </td>
             </tr>
 
@@ -223,7 +223,7 @@ if (isset($_GET['edit']))
                     <label for="league">Liga: </label>
                 </td>
                 <td>
-                    <input type="text" id="league" name="league">
+                    <input type="text" id="league" name="league" value="<?= $_POST['league'] ?? "" ?>">
                 </td>
             </tr>
 
@@ -232,7 +232,7 @@ if (isset($_GET['edit']))
                     <label for="points">Puntos de Liga: </label>
                 </td>
                 <td>
-                    <input type="number" step="1" id="points" name="points">
+                    <input type="number" step="1" id="points" name="points" value="<?= $_POST['points'] ?? "" ?>">
                 </td>
             </tr>
 
@@ -241,7 +241,7 @@ if (isset($_GET['edit']))
                     <label for="coins">Monedas: </label>
                 </td>
                 <td>
-                    <input type="number" step="1" id="coins" name="coins">
+                    <input type="number" step="1" id="coins" name="coins" value="<?= $_POST['coins'] ?? "" ?>">
                 </td>
             </tr>
 

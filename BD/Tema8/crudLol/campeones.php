@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <?php
 
 require_once './resources/dependencies/FormHelper.php';
@@ -216,7 +215,7 @@ if (isset($_GET['edit']))
                     <label for="name">Nombre: </label>
                 </td>
                 <td>
-                    <input type="text" id="name" name="name">
+                    <input type="text" id="name" name="name" value="<?= $_POST['name'] ?? "" ?>">
                 </td>
             </tr>
 
@@ -225,7 +224,7 @@ if (isset($_GET['edit']))
                     <label for="class">Clase: </label>
                 </td>
                 <td>
-                    <input type="text" id="class" name="class">
+                    <input type="text" id="class" name="class" value="<?= $_POST['class'] ?? "" ?>">
                 </td>
             </tr>
 
@@ -234,7 +233,7 @@ if (isset($_GET['edit']))
                     <label for="launchDate">Fecha Lanzamiento: </label>
                 </td>
                 <td>
-                    <input type="date" id="launchDate" name="launchDate">
+                    <input type="date" id="launchDate" name="launchDate" value="<?= $_POST['launchDate'] ?? "" ?>">
                 </td>
             </tr>
 
@@ -243,7 +242,7 @@ if (isset($_GET['edit']))
                     <label for="price">Precio: </label>
                 </td>
                 <td>
-                    <input type="number" id="price" name="price">
+                    <input type="number" id="price" name="price" value="<?= $_POST['price'] ?? "" ?>">
                 </td>
             </tr>
 

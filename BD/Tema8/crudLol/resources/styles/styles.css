@@ -68,7 +68,7 @@ a:visited {
 }
 
 .errMsg,
-.infoMsg{
+.infoMsg {
     margin: 50px auto 10px auto;
     width: 100%;
     color: red;
@@ -263,6 +263,10 @@ a.edit {
 input {
     border: thin solid black;
     border-radius: 5px;
+    outline: none;
+    font-size: 1.1em;
+    padding: 5px 5px 5px 20px;
+    width: 75%;
 }
 
 .newForm input[type=submit],
@@ -335,11 +339,6 @@ form p:last-child {
     display: flex;
     justify-content: left;
     align-items: center;
-}
-
-input {
-    padding: 5px;
-    width: 75%;
 }
 
 i {
@@ -458,7 +457,7 @@ select {
     border-radius: 4px;
     display: inline-block;
     font: inherit;
-    line-height: 1.5em;
+    line-height: 1.75em;
     padding: 0 2.5em 0 1em;
     width: 75%;
 

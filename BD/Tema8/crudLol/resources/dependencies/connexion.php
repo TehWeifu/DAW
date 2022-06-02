@@ -1,5 +1,5 @@
 <?php
-$config = require_once './config.php';
+$config = require_once './resources/dependencies/config.php';
 try {
     $connexion = new PDO($config['database_dsn'], $config['username'], $config['password']);
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
