@@ -58,29 +58,51 @@ p {
 
 #card-1 {
     z-index: 1;
-    transform: translate(-150%, -50%) rotate(-20deg);
+    transform: translate(-180%, -40%) rotate(-20deg);
 }
 
 #card-2 {
     z-index: 5;
-    transform: translate(-100%, -50%) rotate(-10deg);
+    transform: translate(-115%, -45%) rotate(-10deg);
 }
 
 #card-3 {
     z-index: 10;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -46%);
 }
 
 #card-4 {
     z-index: 5;
-    transform: translate(0%, -50%) rotate(10deg);
+    transform: translate(15%, -45%) rotate(10deg);
 }
 
 #card-5 {
     z-index: 1;
-    transform: translate(50%, -50%) rotate(20deg);
+    transform: translate(65%, -40%) rotate(20deg);
 }
 
-ul li:hover {
-    z-index: 1000 !important;
+#card-1:hover {
+    z-index: 10;
+    transform: translate(-180%, -40%) rotate(-20deg) scale(1.2);
 }
+
+#card-2:hover {
+    z-index: 10;
+    transform: translate(-115%, -45%) rotate(-10deg) scale(1.2);
+}
+
+#card-3:hover {
+    z-index: 10;
+    transform: translate(-50%, -46%) scale(1.2);
+}
+
+#card-4:hover {
+    z-index: 10;
+    transform: translate(15%, -45%) rotate(10deg) scale(1.2);
+}
+
+#card-5:hover {
+    z-index: 10;
+    transform: translate(65%, -40%) rotate(20deg) scale(1.2);
+}
+
