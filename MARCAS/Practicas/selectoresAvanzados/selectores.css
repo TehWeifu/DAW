@@ -56,14 +56,19 @@ input:checked + label {
     color: green;
 }
 
-input:not(checked) + label {
+input:not(:checked) + label {
     color: red;
+    font-size: 10em;
 }
 
 /*elementos que NO pertenezcan a una clase*/
 h3:not(.daw) {
     font-size: small;
 }
+
+h3::first-letter
+h3:first-of-type
+h3:only
 
 
 

@@ -19,20 +19,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
 {
     if (isset($_GET['del']))
     {
+        $sql = "DELETE FROM Campeon WHERE id = :idx";
+        $stmt = $connexion->prepare($sql);
         foreach ($_GET['delArr'] as $idx)
         {
-            $sql = "DELETE FROM Campeon WHERE id = :idx";
-            $stmt = $connexion->prepare($sql);
             $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
+
+            $sql = "SELECT nombre, clase FROM Campeon WHERE id = :idx";
+            $tmpStmt = $connexion->prepare($sql);
+            $tmpStmt->bindParam("idx", $idx, PDO::PARAM_INT);
+            $tmpStmt->execute();
+            $tmpRecord = $tmpStmt->fetch(PDO::FETCH_ASSOC);
+            $tmpName = $tmpRecord['nombre'];
+            $tmpClass = $tmpRecord['clase'];
 
             try
             {
                 $stmt->execute();
-                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El campeón ha sido eliminado correctamente. </p>";
+                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha eliminado correctamente el campeón <strong>" . $tmpName . " (" . $tmpClass . ")</strong>. </p>";
 
             } catch (PDOException $e)
             {
-                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! No se puede eliminar un campeón con habilidades establecidas o utilizado por jugadores. </p>";
+                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>No se puede eliminar el campeón <strong>" . $tmpName . "</strong>, ya que tiene habilidades establecidas o es utilizado por jugadores. </p>";
             }
         }
     }
@@ -50,17 +58,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             'idx' => $_POST['idx']
         ];
 
-        $row = $connexion->query("SELECT * FROM Campeon WHERE nombre='" . $_POST['name'] . "' AND id <> '" . $_POST['idx'] . "'");
+        $dataSearch = [
+            'name' => $_POST['name'],
+            'idx' => $_POST['idx']
+        ];
 
-        if ($row->fetch(PDO::FETCH_ASSOC))
+        $sql = "SELECT * FROM Campeon WHERE nombre=:name AND id <> :idx";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute($dataSearch);
+
+        if ($stmt->fetch(PDO::FETCH_ASSOC))
         {
-            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe un campeón con tal nombre. </p>";
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Ya existe un campeón con el nombre <strong>" . $data['name'] . "</strong>. </p>";
         } else
         {
             $sql = "UPDATE Campeon SET nombre=:name, clase=:class, fechaLanzamiento=:launchDate, precio=:price WHERE id=:idx";
             $stmt = $connexion->prepare($sql);
             $stmt->execute($data);
-            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El campeón ha sido editado correctamente. </p>";
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha editado correctamente el campeón <strong>" . $data['name'] . " (" . $data['class'] . ")</strong>. </p>";
         }
 
     } else if (isset($_POST['new']))
@@ -70,17 +85,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $launchDate = $_POST['launchDate'];
         $price = $_POST['price'];
 
-        $row = $connexion->query("SELECT * FROM Campeon WHERE nombre='$name'");
+        $sql = "SELECT * FROM Campeon WHERE nombre=?";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([$name]);
+        $tmpName = $stmt->fetch(PDO::FETCH_ASSOC)['nombre'];
 
-        if ($row->fetch(PDO::FETCH_ASSOC))
+        if ($tmpName !== null)
         {
-            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe un campeón con tal nombre. </p>";
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i> Ya existe un campeón con el nombre <strong>" . $tmpName . "</strong>. </p>";
         } else
         {
             $sql = "INSERT INTO Campeon (nombre, clase, fechaLanzamiento,precio) VALUES (?,?,?,?)";
             $stmt = $connexion->prepare($sql);
             $stmt->execute([$name, $class, $launchDate, $price]);
-            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El campeón ha sido agregado correctamente. </p>";
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha agregado correctamente el campeón <strong>" . $name . " (" . $class . ")</strong>. </p>";
         }
     }
 }
@@ -164,7 +182,7 @@ if (isset($_GET['edit']))
                     <label for="name">Nombre: </label>
                 </td>
                 <td>
-                    <input type="text" id="name" name="name">
+                    <input type="text" id="name" name="name" required>
                 </td>
             </tr>
 
@@ -173,7 +191,7 @@ if (isset($_GET['edit']))
                     <label for="class">Clase: </label>
                 </td>
                 <td>
-                    <input type="text" id="class" name="class">
+                    <input type="text" id="class" name="class" required>
                 </td>
             </tr>
 
@@ -182,7 +200,7 @@ if (isset($_GET['edit']))
                     <label for="launchDate">Fecha Lanzamiento: </label>
                 </td>
                 <td>
-                    <input type="date" id="launchDate" name="launchDate">
+                    <input type="date" id="launchDate" name="launchDate" required>
                 </td>
             </tr>
 
@@ -191,7 +209,7 @@ if (isset($_GET['edit']))
                     <label for="price">Precio: </label>
                 </td>
                 <td>
-                    <input type="number" id="price" name="price">
+                    <input type="number" id="price" name="price" required>
                 </td>
             </tr>
 
@@ -215,7 +233,8 @@ if (isset($_GET['edit']))
                     <label for="name">Nombre: </label>
                 </td>
                 <td>
-                    <input type="text" id="name" name="name" value="<?= $_POST['name'] ?? "" ?>">
+                    <input type="text" id="name" name="name"
+                           value="<?= $_POST['search'] ? $_POST['name'] ?? "" : "" ?>">
                 </td>
             </tr>
 
@@ -224,7 +243,8 @@ if (isset($_GET['edit']))
                     <label for="class">Clase: </label>
                 </td>
                 <td>
-                    <input type="text" id="class" name="class" value="<?= $_POST['class'] ?? "" ?>">
+                    <input type="text" id="class" name="class"
+                           value="<?= $_POST['search'] ? $_POST['class'] ?? "" : "" ?>">
                 </td>
             </tr>
 
@@ -233,7 +253,8 @@ if (isset($_GET['edit']))
                     <label for="launchDate">Fecha Lanzamiento: </label>
                 </td>
                 <td>
-                    <input type="date" id="launchDate" name="launchDate" value="<?= $_POST['launchDate'] ?? "" ?>">
+                    <input type="date" id="launchDate" name="launchDate"
+                           value="<?= $_POST['search'] ? $_POST['launchDate'] ?? "" : "" ?>">
                 </td>
             </tr>
 
@@ -242,7 +263,8 @@ if (isset($_GET['edit']))
                     <label for="price">Precio: </label>
                 </td>
                 <td>
-                    <input type="number" id="price" name="price" value="<?= $_POST['price'] ?? "" ?>">
+                    <input type="number" id="price" name="price"
+                           value="<?= $_POST['search'] ? $_POST['price'] ?? "" : "" ?>">
                 </td>
             </tr>
 
@@ -265,49 +287,55 @@ $currentPage = $_GET['p'] ?? 1;
 if ($currentPage < 1) $currentPage = 1;
 
 $sql = "SELECT * FROM Campeon ";
+$dataResults = [];
 
 if (isset($_POST['search']))
 {
     $sql .= " WHERE 1 ";
 
-    // TODO refactor this with prepare
     if (!empty($_POST['name']))
     {
-        $sql .= " AND nombre LIKE '%" . $_POST['name'] . "%' ";
+        $sql .= " AND nombre LIKE :bindName ";
+        $dataResults[] = ['bindName', '%' . $_POST['name'] . '%', PDO::PARAM_STR];
     }
 
     if (!empty($_POST['class']))
     {
-        $sql .= " AND clase LIKE '%" . $_POST['class'] . "%' ";
+        $sql .= " AND clase LIKE :bindClass ";
+        $dataResults[] = ['bindClass', '%' . $_POST['class'] . '%', PDO::PARAM_STR];
     }
 
-    if (!empty($_POST['date']))
+    if (!empty($_POST['launchDate']))
     {
-        $sql .= " AND fechaLanzamiento = '" . $_POST['date'] . "' ";
+        $sql .= " AND fechaLanzamiento = :bindDate ";
+        $dataResults[] = ['bindDate', $_POST['launchDate'], PDO::PARAM_STR];
     }
 
-    if (!empty($_POST['price']))
+    if (filter_var($_POST['price'], FILTER_VALIDATE_INT) !== false)
     {
-        $sql .= " AND precio = '" . $_POST['price'] . "' ";
+        $sql .= " AND precio = :bindPrice ";
+        $dataResults[] = ['bindPrice', $_POST['price'], PDO::PARAM_INT];
     }
 }
 
 if (!isset($_GET['sort']))
 {
-    $_GET['sort'] = 'id';
+    $_GET['sort'] = 'nombre';
 }
-$field_sort = $_GET['sort'];
-$sql .= " ORDER BY $field_sort ";
+$fieldSort = $_GET['sort'];
+
+$sql .= " ORDER BY $fieldSort";
+
 if (isset($_GET['des']))
 {
-    $sql .= " DESC";
+    $sql .= " DESC ";
 } else
 {
-    $sql .= " ASC";
+    $sql .= " ASC ";
 }
 
-$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
-
+$sql .= " LIMIT :firstResult , 50 ";
+$dataResults[] = ['firstResult', (($currentPage - 1) * 50), PDO::PARAM_INT];
 
 $stmt = $connexion->query("DESCRIBE Campeon");
 
@@ -326,24 +354,38 @@ foreach ($fields as $field)
 }
 print "</tr>";
 
-$stmt = $connexion->query($sql);
-while ($row = $stmt->fetch(PDO::FETCH_NUM))
+
+$stmt = $connexion->prepare($sql);
+foreach ($dataResults as $dataValue)
 {
-    $tmp_idx = array_shift($row);
+    $stmt->bindParam($dataValue[0], $dataValue[1], $dataValue[2]);
+}
 
-    print "<tr>";
+$stmt->execute();
 
-    print "<td>";
-    print "<div class='squaredThree'>";
-    print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
-    print "<label for='squaredThree$tmp_idx'></label>";
-    print "</div>";
-    print "</td>";
+if ($row = $stmt->fetch(PDO::FETCH_NUM))
+{
+    do
+    {
+        $tmp_idx = array_shift($row);
 
-    print "<td>";
-    print implode("</td><td>", $row);
-    print "</td>";
-    print "</tr>";
+        print "<tr>";
+
+        print "<td>";
+        print "<div class='squaredThree'>";
+        print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
+        print "<label for='squaredThree$tmp_idx'></label>";
+        print "</div>";
+        print "</td>";
+
+        print "<td>";
+        print implode("</td><td>", $row);
+        print "</td>";
+        print "</tr>";
+    } while ($row = $stmt->fetch(PDO::FETCH_NUM));
+} else
+{
+    print "<tr><td colspan='200'>No se han encontrado registros</td>";
 }
 
 print "<tr><td></td>";

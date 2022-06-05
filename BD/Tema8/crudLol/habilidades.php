@@ -16,24 +16,42 @@ FormHelper::printMenu();
 print  "<h1>Habilidades</h1>";
 print "<div class='container'>";
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['del'])) {
-        foreach ($_GET['delArr'] as $idx) {
-            $sql = "DELETE FROM Habilidad WHERE id = :idx";
-            $stmt = $connexion->prepare($sql);
+if ($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+    if (isset($_GET['del']))
+    {
+        $sql = "DELETE FROM Habilidad WHERE id = :idx";
+        $stmt = $connexion->prepare($sql);
+
+        foreach ($_GET['delArr'] as $idx)
+        {
             $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
-            try {
+
+            $sql = "SELECT Habilidad.nombre, c.nombre FROM Habilidad JOIN Campeon c on c.id = Habilidad.campeon WHERE Habilidad.id = :idx";
+            $tmpStmt = $connexion->prepare($sql);
+            $tmpStmt->bindParam("idx", $idx, PDO::PARAM_INT);
+            $tmpStmt->execute();
+            $tmpRecord = $tmpStmt->fetch(PDO::FETCH_NUM);
+            $tmpName = $tmpRecord[0];
+            $tmpChamp = $tmpRecord[1];
+
+            try
+            {
                 $stmt->execute();
-                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>La habilidad ha sido eliminada correctamente. </p>";
-            } catch (PDOException $e) {
-                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! No es posible eliminar la habilidad. </p>";
+                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha eliminado correctamente la habilidad <strong>" . $tmpName . " (" . $tmpChamp . ")</strong>. </p>";
+            } catch (PDOException $e)
+            {
+                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>No es posible eliminar la habilidad <strong>" . $tmpName . "</strong>, ya que tiene habilidades establecidas o es utilizado por jugadores. </p>";
+
             }
         }
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['edit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if (isset($_POST['edit']))
+    {
         $data = [
             'name' => $_POST['name'],
             'energy' => $_POST['energy'],
@@ -42,37 +60,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'idx' => $_POST['idx']
         ];
 
-        $row = $connexion->query("SELECT * FROM Habilidad WHERE nombre='" . $_POST['name'] . "' AND id <> '" . $_POST['idx'] . "'");
+        $dataSearch = [
+            'name' => $_POST['name'],
+            'idx' => $_POST['idx']
+        ];
 
-        if ($row->fetch(PDO::FETCH_ASSOC)) {
-            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe una habilidad con tal nombre. </p>";
-        } else {
+        $sql = "SELECT * FROM Habilidad WHERE nombre=:name AND id <> :idx";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute($dataSearch);
+
+        if ($stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Ya existe una habilidad con el nombre <strong>" . $data['name'] . "</strong>. </p>";
+        } else
+        {
             $sql = "UPDATE Habilidad SET nombre=:name, puntosEnergia=:energy, enfriamiento=:cooldown, campeon=:champ_id WHERE id=:idx";
             $stmt = $connexion->prepare($sql);
             $stmt->execute($data);
-            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>La habilidad ha sido editada correctamente. </p>";
+
+            $sql = "SELECT c.nombre FROM Habilidad JOIN Campeon c on c.id = Habilidad.campeon WHERE Habilidad.nombre = ?";
+            $stmt = $connexion->prepare($sql);
+            $stmt->execute([$data['name']]);
+            $tmpChampName = $stmt->fetch(PDO::FETCH_NUM)[0];
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha editado correctamente la habilidad <strong>" . $data['name'] . " (" . $tmpChampName . ")</strong>. </p>";
         }
 
-    } else if (isset($_POST['new'])) {
+    } else if (isset($_POST['new']))
+    {
         $name = $_POST['name'];
         $energy = $_POST['energy'];
         $cooldown = $_POST['cooldown'];
         $champ_id = $_POST['champ_id'];
 
-        $row = $connexion->query("SELECT * FROM Habilidad WHERE nombre='$name'");
+        $sql = "SELECT id FROM Habilidad WHERE nombre = ?";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([$name]);
+        $tmpResult = $stmt->fetch(PDO::FETCH_NUM);
 
-        if ($row->fetch(PDO::FETCH_ASSOC)) {
-            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe una habilidad con tal nombre. </p>";
-        } else {
-            $sql = "INSERT INTO Habilidad (nombre, puntosEnergia, enfriamiento,campeon) VALUES (?,?,?,?)";
+        if ($tmpResult !== false)
+        {
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i> Ya existe una habilidad con el nombre <strong>" . $name . "</strong>. </p>";
+        } else
+        {
+            $sql = "INSERT INTO Habilidad (nombre, puntosEnergia, enfriamiento, campeon) VALUES (?,?,?,?)";
             $stmt = $connexion->prepare($sql);
             $stmt->execute([$name, $energy, $cooldown, $champ_id]);
-            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>La habilidad ha sido agregada correctamente. </p>";
+
+            $sql = "SELECT c.nombre FROM Habilidad JOIN Campeon c on c.id = Habilidad.campeon WHERE Habilidad.nombre = ?";
+            $stmt = $connexion->prepare($sql);
+            $stmt->execute([$name]);
+            $tmpChampName = $stmt->fetch(PDO::FETCH_NUM)[0];
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha agregado correctamente la habilidad <strong>" . $name . " (" . $tmpChampName . ")</strong>. </p>";
         }
     }
 }
 
-if (isset($_GET['edit'])) {
+if (isset($_GET['edit']))
+{
     $idx = $_GET['idx'];
 
     $sql = "SELECT * FROM Habilidad WHERE id = :idx";
@@ -100,13 +144,14 @@ if (isset($_GET['edit'])) {
                 <td>
                     <select id="champ_id" name="champ_id" class="classic" required>
                         <?php
-                        foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila) {
+                        foreach ($connexion->query("SELECT * FROM Campeon ORDER BY nombre ", PDO::FETCH_ASSOC) as $fila)
+                        {
                             $id = $fila['id'];
-                            $name = $fila['nombre'];
+                            $champName = $fila['nombre'];
 
                             print "<option ";
                             if ($id == $champ_id) print "selected ";
-                            print "value='$id'>$name</option>";
+                            print "value='$id'>$champName</option>";
                         }
                         ?>
                     </select>
@@ -149,7 +194,8 @@ if (isset($_GET['edit'])) {
     </form>
 
     <?php
-} else if (isset($_GET['new'])) { ?>
+} else if (isset($_GET['new']))
+{ ?>
     <form class='newForm' method='post' action='<?= $_SERVER["PHP_SELF"] ?>'>
         <h3><strong>Nueva Habilidad</strong></h3>
 
@@ -161,7 +207,8 @@ if (isset($_GET['edit'])) {
                 <td>
                     <select id="champ_id" name="champ_id" class="classic" required>
                         <?php
-                        foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila) {
+                        foreach ($connexion->query(" SELECT * FROM Campeon ORDER BY nombre ", PDO::FETCH_ASSOC) as $fila)
+                        {
                             $id = $fila['id'];
                             $name = $fila['nombre'];
 
@@ -209,7 +256,8 @@ if (isset($_GET['edit'])) {
     </form>
 
     <?php
-} else { ?>
+} else
+{ ?>
     <form class='searchForm' method='post' action='<?= $_SERVER["PHP_SELF"] ?>'>
         <h3><strong>Buscar Habilidad</strong></h3>
 
@@ -222,7 +270,8 @@ if (isset($_GET['edit'])) {
                     <select id="champ_id" name="champ_id" class="classic">
                         <option></option>
                         <?php
-                        foreach ($connexion->query("SELECT * FROM Campeon", PDO::FETCH_ASSOC) as $fila) {
+                        foreach ($connexion->query("SELECT * FROM Campeon ORDER BY nombre ", PDO::FETCH_ASSOC) as $fila)
+                        {
                             $id = $fila['id'];
                             $name = $fila['nombre'];
 
@@ -257,7 +306,8 @@ if (isset($_GET['edit'])) {
                     <label for="cooldown">Tiempo de Enfriamiento: </label>
                 </td>
                 <td>
-                    <input type='number' step="0.01" id="cooldown" name='cooldown' value='<?= $_POST['energy'] ?? "" ?>'>
+                    <input type='number' step="0.01" id="cooldown" name='cooldown'
+                           value='<?= $_POST['cooldown'] ?? "" ?>'>
                 </td>
             </tr>
         </table>
@@ -278,40 +328,55 @@ $currentPage = $_GET['p'] ?? 1;
 if ($currentPage < 1) $currentPage = 1;
 
 $sql = "SELECT Habilidad.id, C.nombre as 'Campeon', Habilidad.nombre, puntosEnergia, enfriamiento FROM Habilidad JOIN Campeon C on C.id = Habilidad.campeon ";
+$dataResults = [];
 
-if (isset($_POST['search'])) {
+if (isset($_POST['search']))
+{
     $sql .= " WHERE 1 ";
 
-    // TODO refactor this with prepare
-    if (!empty($_POST['name'])) {
-        $sql .= " AND Habilidad.nombre LIKE '%" . $_POST['name'] . "%' ";
+    if (!empty($_POST['name']))
+    {
+        $sql .= " AND Habilidad.nombre LIKE :bindName ";
+        $dataResults[] = ['bindName', '%' . $_POST['name'] . '%', PDO::PARAM_STR];
     }
 
-    if (!empty($_POST['energy'])) {
-        $sql .= " AND puntosEnergia = '" . $_POST['energy'] . "' ";
+    if (filter_var($_POST['energy'], FILTER_VALIDATE_INT) !== false)
+    {
+        $sql .= " AND puntosEnergia = :bindEnergy ";
+        $dataResults[] = ['bindEnergy', $_POST['energy'], PDO::PARAM_INT];
     }
 
-    if (!empty($_POST['cooldown'])) {
-        $sql .= " AND enfriamiento = '" . $_POST['cooldown'] . "' ";
+    if (filter_var($_POST['cooldown'], FILTER_VALIDATE_INT) !== false)
+    {
+        $sql .= " AND enfriamiento = :bindCooldown ";
+        $dataResults[] = ['bindCooldown', $_POST['cooldown'], PDO::PARAM_INT];
     }
 
-    if (!empty($_POST['champ_id'])) {
-        $sql .= " AND campeon = '" . $_POST['champ_id'] . "' ";
+    if (filter_var($_POST['champ_id'], FILTER_VALIDATE_INT) !== false)
+    {
+        $sql .= " AND campeon = :bindChamp ";
+        $dataResults[] = ['bindChamp', $_POST['champ_id'], PDO::PARAM_INT];
     }
 }
 
-if (!isset($_GET['sort'])) {
+if (!isset($_GET['sort']))
+{
     $_GET['sort'] = ' Campeon ';
 }
-$field_sort = $_GET['sort'];
-$sql .= " ORDER BY $field_sort ";
-if (isset($_GET['des'])) {
+$fieldSort = $_GET['sort'];
+
+$sql .= " ORDER BY $fieldSort";
+
+if (isset($_GET['des']))
+{
     $sql .= " DESC";
-} else {
+} else
+{
     $sql .= " ASC";
 }
 
-$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
+$sql .= " LIMIT :firstResult , 50 ";
+$dataResults[] = ['firstResult', (($currentPage - 1) * 50), PDO::PARAM_INT];
 
 $stmt = $connexion->query("DESCRIBE Habilidad");
 
@@ -322,35 +387,50 @@ $fields = array_map(function ($row) {
 print "<table class='resultsTable'>";
 print "<tr><td></td>";
 array_shift($fields);
-foreach ($fields as $field) {
+foreach ($fields as $field)
+{
     $fancyField = preg_replace("/([a-z])([A-Z])/", "$1 $2", $field);
     print "<th class='headerSort'>$fancyField <a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&asc" . "'><i class='fa-solid fa-sort-up'></i></a> " .
         "<a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&des" . "'><i class='fa-solid fa-sort-down'></i></a> </th>";
 }
 print "</tr>";
 
-$stmt = $connexion->query($sql);
-while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-    $tmp_idx = array_shift($row);
+$stmt = $connexion->prepare($sql);
+foreach ($dataResults as $dataValue)
+{
+    $stmt->bindParam($dataValue[0], $dataValue[1], $dataValue[2]);
+}
 
-    print "<tr>";
+$stmt->execute();
 
-    print "<td>";
-    print "<div class='squaredThree'>";
-    print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
-    print "<label for='squaredThree$tmp_idx'></label>";
-    print "</div>";
-    print "</td>";
+if ($row = $stmt->fetch(PDO::FETCH_NUM))
+{
+    do
+    {
+        $tmp_idx = array_shift($row);
 
+        print "<tr>";
 
-    print "<td>";
-    print implode("</td><td>", $row);
-    print "</td>";
-    print "</tr>";
+        print "<td>";
+        print "<div class='squaredThree'>";
+        print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
+        print "<label for='squaredThree$tmp_idx'></label>";
+        print "</div>";
+        print "</td>";
+
+        print "<td>";
+        print implode("</td><td>", $row);
+        print "</td>";
+        print "</tr>";
+    } while ($row = $stmt->fetch(PDO::FETCH_NUM));
+} else
+{
+    print "<tr><td colspan='200'>No se han encontrado registros</td>";
 }
 
 print "<tr><td></td>";
-foreach ($fields as $field) {
+foreach ($fields as $field)
+{
     $field = preg_replace("/([a-z])([A-Z])/", "$1 $2", $field);
     print "<th>$field</th>";
 }

@@ -20,19 +20,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
 {
     if (isset($_GET['del']))
     {
+        $sql = "DELETE FROM Jugador WHERE id = :idx";
+        $stmt = $connexion->prepare($sql);
         foreach ($_GET['delArr'] as $idx)
         {
-            $sql = "DELETE FROM Jugador WHERE id = :idx";
-            $stmt = $connexion->prepare($sql);
             $stmt->bindParam("idx", $idx, PDO::PARAM_INT);
+
+            $sql = "SELECT nombre, liga FROM Jugador WHERE id = :idx";
+            $tmpStmt = $connexion->prepare($sql);
+            $tmpStmt->bindParam("idx", $idx, PDO::PARAM_INT);
+            $tmpStmt->execute();
+            $tmpRecord = $tmpStmt->fetch(PDO::FETCH_ASSOC);
+            $tmpName = $tmpRecord['nombre'];
+            $tmpLeague = $tmpRecord['clase'];
+
             try
             {
                 $stmt->execute();
-                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El jugador ha sido eliminado correctamente. </p>";
+                print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha eliminado correctamente el jugador <strong>" . $tmpName . " (" . $tmpLeague . ")</strong>. </p>";
 
             } catch (PDOException $e)
             {
-                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! No se puede eliminar un jugador que tiene campeones asociados. </p>";
+                print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>No se puede eliminar el jugador <strong>" . $tmpName . "</strong>, ya que ha adquirido uno o más campeones. </p>";
             }
         }
     }
@@ -50,17 +59,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             'idx' => $_POST['idx']
         ];
 
-        $row = $connexion->query("SELECT * FROM Jugador WHERE nombre='" . $_POST['name'] . "' AND id <> '" . $_POST['idx'] . "'");
+        $dataSearch = [
+            'name' => $_POST['name'],
+            'idx' => $_POST['idx']
+        ];
 
-        if ($row->fetch(PDO::FETCH_ASSOC))
+        $sql = "SELECT * FROM Jugador WHERE nombre=:name AND id <> :idx";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute($dataSearch);
+
+        if ($stmt->fetch(PDO::FETCH_ASSOC))
         {
-            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe un jugador con tal nombre. </p>";
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Ya existe un jugador con el nombre <strong>" . $data['name'] . "</strong>. </p>";
         } else
         {
             $sql = "UPDATE Jugador SET nombre=:name, liga=:league, puntosLiga=:points, monedas=:coins WHERE id=:idx";
             $stmt = $connexion->prepare($sql);
             $stmt->execute($data);
-            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El jugador ha sido editado correctamente. </p>";
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha editado correctamente el jugador <strong>" . $data['name'] . " (" . $data['league'] . ")</strong>. </p>";
         }
 
     } else if (isset($_POST['new']))
@@ -70,17 +86,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $points = $_POST['points'];
         $coins = $_POST['coins'];
 
-        $row = $connexion->query("SELECT * FROM Jugador WHERE nombre='$name'");
+        $sql = "SELECT * FROM Jugador WHERE nombre=?";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([$name]);
+        $tmpName = $stmt->fetch(PDO::FETCH_ASSOC)['nombre'];
 
-        if ($row->fetch(PDO::FETCH_ASSOC))
+        if ($tmpName !== null)
         {
-            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i>Error! Ya existe un jugador con tal nombre. </p>";
+            print"<p class='errMsg'><i class='fa-solid fa-triangle-exclamation'></i> Ya existe un jugador con el nombre <strong>" . $tmpName . "</strong>. </p>";
         } else
         {
             $sql = "INSERT INTO Jugador (nombre, liga, puntosLiga,monedas) VALUES (?,?,?,?)";
             $stmt = $connexion->prepare($sql);
             $stmt->execute([$name, $league, $points, $coins]);
-            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>El jugador ha sido agregado correctamente. </p>";
+            print"<p class='infoMsg'><i class='fa-solid fa-circle-info'></i>Se ha agregado correctamente el campeón <strong>" . $name . " (" . $league . ")</strong>. </p>";
         }
     }
 }
@@ -263,41 +282,45 @@ print "</div>";
 $currentPage = $_GET['p'] ?? 1;
 if ($currentPage < 1) $currentPage = 1;
 
-
 $sql = "SELECT * from Jugador ";
 
 if (isset($_POST['search']))
 {
     $sql .= " WHERE 1 ";
 
-    // TODO refactor this with prepare
     if (!empty($_POST['name']))
     {
-        $sql .= " AND nombre LIKE '%" . $_POST['name'] . "%' ";
+        $sql .= " AND nombre LIKE :bindName ";
+        $dataResults[] = ['bindName', '%' . $_POST['name'] . '%', PDO::PARAM_STR];
     }
 
     if (!empty($_POST['league']))
     {
-        $sql .= " AND liga LIKE '%" . $_POST['league'] . "%' ";
+        $sql .= " AND liga LIKE :bindLeague ";
+        $dataResults[] = ['bindLeague', '%' . $_POST['league'] . '%', PDO::PARAM_STR];
     }
 
-    if (!empty($_POST['points']))
+    if (filter_var($_POST['points'], FILTER_VALIDATE_INT) !== false)
     {
-        $sql .= " AND puntosLiga = '" . $_POST['points'] . "' ";
+        $sql .= " AND puntosLiga = :bindPoints ";
+        $dataResults[] = ['bindPoints', $_POST['points'], PDO::PARAM_INT];
     }
 
-    if (!empty($_POST['coins']))
+    if (filter_var($_POST['coins'], FILTER_VALIDATE_INT) !== false)
     {
-        $sql .= " AND monedas = '" . $_POST['coins'] . "' ";
+        $sql .= " AND coins = :bindCoins ";
+        $dataResults[] = ['bindCoins', $_POST['coins'], PDO::PARAM_INT];
     }
 }
 
 if (!isset($_GET['sort']))
 {
-    $_GET['sort'] = 'id';
+    $_GET['sort'] = 'nombre';
 }
-$field_sort = $_GET['sort'];
-$sql .= " ORDER BY $field_sort ";
+$fieldSort = $_GET['sort'];
+
+$sql .= " ORDER BY $fieldSort ";
+
 if (isset($_GET['des']))
 {
     $sql .= " DESC";
@@ -306,7 +329,8 @@ if (isset($_GET['des']))
     $sql .= " ASC";
 }
 
-$sql .= " LIMIT 50 OFFSET " . ($currentPage - 1) * 50;
+$sql .= " LIMIT :firstResult , 50 ";
+$dataResults[] = ['firstResult', (($currentPage - 1) * 50), PDO::PARAM_INT];
 
 $stmt = $connexion->query("DESCRIBE Jugador");
 
@@ -325,24 +349,42 @@ foreach ($fields as $field)
 }
 print "</tr>";
 
-$stmt = $connexion->query($sql);
-while ($row = $stmt->fetch(PDO::FETCH_NUM))
+$stmt = $connexion->prepare($sql);
+foreach ($dataResults as $dataValue)
 {
-    $tmp_idx = array_shift($row);
+    $stmt->bindParam($dataValue[0], $dataValue[1], $dataValue[2]);
+}
 
-    print "<tr>";
+//var_dump($sql);
+//print "<pre>";
+//print_r($dataResults);
+//print "</pre>";
 
-    print "<td>";
-    print "<div class='squaredThree'>";
-    print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
-    print "<label for='squaredThree$tmp_idx'></label>";
-    print "</div>";
-    print "</td>";
+$stmt->execute();
 
-    print "<td>";
-    print implode("</td><td>", $row);
-    print "</td>";
-    print "</tr>";
+if ($row = $stmt->fetch(PDO::FETCH_NUM))
+{
+    do
+    {
+        $tmp_idx = array_shift($row);
+
+        print "<tr>";
+
+        print "<td>";
+        print "<div class='squaredThree'>";
+        print "<input type='checkbox' class='chkBox' value='$tmp_idx' id='squaredThree$tmp_idx' name='champ_id'/>";
+        print "<label for='squaredThree$tmp_idx'></label>";
+        print "</div>";
+        print "</td>";
+
+        print "<td>";
+        print implode("</td><td>", $row);
+        print "</td>";
+        print "</tr>";
+    } while ($row = $stmt->fetch(PDO::FETCH_NUM));
+} else
+{
+    print "<tr><td colspan='200'>No se han encontrado registros</td>";
 }
 
 print "<tr><td></td>";
