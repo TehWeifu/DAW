@@ -9,21 +9,25 @@
 </head>
 <body>
 <?php
-include_once "./conexion.php";
+include_once "./resources/dependencies/conexion.php";
+/** @var PDO $connexion */
 
 const DELETE = 1;
 const EDIT = 2;
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if ($_GET['mode'] == DELETE) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+    if (isset($_GET['mode']) && $_GET['mode'] == DELETE)
+    {
         $idx = $_GET['indx'];
 
-        $conexion->query("DELETE FROM categorias WHERE id_categoria = $idx") or die($conexion->error);
-    } elseif ($_GET['mode'] == EDIT) {
+        $connexion->query("DELETE FROM categorias WHERE id_categoria = $idx") or die($connexion->errorInfo());
+    } elseif (isset($_GET['mode']) && $_GET['mode'] == EDIT)
+    {
         $idx = $_GET['indx'];
 
-        $sql = $conexion->query("SELECT * FROM categorias WHERE id_categoria = $idx") or die($conexion->error);
-        $name = $sql->fetch_array(MYSQLI_ASSOC)['categoria'];
+        $sql = $connexion->query("SELECT * FROM categorias WHERE id_categoria = $idx") or die($connexion->errorInfo());
+        $name = $sql->fetch(PDO::FETCH_ASSOC)['categoria'];
 
         print "<form method='post' action='" . $_SERVER['PHP_SELF'] . "'>";
         print "<p><label>id_categoria: <input type='text' readonly value='$idx' name='idx' ></label></p>";
@@ -31,52 +35,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         print "<p><input type='submit' name='edit' value='Editar'></p>";
         print "</form>";
     }
-
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['edit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if (isset($_POST['edit']))
+    {
         $idx = $_POST['idx'];
         $name = $_POST['cat'];
 
-        $conexion->query("UPDATE categorias SET categoria='$name' WHERE id_categoria=$idx") or die($conexion->error);
+        $connexion->query("UPDATE categorias SET categoria='$name' WHERE id_categoria=$idx") or die($connexion->errorInfo());
 
-    } else {
+    } else
+    {
         $user_category = $_POST['cat'];
 
-        $tmpCount = $conexion->query("SELECT id_categoria FROM categorias ORDER BY id_categoria DESC LIMIT 1") or die($conexion->error);
-        $tmpCount = intval($tmpCount->fetch_array()[0]);
+        $tmpCount = $connexion->query("SELECT id_categoria FROM categorias ORDER BY id_categoria DESC LIMIT 1") or die($connexion->errorInfo());
+        $tmpCount = intval($tmpCount->fetch()[0]);
         $tmpCount++;
 
-        $insert_sql = $conexion->query("INSERT INTO categorias VALUES ($tmpCount, '$user_category')") or die($conexion->error);
+        $insert_sql = $connexion->query("INSERT INTO categorias VALUES ($tmpCount, '$user_category')") or die($connexion->errorInfo());
     }
 }
 $query = "SELECT * FROM categorias";
-if (isset($_GET['sort'])) {
+if (isset($_GET['sort']))
+{
     $field_sort = $_GET['sort'];
     $query .= " ORDER BY $field_sort";
-    if (isset($_GET['asc'])) {
+    if (isset($_GET['asc']))
+    {
         $query .= " ASC";
-    } else {
+    } else
+    {
         $query .= " DESC";
     }
 }
-$sql = $conexion->query($query) or die($conexion->error);
+$sql = $connexion->query($query) or die($connexion->errorInfo());
 
 $fields = array_map(function ($el) {
-    return $el->name;
-}, $sql->fetch_fields());
+    return $el['Field'];
+}, $connexion->query("DESCRIBE categorias")->fetchAll(PDO::FETCH_ASSOC));
 
 print "<table border='1'>";
 print "<tr>";
-foreach ($fields as $field) {
+foreach ($fields as $field)
+{
     print "<th>$field <a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&asc" . "'>↑</a> " .
         "<a href='" . $_SERVER['PHP_SELF'] . "?sort=$field&des" . "'>↓</a> </th>";
 }
 print "</tr>";
 
 
-while ($fila = $sql->fetch_array(MYSQLI_NUM)) {
+while ($fila = $sql->fetch(PDO::FETCH_NUM))
+{
     $tmp_idx = $fila[0];
 
     print "<tr><td>";
@@ -88,7 +99,8 @@ while ($fila = $sql->fetch_array(MYSQLI_NUM)) {
 }
 print "</table>";
 
-if ($_GET['mode'] != EDIT) {
+if (!isset($_GET['mode']))
+{
     ?>
 
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
